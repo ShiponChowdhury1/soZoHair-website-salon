@@ -113,17 +113,17 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="flex h-full flex-col gap-7 sm:gap-8">
+    <div className="flex h-full flex-col gap-5 sm:gap-6">
       <Logo />
 
-      <div className="space-y-1.5">
-        <h1 className="text-4xl font-semibold tracking-tight text-[#1a1a1a] lg:text-5xl">
+      <div className="space-y-1">
+        <h1 className="text-4xl font-semibold tracking-tight text-[#1a1a1a] lg:text-[52px] lg:leading-[1]">
           Sign up
         </h1>
         <p className="text-sm text-zinc-600">Sign up for free to access to in any of our products</p>
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form className="space-y-3" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
           id="fullName"
           type="text"
@@ -237,7 +237,7 @@ export function RegisterForm() {
         </Button>
       </form>
 
-      <div className="mt-5 space-y-4">
+      <div className="mt-3 space-y-3">
         <p className="text-center text-sm text-zinc-600">
           Already have an account?{" "}
           <Link href="/login" className="font-semibold text-[#1a1a1a] hover:text-[#5C1F5C]">

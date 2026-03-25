@@ -17,19 +17,28 @@ const variantClasses: Record<
     image: string;
     form: string;
     content: string;
+    imageOrder: string;
+    formOrder: string;
+    formJustify: string;
   }
 > = {
   login: {
-    frame: "lg:h-[1024px]",
-    image: "lg:h-[1024px]",
-    form: "lg:h-[1024px] lg:px-[76px] lg:py-6",
-    content: "lg:w-[448px] lg:min-h-[731px]",
+    frame: "lg:h-[100dvh]",
+    image: "lg:h-[100dvh]",
+    form: "lg:h-[100dvh] lg:px-[76px] lg:py-3",
+    content: "lg:w-[448px]",
+    imageOrder: "lg:order-2",
+    formOrder: "lg:order-1",
+    formJustify: "lg:justify-center",
   },
   register: {
-    frame: "lg:h-[1265px]",
-    image: "lg:h-[1265px]",
-    form: "lg:h-[1265px] lg:px-[76px] lg:py-20",
-    content: "lg:w-[448px] lg:h-[1105px]",
+    frame: "lg:h-[100dvh]",
+    image: "lg:h-[100dvh]",
+    form: "lg:h-[100dvh] lg:px-[76px] lg:py-2",
+    content: "lg:w-[448px]",
+    imageOrder: "lg:order-1",
+    formOrder: "lg:order-2",
+    formJustify: "lg:justify-center",
   },
 };
 
@@ -37,11 +46,11 @@ export function AuthLayout({ variant, imageSrc, imageAlt, children }: AuthLayout
   const styles = variantClasses[variant];
 
   return (
-    <main className="min-h-screen bg-white lg:flex lg:items-start lg:justify-center">
+    <main className="flex min-h-screen items-center justify-center bg-white">
       <div
-        className={`grid min-h-screen bg-white lg:w-[1440px] lg:grid-cols-[840px_600px] ${styles.frame}`}
+        className={`grid w-full min-h-screen gap-0 bg-white lg:min-h-0 lg:w-[1440px] lg:grid-cols-[840px_600px] ${styles.frame}`}
       >
-        <section className={`relative min-h-[360px] ${styles.image}`}>
+        <section className={`relative min-h-[360px] ${styles.imageOrder} ${styles.image}`}>
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -56,8 +65,12 @@ export function AuthLayout({ variant, imageSrc, imageAlt, children }: AuthLayout
           </p>
         </section>
 
-        <section className={`flex items-center justify-center px-6 py-10 sm:px-10 ${styles.form}`}>
-          <div className={`w-full max-w-md lg:max-w-none ${styles.content}`}>{children}</div>
+        <section
+          className={`flex items-center justify-center px-6 py-10 sm:px-10 ${styles.formOrder} ${styles.formJustify} ${styles.form}`}
+        >
+          <div className={`w-full max-w-md lg:max-w-none ${styles.content}`}>
+            {children}
+          </div>
         </section>
       </div>
     </main>
