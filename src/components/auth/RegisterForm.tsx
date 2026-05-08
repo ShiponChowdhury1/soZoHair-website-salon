@@ -113,7 +113,7 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="flex h-full flex-col gap-5 sm:gap-6">
+    <div className="flex h-full flex-col gap-6 sm:gap-7">
       <Logo />
 
       <div className="space-y-1">
@@ -237,15 +237,18 @@ export function RegisterForm() {
         </Button>
       </form>
 
-      <div className="mt-3 space-y-3">
+      <div className="mt-2 space-y-3">
         <p className="text-center text-sm text-zinc-600">
           Already have an account?{" "}
-          <Link href="/login" className="font-semibold text-[#1a1a1a] hover:text-[#5C1F5C]">
-            Sign in
+          <Link
+            href="/login"
+            className="font-semibold text-[#1a1a1a] underline underline-offset-2 hover:text-[#5C1F5C]"
+          >
+            Sign In
           </Link>
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-[#e0e0e0]" />
           <span className="text-sm text-zinc-500">Or continue with</span>
           <span className="h-px flex-1 bg-[#e0e0e0]" />

@@ -111,7 +111,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex h-full flex-col gap-7 sm:gap-8">
+    <div className="flex h-full flex-col gap-6 sm:gap-7">
       <Logo />
 
       <div className="space-y-1.5">
@@ -123,7 +123,7 @@ export function LoginForm() {
         </p>
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form className="space-y-3.5" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
           id="email"
           type="email"
@@ -165,7 +165,10 @@ export function LoginForm() {
             />
             Remember me
           </label>
-          <Link href="/forgot-password" className="font-medium text-zinc-700 hover:text-[#5C1F5C]">
+          <Link
+            href="/forgot-password"
+            className="font-medium text-zinc-700 underline underline-offset-2 hover:text-[#5C1F5C]"
+          >
             Forgot Password
           </Link>
         </div>
@@ -177,15 +180,18 @@ export function LoginForm() {
         </Button>
       </form>
 
-      <div className="mt-5 space-y-4">
+      <div className="mt-4 space-y-3 ">
         <p className="text-center text-sm text-zinc-600">
           Don&apos;t have an account?{" "}
-          <Link href="/register" className="font-semibold text-[#1a1a1a] hover:text-[#5C1F5C]">
+          <Link
+            href="/register"
+            className="font-semibold text-[#1a1a1a] underline underline-offset-2 hover:text-[#5C1F5C]"
+          >
             Sign Up
           </Link>
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-[#e0e0e0]" />
           <span className="text-sm text-zinc-500">Or continue with</span>
           <span className="h-px flex-1 bg-[#e0e0e0]" />
