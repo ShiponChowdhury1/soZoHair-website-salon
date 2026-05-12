@@ -8,6 +8,7 @@ interface AuthLayoutProps {
   imageSrc: string;
   imageAlt: string;
   children: ReactNode;
+  showImage?: boolean;
 }
 
 const variantClasses: Record<
@@ -42,28 +43,30 @@ const variantClasses: Record<
   },
 };
 
-export function AuthLayout({ variant, imageSrc, imageAlt, children }: AuthLayoutProps) {
+export function AuthLayout({ variant, imageSrc, imageAlt, children, showImage = true }: AuthLayoutProps) {
   const styles = variantClasses[variant];
+
+  const gridCols = showImage ? "lg:grid-cols-[840px_600px]" : "lg:grid-cols-1 lg:w-[720px]";
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-white">
-      <div
-        className={`grid w-full min-h-screen gap-0 bg-white lg:min-h-0 lg:w-[1440px] lg:grid-cols-[840px_600px] ${styles.frame}`}
-      >
-        <section className={`relative min-h-[360px] ${styles.imageOrder} ${styles.image}`}>
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            priority
-            sizes="(min-width: 1024px) 840px, 100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
-          <p className="absolute bottom-6 left-6 text-6xl font-light tracking-tight text-white/35">
-            SoZo 2026
-          </p>
-        </section>
+      <div className={`grid w-full min-h-screen gap-0 bg-white lg:min-h-0 ${gridCols} ${styles.frame}`}>
+        {showImage ? (
+          <section className={`relative min-h-[360px] ${styles.imageOrder} ${styles.image}`}>
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 840px, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
+            <p className="absolute bottom-6 left-6 text-6xl font-light tracking-tight text-white/35">
+              SoZo 2026
+            </p>
+          </section>
+        ) : null}
 
         <section
           className={`flex items-center justify-center px-6 py-10 sm:px-10 ${styles.formOrder} ${styles.formJustify} ${styles.form}`}

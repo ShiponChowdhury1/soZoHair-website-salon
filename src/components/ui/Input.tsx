@@ -20,7 +20,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         <input
           id={id}
           ref={ref}
-          className={`h-[52px] w-full rounded-full border border-[#e0e0e0] bg-white px-4 text-sm text-[#1a1a1a] placeholder:text-zinc-500 outline-none transition focus:border-[#6B2D6B] focus:ring-2 focus:ring-[#6B2D6B]/20 ${rightAdornment ? "pr-12" : ""} ${className}`}
+          className={`h-[52px] w-full rounded-full border border-[#e0e0e0] bg-white px-4 text-sm text-[#1a1a1a] placeholder:text-zinc-500 outline-none transition focus:outline-none focus:border-[#cfa09a] focus:ring-2 focus:ring-[#cfa09a]/20 ${rightAdornment ? "pr-12" : ""} ${className}`}
           {...props}
         />
         {rightAdornment ? (
