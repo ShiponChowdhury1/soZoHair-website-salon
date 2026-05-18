@@ -6,6 +6,25 @@
   --color-primary: #6b2d6b;
   --color-button: #5c1f5c;
   --color-input-border: #e0e0e0;
+
+  /* Landing design tokens */
+  --color-warm-bg: #F8F3EE;
+  --color-warm-accent: #C4956A;
+  --color-warm-accent-hover: #B3845A;
+  --color-dark-text: #2D2D2D;
+  --color-body-text: #666666;
+  --color-section-subtitle: #999999;
+  --color-footer-bg: #3B2A1F;
+
+  /* Section dimensions */
+  --container-max-width: 1319px;
+  --section-padding-top: 128px;
+  --section-padding-x: 300px;
+  --section-gap: 65.59px;
+
+  /* Fonts */
+  --font-heading: var(--font-playfair), "Georgia", serif;
+  --font-body: var(--font-geist-sans), "Segoe UI", sans-serif;
 }
 
 @theme inline {
@@ -15,8 +34,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), "Segoe UI", sans-serif;
+  font-family: var(--font-body);
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/store/StoreProvider";
 
@@ -13,9 +13,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "SoZo Hair, Spa & Wigs",
-  description: "Salon authentication experience for SoZo Hair, Spa & Wigs.",
+  title: "SoZo Hair, Spa & Wigs | Premium Salon Experience",
+  description:
+    "Discover luxury hair, spa, and wig services at SoZo Hair. Expert stylists, premium products, and a relaxing environment tailored just for you.",
 };
 
 export default function RootLayout({
@@ -26,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <StoreProvider>{children}</StoreProvider>
