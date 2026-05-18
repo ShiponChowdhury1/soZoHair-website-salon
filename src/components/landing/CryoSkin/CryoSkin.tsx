@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./CryoSkin.module.css";
 
 const features = [
   "Non-invasive fat reduction technology",
@@ -12,42 +11,51 @@ const features = [
 
 export default function CryoSkin() {
   return (
-    <section className={styles.section} id="cryoskin">
-      <div className={styles.container}>
-        <div className={styles.textContent}>
-          <span className={styles.label}>Advanced Technology</span>
-          <h2 className={styles.heading}>
+    <section className="relative w-full min-h-[500px] overflow-hidden" id="cryoskin">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/landing/cryo/backgorund-cryoskin section.png"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-[var(--container-max-width)] mx-auto px-5 sm:px-8 lg:px-10 py-24 md:py-32">
+        <div className="max-w-2xl">
+          <span className="text-xs font-medium tracking-[2px] uppercase text-[#E8B4B8]">
+            Advanced Technology
+          </span>
+          <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-[38px] font-semibold text-white leading-[1.25] mt-4">
             CryoSkin – A Non-Invasive, Safe, Painless Fat Loss Technology
           </h2>
-          <p className={styles.description}>
+          <p className="text-[15px] leading-[1.8] text-gray-300 mt-5">
             Experience the revolutionary CryoSkin treatment that uses cold therapy
             to destroy fat cells naturally. This cutting-edge technology offers a
             safe and effective alternative to invasive procedures, helping you
             achieve your body goals with zero downtime.
           </p>
-          <div className={styles.featureList}>
+          <div className="flex flex-col gap-3.5 mt-6">
             {features.map((feature) => (
-              <div key={feature} className={styles.featureItem}>
-                <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="currentColor">
+              <div key={feature} className="flex items-start gap-3 text-sm text-white leading-[1.5]">
+                <svg className="w-5 h-5 text-[#E8B4B8] flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                 </svg>
                 <span>{feature}</span>
               </div>
             ))}
           </div>
-          <Link href="#" className={styles.ctaBtn}>
+          <Link
+            href="#"
+            className="inline-flex items-center justify-center px-9 py-3.5 bg-[#D4A59A] text-white border-none rounded-md text-sm font-medium no-underline w-fit mt-6 transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(212,165,154,0.3)]"
+          >
             Learn More
           </Link>
-        </div>
-
-        <div className={styles.imageContent}>
-          <Image
-            src="/landing/Image (Cryoskin).png"
-            alt="CryoSkin Fat Loss Treatment"
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
         </div>
       </div>
     </section>

@@ -76,9 +76,10 @@ export default function Footer() {
             © {new Date().getFullYear()} SoZo Hair, Spa &amp; Wigs. All rights reserved.
           </span>
           <div className={styles.bottomLinks}>
-            <a href="#" className={styles.bottomLink}>Privacy Policy</a>
-            <a href="#" className={styles.bottomLink}>Terms of Service</a>
-            <a href="#" className={styles.bottomLink}>Cookie Policy</a>
+            <Link href="/privacy-policy" className={styles.bottomLink}>Privacy Policy</Link>
+            <Link href="/terms-of-service" className={styles.bottomLink}>Terms of Service</Link>
+            <Link href="/cookie-policy" className={styles.bottomLink}>Cookie Policy</Link>
+            <Link href="/return-refund" className={styles.bottomLink}>Return &amp; Refund</Link>
           </div>
         </div>
       </div>
