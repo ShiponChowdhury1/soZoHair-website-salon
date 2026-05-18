@@ -53,6 +53,7 @@ const moreItemsRight = [
 
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<ActiveMenu>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -68,6 +69,7 @@ export default function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setActiveMenu(null);
+        setIsSearchOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -75,6 +77,7 @@ export default function Navbar() {
   }, []);
 
   const handleNavClick = useCallback((id: ActiveMenu | "home" | "wigs" | "gallery") => {
+    setIsSearchOpen(false);
     if (id === "services" || id === "shop" || id === "more") {
       setActiveMenu((prev) => (prev === id ? null : id));
     } else {
@@ -166,7 +169,11 @@ export default function Navbar() {
         <div className="flex items-center gap-8">
           {/* Icons */}
           <div className="flex items-center gap-5">
-            <button aria-label="Search" className="text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0">
+            <button 
+              aria-label="Search" 
+              onClick={() => { setIsSearchOpen(!isSearchOpen); setActiveMenu(null); }}
+              className="text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0"
+            >
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -189,7 +196,39 @@ export default function Navbar() {
             Sign in
           </Link>
         </div>
+
+        {/* Search Overlay Inside Navbar */}
+        <div 
+          className={`absolute inset-0 bg-white z-[60] flex items-center justify-center transition-all duration-300 ease-in-out ${
+            isSearchOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          }`}
+        >
+          <div className="w-full max-w-3xl px-5 md:px-8 flex items-center gap-4">
+            <svg className="w-6 h-6 text-[#C4956A] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="text" 
+              placeholder="Search for services, products, or artists..." 
+              className="flex-1 bg-transparent border-none outline-none text-xl md:text-2xl font-[family-name:var(--font-playfair)] text-[#2D2D2D] placeholder:text-gray-300 focus:ring-0"
+              autoFocus={isSearchOpen}
+            />
+            <button 
+              onClick={() => setIsSearchOpen(false)} 
+              className="text-gray-400 hover:text-[#D4A59A] transition-colors p-2 flex-shrink-0"
+              aria-label="Close search"
+            >
+              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
       </nav>
+
+
 
       {/* Mega Menu Dropdown */}
       <div
