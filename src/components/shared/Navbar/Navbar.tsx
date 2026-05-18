@@ -190,7 +190,7 @@ export default function Navbar() {
 
           {/* Sign in Button */}
           <Link
-            href="/sign-in"
+            href="/register"
             className="inline-flex items-center justify-center px-7 py-2.5 bg-[#D4A59A] text-white rounded-full text-[15px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md"
           >
             Sign in
