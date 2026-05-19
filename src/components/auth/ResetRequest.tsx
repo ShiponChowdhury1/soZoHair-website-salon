@@ -23,11 +23,20 @@ export default function ResetRequest() {
   }
 
   return (
-    <div className="mx-auto w-[570px] h-[366px] rounded-2xl bg-white p-8 shadow-md">
-      <h2 className="text-2xl font-semibold text-[#1a1a1a]">Reset your password</h2>
-      <p className="mt-2 text-sm text-zinc-600">Type in your registered email address to reset password</p>
+    <div className="flex flex-col gap-6 sm:gap-8 max-w-[400px] mx-auto w-full">
+      <div className="text-center space-y-4">
+        <h2 className="text-[16px] font-bold tracking-wide text-[#2D2D2D]">
+          SoZo Hair, Spa & Wigs
+        </h2>
+        <h1 className="text-[40px] font-medium tracking-tight text-[#1a1a1a] leading-tight">
+          Reset Password
+        </h1>
+        <p className="text-[14px] text-zinc-500">
+          Type in your registered email address to reset password
+        </p>
+      </div>
 
-      <div className="mt-6">
+      <div className="mt-2 space-y-4">
         <Input
           id="email"
           label="Email Address *"
@@ -38,11 +47,17 @@ export default function ResetRequest() {
         {error ? <p className="mt-2 text-xs text-red-600">{error}</p> : null}
       </div>
 
-      <div className="mt-8">
-        <Button onClick={handleNext} className="rounded-full bg-[#cfa09a] hover:bg-[#d6a79f]">Next</Button>
+      <div className="mt-4 flex flex-col items-center gap-6">
+        <button
+          onClick={handleNext}
+          className="w-full h-12 rounded-full bg-[#D4A59A] text-white font-medium hover:bg-[#C4956A] transition-colors flex items-center justify-center"
+        >
+          Next
+        </button>
+        <p className="text-[13px] text-zinc-600">
+          Remembered? <Link href="/login" className="font-bold text-[#1a1a1a] hover:text-[#D4A59A]">Sign in</Link>
+        </p>
       </div>
-
-      <p className="mt-4 text-sm text-zinc-500">Remembered? <Link href="/login" className="text-[#6B2D6B] underline">Sign in</Link></p>
     </div>
   );
 }

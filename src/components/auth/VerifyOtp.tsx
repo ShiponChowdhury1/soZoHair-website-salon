@@ -56,11 +56,20 @@ export default function VerifyOtp() {
   }
 
   return (
-    <div className="mx-auto w-[570px] h-[460px] rounded-2xl bg-white p-8 shadow-md">
-      <h2 className="text-2xl font-semibold text-[#1a1a1a]">Verify your email address</h2>
-      <p className="mt-2 text-sm text-zinc-600">We have sent a 6 digit OTP in your email address</p>
+    <div className="flex flex-col gap-6 sm:gap-8 max-w-[400px] mx-auto w-full">
+      <div className="text-center space-y-4">
+        <h2 className="text-[16px] font-bold tracking-wide text-[#2D2D2D]">
+          SoZo Hair, Spa & Wigs
+        </h2>
+        <h1 className="text-[40px] font-medium tracking-tight text-[#1a1a1a]">
+          Verify Email
+        </h1>
+        <p className="text-[14px] text-zinc-500">
+          We have sent a 6 digit OTP to your email address
+        </p>
+      </div>
 
-      <div className="mt-8 flex items-center justify-center gap-3">
+      <div className="mt-4 flex items-center justify-center gap-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <input
             key={i}
@@ -76,11 +85,17 @@ export default function VerifyOtp() {
       </div>
       {error ? <p className="mt-2 text-xs text-red-600 text-center">{error}</p> : null}
 
-      <div className="mt-8 flex justify-center">
-        <Button onClick={handleVerify} className="rounded-full bg-[#cfa09a] hover:bg-[#d6a79f]">Verify</Button>
+      <div className="mt-6 flex flex-col items-center gap-4">
+        <button
+          onClick={handleVerify}
+          className="w-full h-12 rounded-full bg-[#D4A59A] text-white font-medium hover:bg-[#C4956A] transition-colors flex items-center justify-center"
+        >
+          Verify
+        </button>
+        <p className="text-[13px] text-zinc-600">
+          Don't get the code? <button className="font-bold text-[#1a1a1a] hover:text-[#D4A59A]">Resend</button>
+        </p>
       </div>
-
-      <p className="mt-4 text-sm text-zinc-500 text-center">Don’t get the code? <button className="text-[#6B2D6B] underline">Resend</button></p>
     </div>
   );
 }

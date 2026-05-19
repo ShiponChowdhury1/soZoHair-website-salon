@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Navbar from "@/components/shared/Navbar/Navbar";
+import Footer from "@/components/shared/Footer/Footer";
 
 type AuthVariant = "login" | "register";
 
@@ -11,71 +13,57 @@ interface AuthLayoutProps {
   showImage?: boolean;
 }
 
-const variantClasses: Record<
-  AuthVariant,
-  {
-    frame: string;
-    image: string;
-    form: string;
-    content: string;
-    imageOrder: string;
-    formOrder: string;
-    formJustify: string;
-  }
-> = {
-  login: {
-    frame: "lg:h-[100dvh]",
-    image: "lg:h-[100dvh]",
-    form: "lg:h-[100dvh] lg:px-[76px] lg:py-3",
-    content: "lg:w-[448px]",
-    imageOrder: "lg:order-2",
-    formOrder: "lg:order-1",
-    formJustify: "lg:justify-center",
-  },
-  register: {
-    frame: "lg:h-[100dvh]",
-    image: "lg:h-[100dvh]",
-    form: "lg:h-[100dvh] lg:px-[76px] lg:py-2",
-    content: "lg:w-[448px]",
-    imageOrder: "lg:order-1",
-    formOrder: "lg:order-2",
-    formJustify: "lg:justify-center",
-  },
-};
-
 export function AuthLayout({ variant, imageSrc, imageAlt, children, showImage = true }: AuthLayoutProps) {
-  const styles = variantClasses[variant];
-
-  const gridCols = showImage ? "lg:grid-cols-[840px_600px]" : "lg:grid-cols-1 lg:w-[720px]";
-
   return (
-    <main className="flex min-h-screen items-center justify-center bg-white">
-      <div className={`grid w-full min-h-screen gap-0 bg-white lg:min-h-0 ${gridCols} ${styles.frame}`}>
-        {showImage ? (
-          <section className={`relative min-h-[360px] ${styles.imageOrder} ${styles.image}`}>
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 840px, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
-            <p className="absolute bottom-6 left-6 text-6xl font-light tracking-tight text-white/35">
-              SoZo 2026
-            </p>
-          </section>
-        ) : null}
+    <div className="min-h-screen flex flex-col relative bg-[#FDF9F5]">
+      <Navbar />
 
-        <section
-          className={`flex items-center justify-center px-6 py-10 sm:px-10 ${styles.formOrder} ${styles.formJustify} ${styles.form}`}
-        >
-          <div className={`w-full max-w-md lg:max-w-none ${styles.content}`}>
-            {children}
+      {/* Main Content Area */}
+      <main className="flex-grow relative flex items-center justify-center py-20 px-4 pt-32">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/auth/background.png"
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-[#FDF9F5]/90" />
+        </div>
+
+        {/* Card Container */}
+        <div className={`relative z-10 w-full bg-[#FFFFFF] mx-auto shadow-2xl ${
+          showImage 
+            ? "max-w-[1320px] overflow-hidden flex flex-col lg:flex-row" 
+            : "max-w-[570px] rounded-2xl py-12 px-6 sm:px-10 flex flex-col items-center justify-center"
+        }`}>
+          
+          {/* Register Layout: Image on Left */}
+          {showImage && variant === "register" && (
+            <div className="hidden lg:block lg:w-1/2 relative min-h-[800px]">
+              <Image src="/auth/register.png" alt={imageAlt} fill className="object-cover" priority />
+            </div>
+          )}
+
+          {/* Form Area */}
+          <div className={showImage ? "w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16" : "w-full flex items-center justify-center"}>
+            <div className={showImage ? "w-full max-w-[440px]" : "w-full"}>
+              {children}
+            </div>
           </div>
-        </section>
-      </div>
-    </main>
+
+          {/* Login Layout: Image on Right */}
+          {showImage && variant === "login" && (
+            <div className="hidden lg:block lg:w-1/2 relative min-h-[800px]">
+              <Image src="/auth/login.png" alt={imageAlt} fill className="object-cover" priority />
+            </div>
+          )}
+
+        </div>
+      </main>
+
+      <Footer />
+    </div>
   );
 }

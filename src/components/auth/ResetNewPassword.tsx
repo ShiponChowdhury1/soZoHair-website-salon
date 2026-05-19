@@ -26,18 +26,32 @@ export default function ResetNewPassword() {
   }
 
   return (
-    <div className="mx-auto w-[570px] h-[460px] rounded-2xl bg-white p-8 shadow-md">
-      <h2 className="text-2xl font-semibold text-[#1a1a1a]">Reset your password</h2>
-      <p className="mt-2 text-sm text-zinc-600">Type in your new password</p>
+    <div className="flex flex-col gap-6 sm:gap-8 max-w-[400px] mx-auto w-full">
+      <div className="text-center space-y-4">
+        <h2 className="text-[16px] font-bold tracking-wide text-[#2D2D2D]">
+          SoZo Hair, Spa & Wigs
+        </h2>
+        <h1 className="text-[40px] font-medium tracking-tight text-[#1a1a1a] leading-tight">
+          Reset Password
+        </h1>
+        <p className="text-[14px] text-zinc-500">
+          Type in your new password
+        </p>
+      </div>
 
-      <div className="mt-6 space-y-4">
+      <div className="mt-2 space-y-4">
         <Input id="new-password" label="New password *" placeholder="New password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <Input id="confirm-password" label="Retype new password *" placeholder="Retype new password" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
       </div>
       {error ? <p className="mt-2 text-xs text-red-600">{error}</p> : null}
 
-      <div className="mt-6">
-        <Button onClick={handleReset} className="rounded-full bg-[#cfa09a] hover:bg-[#d6a79f]">Reset password</Button>
+      <div className="mt-4 flex flex-col items-center gap-6">
+        <button
+          onClick={handleReset}
+          className="w-full h-12 rounded-full bg-[#D4A59A] text-white font-medium hover:bg-[#C4956A] transition-colors flex items-center justify-center"
+        >
+          Reset password
+        </button>
       </div>
     </div>
   );

@@ -3,17 +3,29 @@ import { Button } from "../ui/Button";
 
 export default function PasswordChanged() {
   return (
-    <div className="mx-auto w-[570px] h-[460px] rounded-2xl bg-white p-8 text-center shadow-md">
-      <div className="mx-auto mb-6 mt-6 h-24 w-24 rounded-full bg-green-100 flex items-center justify-center">
-        <div className="h-12 w-12 rounded-full bg-green-500 text-white flex items-center justify-center">✓</div>
+    <div className="flex flex-col gap-6 sm:gap-8 max-w-[400px] mx-auto w-full text-center">
+      <div className="mx-auto mb-2 mt-4 h-24 w-24 rounded-full bg-green-50 flex items-center justify-center">
+        <div className="h-12 w-12 rounded-full bg-green-500 text-white flex items-center justify-center text-xl">✓</div>
       </div>
 
-      <h2 className="text-2xl font-semibold text-[#1a1a1a]">Your Password Successfully Changed</h2>
-      <p className="mt-3 text-sm text-zinc-600">Sign in to your account with your new password</p>
+      <div className="space-y-4">
+        <h2 className="text-[16px] font-bold tracking-wide text-[#2D2D2D]">
+          SoZo Hair, Spa & Wigs
+        </h2>
+        <h1 className="text-[40px] font-medium tracking-tight text-[#1a1a1a] leading-tight">
+          Success!
+        </h1>
+        <p className="text-[14px] text-zinc-500">
+          Your password has been successfully changed.<br/>
+          Sign in to your account with your new password.
+        </p>
+      </div>
 
-      <div className="mt-8 max-w-xs mx-auto">
-        <Link href="/login">
-          <Button className="rounded-full bg-[#cfa09a] hover:bg-[#d6a79f]">Sign in</Button>
+      <div className="mt-4 flex flex-col items-center gap-6">
+        <Link href="/login" className="w-full">
+          <button className="w-full h-12 rounded-full bg-[#D4A59A] text-white font-medium hover:bg-[#C4956A] transition-colors flex items-center justify-center">
+            Sign in
+          </button>
         </Link>
       </div>
     </div>

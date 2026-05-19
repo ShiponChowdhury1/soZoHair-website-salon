@@ -21,7 +21,7 @@ export const productSections = [
         featured: true,
         rating: 4.8,
         reviewCount: 8,
-        thumbnail: "/landing/premium/image-1.png"
+        thumbnail: "/landing/premium/special-product-1.png"
       },
       {
         id: 10,
@@ -38,7 +38,7 @@ export const productSections = [
         featured: true,
         rating: 4.9,
         reviewCount: 14,
-        thumbnail: "/landing/premium/image-10.png"
+        thumbnail: "/landing/premium/special-product.png"
       }
     ]
   },
@@ -64,7 +64,7 @@ export const productSections = [
         featured: true,
         rating: 4.8,
         reviewCount: 8,
-        thumbnail: "/landing/premium/image-1.png"
+        thumbnail: "/landing/premium/premium-products (1).png"
       },
       {
         id: 2,
@@ -79,7 +79,7 @@ export const productSections = [
         stock: true,
         rating: 4.7,
         reviewCount: 6,
-        thumbnail: "/landing/premium/image-2.png"
+        thumbnail: "/landing/premium/premium-products (2).png"
       },
       {
         id: 3,
@@ -94,7 +94,7 @@ export const productSections = [
         stock: true,
         rating: 4.9,
         reviewCount: 12,
-        thumbnail: "/landing/premium/image-3.png"
+        thumbnail: "/landing/premium/premium-products (3).png"
       },
       {
         id: 4,
@@ -109,7 +109,7 @@ export const productSections = [
         stock: true,
         rating: 4.6,
         reviewCount: 9,
-        thumbnail: "/landing/premium/image-4.png"
+        thumbnail: "/landing/premium/premium-products (4).png"
       },
       {
         id: 5,
@@ -124,7 +124,7 @@ export const productSections = [
         stock: true,
         rating: 4.5,
         reviewCount: 7,
-        thumbnail: "/landing/premium/image-5.png"
+        thumbnail: "/landing/premium/premium-products (5).png"
       },
       {
         id: 6,
@@ -139,7 +139,7 @@ export const productSections = [
         stock: true,
         rating: 4.4,
         reviewCount: 5,
-        thumbnail: "/landing/premium/image-6.png"
+        thumbnail: "/landing/premium/premium-products (6).png"
       },
       {
         id: 7,
@@ -154,7 +154,7 @@ export const productSections = [
         stock: true,
         rating: 4.8,
         reviewCount: 4,
-        thumbnail: "/landing/premium/image-7.png"
+        thumbnail: "/landing/premium/premium-products (7).png"
       },
       {
         id: 8,
@@ -169,7 +169,7 @@ export const productSections = [
         stock: true,
         rating: 4.3,
         reviewCount: 6,
-        thumbnail: "/landing/premium/image-8.png"
+        thumbnail: "/landing/premium/premium-products (8).png"
       },
       {
         id: 9,
@@ -184,7 +184,7 @@ export const productSections = [
         stock: true,
         rating: 4.7,
         reviewCount: 11,
-        thumbnail: "/landing/premium/image-9.png"
+        thumbnail: "/landing/premium/premium-products (9).png"
       },
       {
         id: 10,
@@ -201,7 +201,7 @@ export const productSections = [
         featured: true,
         rating: 4.9,
         reviewCount: 14,
-        thumbnail: "/landing/premium/image-10.png"
+        thumbnail: "/landing/premium/premium-products (10).png"
       },
       {
         id: 11,
@@ -216,7 +216,7 @@ export const productSections = [
         stock: true,
         rating: 4.2,
         reviewCount: 4,
-        thumbnail: "/landing/premium/image-11.png"
+        thumbnail: "/landing/premium/premium-products (11).png"
       },
       {
         id: 12,
@@ -231,7 +231,7 @@ export const productSections = [
         stock: true,
         rating: 4.4,
         reviewCount: 8,
-        thumbnail: "/landing/premium/image-12.png"
+        thumbnail: "/landing/premium/premium-products (12).png"
       }
     ]
   }
