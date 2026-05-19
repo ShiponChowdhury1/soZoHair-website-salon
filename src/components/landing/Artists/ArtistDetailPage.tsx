@@ -9,7 +9,7 @@ function StarRating({ rating, size = 14 }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width={size} height={size} viewBox="0 0 14 14" fill={i < rating ? "#C4956A" : "#444"}>
+        <svg key={i} width={size} height={size} viewBox="0 0 14 14" fill={i < rating ? "#C4956A" : "#ddd"}>
           <path d="M7 1l1.545 3.13L12 4.635l-2.5 2.435.59 3.44L7 8.885l-3.09 1.625.59-3.44L2 4.635l3.455-.505z" />
         </svg>
       ))}
@@ -17,25 +17,25 @@ function StarRating({ rating, size = 14 }) {
   );
 }
 
-const defaultReviews = [
-  {
-    text: "They always listen to me and then know exactly how to give me the look I want. I am super conscientious about making sure I'm happy.",
-  },
-  {
-    text: "I have been a client for years. It is just such a pleasant experience every time I go that I keep coming back.",
-  },
-  {
-    text: "Does an amazing job with my hair! They always give me little tips to make sure I can 'do it myself'. I appreciate the suggestions.",
-  },
-];
-
 export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
-
-
   // Get 4 suggested artists (excluding the currently viewed one)
   const suggestedArtists = artists
     .filter((a) => a.id !== artist.id)
     .slice(0, 4);
+
+  // Split the fullDescription to separate bio from reviews
+  const fullText = artist.fullDescription || artist.description || "";
+  const reviewSplit = fullText.split("Client Reviews for Karen:");
+  const bioText = reviewSplit[0]?.trim() || "";
+  const reviewsText = reviewSplit[1]?.trim() || "";
+
+  // Parse individual reviews from the text block
+  const reviewLines = reviewsText
+    ? reviewsText
+        .split(/(?=Karen |I have been|Karen does)/)
+        .map((r) => r.trim())
+        .filter((r) => r.length > 0)
+    : [];
 
   return (
     <div className="w-full" style={{ backgroundColor: "#FDF9F5" }}>
@@ -52,7 +52,7 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
         </button>
       </div>
 
-      {/* Main content */}
+      {/* Hero Section — Image + Name/Short description/Book */}
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 py-10 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start">
 
@@ -67,41 +67,23 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
             />
           </div>
 
-          {/* Right — Details */}
-          <div className="flex flex-col gap-6 pt-2">
+          {/* Right — Name + short desc + Book */}
+          <div className="flex flex-col gap-5 pt-2">
+            <h1
+              className="text-[#2D2D2D] text-4xl md:text-[42px] font-semibold leading-tight"
+              style={{ fontFamily: "var(--font-playfair, serif)" }}
+            >
+              {artist.name}
+            </h1>
 
-            {/* Name & Role */}
-            <div>
-              <h1
-                className="text-[#2D2D2D] text-4xl md:text-5xl font-semibold leading-tight"
-                style={{ fontFamily: "var(--font-playfair, serif)" }}
-              >
-                {artist.name}
-              </h1>
-              <div className="flex items-center gap-3 mt-3">
-                <StarRating rating={artist.rating} size={16} />
-              </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-[#666] text-[15px] leading-[1.8]">
-              {artist.fullDescription || artist.description}
+            <p className="text-[#666] text-[15px] leading-[1.8] max-w-md">
+              Our passionate team of beauty professionals is dedicated to making you look and feel your absolute best with expert care and artistry.
             </p>
-
-            {/* Specialty badge */}
-            <div className="flex flex-wrap gap-2">
-              <span className="px-4 py-1.5 rounded-full text-xs uppercase tracking-widest font-medium border border-[#C4956A] text-[#C4956A]">
-                {artist.role}
-              </span>
-              <span className="px-4 py-1.5 rounded-full text-xs uppercase tracking-widest font-medium border border-[#ddd] text-[#666]">
-                {artist.specialty}
-              </span>
-            </div>
 
             {/* Book Button */}
             <div className="flex flex-col gap-2 mt-2">
               <button
-                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-white font-medium text-[15px] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(212,165,154,0.35)]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-white font-medium text-[15px] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(212,165,154,0.35)]"
                 style={{ backgroundColor: "#D4A59A" }}
               >
                 <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
@@ -110,23 +92,49 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
                 </svg>
                 Book Your Appointment
               </button>
-              <p className="text-[#888] text-[13px] text-center md:text-left mt-1">
+              <p className="text-[#666] text-[14px] mt-2">
                 Online Booking – Best Rates and No Booking Fees
               </p>
             </div>
-
-            {/* Divider */}
-            <div className="w-full h-px bg-[#EAEAEA] my-2" />
-
-           
-
           </div>
         </div>
       </div>
 
+      {/* Full Bio Section — full width text */}
+      {bioText && (
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 pb-10">
+          <p className="text-[#444] text-[15px] leading-[1.9]">
+            {bioText}
+          </p>
+        </div>
+      )}
+
+      {/* Client Reviews Section */}
+      {reviewLines.length > 0 && (
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 pb-10">
+          <div className="flex flex-col gap-4">
+            {reviewLines.map((review, i) => (
+              <p key={i} className="text-[#444] text-[15px] leading-[1.9]">
+                {review}
+              </p>
+            ))}
+          </div>
+
+          {/* Online Booking link */}
+          <p className="text-[#2D2D2D] text-[14px] font-semibold uppercase tracking-wider mt-6">
+            ONLINE BOOKING
+          </p>
+        </div>
+      )}
+
+      {/* Divider */}
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+        <div className="w-full h-px bg-[#EAEAEA]" />
+      </div>
+
       {/* Suggested for you */}
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 pb-16 md:pb-24 pt-4">
-        <h2 
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 pb-16 md:pb-24 pt-12">
+        <h2
           className="text-[#2D2D2D] text-3xl md:text-[34px] font-semibold mb-8"
           style={{ fontFamily: "var(--font-playfair, serif)" }}
         >
@@ -134,10 +142,10 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {suggestedArtists.map((suggested) => (
-            <ArtistCard 
-              key={suggested.id} 
-              artist={suggested} 
-              onClick={onSelectArtist} 
+            <ArtistCard
+              key={suggested.id}
+              artist={suggested}
+              onClick={onSelectArtist}
             />
           ))}
         </div>
