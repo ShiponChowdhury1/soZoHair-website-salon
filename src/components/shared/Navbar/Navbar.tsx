@@ -31,8 +31,8 @@ const serviceItemsRight = [
 ];
 
 const shopItems = [
-  { label: "Special Products", href: "#premium" },
-  { label: "Premium Products", href: "#premium" },
+  { label: "Special Products", href: "/special-products" },
+  { label: "Premium Products", href: "/premium-products" },
 ];
 
 const moreItemsMiddle = [
@@ -56,7 +56,7 @@ const mobileNavItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "#wigs" },
-  { label: "Shop", href: "#premium", hasSubmenu: true, menuKey: "shop" as const },
+  { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
   { label: "Gallery", href: "#gallery" },
   { label: "Teams", href: "/teams" },
   { label: "Contact", href: "#contact" },

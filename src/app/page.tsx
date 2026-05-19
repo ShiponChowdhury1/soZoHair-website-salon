@@ -12,6 +12,7 @@ import ClientLove from "@/components/landing/ClientLove/ClientLove";
 import Map from "@/components/landing/Map/Map";
 import Contact from "@/components/landing/Contact/Contact";
 import Footer from "@/components/shared/Footer/Footer";
+import SpecialsPopup from "@/components/landing/SpecialsPopup/SpecialsPopup";
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
       <Map />
       <Contact />
       <Footer />
+      <SpecialsPopup />
     </main>
   );
 }
