@@ -36,7 +36,7 @@ const shopItems = [
 ];
 
 const moreItemsMiddle = [
-  { label: "Teams", href: "#artists" },
+  { label: "Teams", href: "/teams" },
   { label: "Medical Spa Services", href: "#services" },
   { label: "SoZo on Social Media", href: "#" },
   { label: "Ask the Expert", href: "#" },

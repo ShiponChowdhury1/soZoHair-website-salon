@@ -26,7 +26,6 @@ export default function Home() {
           <AboutSozo />
         </div>
       </section>
-
       <OurServices />
       <CryoSkin />
       <PurePlasma />
