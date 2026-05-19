@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import CartSidebar from "@/components/shared/CartSidebar/CartSidebar";
+import { useCart } from "@/context/CartContext";
 
 type ActiveMenu = "services" | "shop" | "more" | null;
 
@@ -69,7 +71,9 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -124,6 +128,7 @@ export default function Navbar() {
   };
 
   return (
+    <>
     <div
       ref={navRef}
       className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
@@ -241,12 +246,21 @@ export default function Navbar() {
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </button>
-            <button aria-label="Shopping Bag" className="text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0">
+            <button
+              aria-label="Shopping Bag"
+              onClick={() => setIsCartOpen(true)}
+              className="relative text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0"
+            >
               <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg>
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[#D4A59A] text-white text-[10px] font-bold flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
             </button>
           </div>
 
@@ -487,5 +501,9 @@ export default function Navbar() {
         </div>
       </div>
     </div>
+
+      {/* Cart Sidebar */}
+      <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </>
   );
 }
