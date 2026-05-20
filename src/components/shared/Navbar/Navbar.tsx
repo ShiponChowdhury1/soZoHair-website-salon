@@ -3,7 +3,9 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
 import CartSidebar from "@/components/shared/CartSidebar/CartSidebar";
+import WishlistSidebar from "@/components/shared/WishlistSidebar/WishlistSidebar";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 type ActiveMenu = "services" | "shop" | "more" | null;
 
@@ -72,8 +74,10 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
-  const { totalItems } = useCart();
+  const { totalItems: totalCartItems } = useCart();
+  const { totalItems: totalWishlistItems } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -236,8 +240,8 @@ export default function Navbar() {
         <div className="flex items-center gap-3 sm:gap-5 md:gap-8">
           {/* Icons */}
           <div className="flex items-center gap-3 sm:gap-5">
-            <button 
-              aria-label="Search" 
+            <button
+              aria-label="Search"
               onClick={() => { setIsSearchOpen(!isSearchOpen); setActiveMenu(null); }}
               className="text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0"
             >
@@ -245,6 +249,20 @@ export default function Navbar() {
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
+            </button>
+            <button
+              aria-label="Wishlist"
+              onClick={() => setIsWishlistOpen(true)}
+              className="relative text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0"
+            >
+              <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              {totalWishlistItems > 0 && (
+                <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[#D4A59A] text-white text-[10px] font-bold flex items-center justify-center">
+                  {totalWishlistItems}
+                </span>
+              )}
             </button>
             <button
               aria-label="Shopping Bag"
@@ -256,9 +274,9 @@ export default function Navbar() {
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg>
-              {totalItems > 0 && (
+              {totalCartItems > 0 && (
                 <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[#D4A59A] text-white text-[10px] font-bold flex items-center justify-center">
-                  {totalItems}
+                  {totalCartItems}
                 </span>
               )}
             </button>
@@ -504,6 +522,9 @@ export default function Navbar() {
 
       {/* Cart Sidebar */}
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+
+      {/* Wishlist Sidebar */}
+      <WishlistSidebar isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} />
     </>
   );
 }

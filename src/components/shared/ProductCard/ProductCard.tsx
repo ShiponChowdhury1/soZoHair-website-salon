@@ -1,7 +1,41 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductCard({ product }: { product: any }) {
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
+  
+  const isWished = isInWishlist(product.id);
+
+  const handleToggleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleWishlist({
+      id: product.id,
+      slug: product.slug,
+      name: product.name,
+      price: product.price,
+      oldPrice: product.oldPrice,
+      thumbnail: product.thumbnail,
+      route: product.route,
+    });
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addToCart({
+      id: product.id,
+      slug: product.slug,
+      name: product.name,
+      price: product.price,
+      oldPrice: product.oldPrice,
+      thumbnail: product.thumbnail,
+      route: product.route,
+    });
+  };
   return (
     <div className="group relative rounded-xl overflow-hidden bg-white border border-[#eaeaea] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] flex flex-col text-left">
       <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-50">
@@ -16,10 +50,13 @@ export default function ProductCard({ product }: { product: any }) {
         </Link>
         {/* Favorite Button */}
         <button 
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors z-10"
-          aria-label="Add to wishlist"
+          onClick={handleToggleWishlist}
+          className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-10 ${
+            isWished ? "bg-white text-[#D4A59A]" : "bg-black/40 text-white hover:bg-black/60"
+          }`}
+          aria-label={isWished ? "Remove from wishlist" : "Add to wishlist"}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill={isWished ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
         </button>
@@ -52,6 +89,7 @@ export default function ProductCard({ product }: { product: any }) {
         
         {/* Cart Button */}
         <button 
+          onClick={handleAddToCart}
           className="absolute bottom-5 right-5 w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-[#444] hover:bg-[#D4A59A] hover:text-white transition-colors"
           aria-label="Add to cart"
         >
