@@ -13,7 +13,7 @@ const dropdownLeftItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
-  { label: "Wigs", href: "#wigs" },
+  { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "#premium" },
   { label: "Articles", href: "#" },
   { label: "Gallery", href: "#gallery" },
@@ -59,7 +59,7 @@ const moreItemsRight = [
 const mobileNavItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "#services", hasSubmenu: true, menuKey: "services" as const },
-  { label: "Wigs", href: "#wigs" },
+  { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
   { label: "Gallery", href: "#gallery" },
   { label: "Teams", href: "/teams" },
@@ -187,8 +187,8 @@ export default function Navbar() {
           </button>
 
           <Link
-            href="#wigs"
-            onClick={() => handleNavClick("wigs")}
+            href="/wigs"
+            onClick={() => handleNavClick(null)}
             className="text-[15px] font-medium text-[#555] no-underline pb-1 transition-colors hover:text-[#2D2D2D]"
           >
             Wigs
