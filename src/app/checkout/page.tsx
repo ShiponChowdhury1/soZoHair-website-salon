@@ -294,9 +294,12 @@ export default function CheckoutPage() {
             </div>
 
             <div className="flex gap-3">
-              <button className="flex-1 h-11 rounded-full border border-gray-200 text-[#2D2D2D] font-medium text-[14px] hover:border-[#D4A59A] hover:text-[#D4A59A] transition-colors">
+              <Link
+                href="/track-order"
+                className="flex-1 h-11 rounded-full border border-gray-200 text-[#2D2D2D] font-medium text-[14px] hover:border-[#D4A59A] hover:text-[#D4A59A] transition-colors flex items-center justify-center no-underline"
+              >
                 Track order
-              </button>
+              </Link>
               <Link
                 href="/premium-products"
                 className="flex-1 h-11 rounded-full bg-[#D4A59A] text-white font-medium text-[14px] hover:bg-[#C4956A] transition-colors flex items-center justify-center no-underline"
