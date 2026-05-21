@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const services = [
-  { title: "Hair Color & Cuts", image: "/landing/services/ServiceCard.png" },
-  { title: "Specialty Hair Services", image: "/landing/services/ServiceCard (1).png" },
-  { title: "Medi-Cosmetology", image: "/landing/services/ServiceCard (2).png" },
-  { title: "Waxing Services", image: "/landing/services/ServiceCard (3).png" },
-  { title: "Lash & Brow Services", image: "/landing/services/ServiceCard (4).png" },
-  { title: "CryoSkin Fat Loss", image: "/landing/services/ServiceCard (5).png" },
-  { title: "The Relaxing Scalp Facial", image: "/landing/services/ServiceCard (6).png" },
+  { title: "Hair Color & Cuts", image: "/landing/services/hair-cuts.png" },
+  { title: "Specialty Hair Services", image: "/landing/services/speeialty-hair.png" },
+  { title: "Hair Extensions", image: "/landing/services/hair-extensions.png" },
+  { title: "Waxing Services", image: "/landing/services/waxing.png" },
+  { title: "Lash & Brow Services", image: "/landing/services/lash-brow.png" },
+  { title: "CryoSkin Fat Loss", image: "/landing/services/cryosking.png" },
+  { title: "Pure Plasma", image: "/landing/services/pure-plasma.png" },
+  { title: "The Relaxing Scalp Facial", image: "/landing/services/the-relaxing-Scalp-facial.png"},
 ];
 
 export default function OurServices() {
