@@ -17,8 +17,7 @@ export default function ArticlesHero() {
         <div className="hero-text">
           <span className="hero-label">Salon Tips</span>
           <h1 className="hero-title">
-            Sozo Hair Salon<br />
-            <em>Tips Articles</em>
+            Sozo Hair Salon Tips Articles
           </h1>
           <p className="hero-sub">
             Discover the latest hair trends, professional styling advice, and expert care tips directly from our master stylists.
@@ -27,13 +26,8 @@ export default function ArticlesHero() {
             Browse Articles
           </button>
         </div>
-        <div className="hero-image">
-          <img
-            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80"
-            alt="Hair styling"
-          />
-        </div>
       </div>
     </section>
   );
 }
+
