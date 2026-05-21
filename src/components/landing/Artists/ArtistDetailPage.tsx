@@ -5,7 +5,12 @@ import { useState } from "react";
 
 import { artists, ArtistCard } from "./Artists";
 
-function StarRating({ rating, size = 14 }) {
+interface StarRatingProps {
+  rating: number;
+  size?: number;
+}
+
+function StarRating({ rating, size = 14 }: StarRatingProps) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -17,7 +22,13 @@ function StarRating({ rating, size = 14 }) {
   );
 }
 
-export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
+interface ArtistDetailPageProps {
+  artist: any;
+  onBack: () => void;
+  onSelectArtist: (artist: any) => void;
+}
+
+export default function ArtistDetailPage({ artist, onBack, onSelectArtist }: ArtistDetailPageProps) {
   // Get 4 suggested artists (excluding the currently viewed one)
   const suggestedArtists = artists
     .filter((a) => a.id !== artist.id)
@@ -33,8 +44,8 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
   const reviewLines = reviewsText
     ? reviewsText
         .split(/(?=Karen |I have been|Karen does)/)
-        .map((r) => r.trim())
-        .filter((r) => r.length > 0)
+        .map((r: string) => r.trim())
+        .filter((r: string) => r.length > 0)
     : [];
 
   return (
@@ -113,7 +124,7 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }) {
       {reviewLines.length > 0 && (
         <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 pb-10">
           <div className="flex flex-col gap-4">
-            {reviewLines.map((review, i) => (
+            {reviewLines.map((review: string, i: number) => (
               <p key={i} className="text-[#444] text-[15px] leading-[1.9]">
                 {review}
               </p>

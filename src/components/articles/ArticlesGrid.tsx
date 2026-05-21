@@ -107,42 +107,44 @@ export default function ArticlesGrid({ articles }: ArticlesGridProps) {
 
   return (
     <section className="articles-section">
-      <div className="articles-header">
-        <h2>Sozo's Top Articles</h2>
-        <div className="sort-wrap">
-          <span>Sort by:</span>
-          <select
-            id="sortSelect"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
-          >
-            <option value="latest">Latest</option>
-            <option value="oldest">Oldest</option>
-            <option value="az">A–Z</option>
-          </select>
-        </div>
-      </div>
-      <div className="articles-grid" id="articlesGrid">
-        {paginatedArticles.map((article) => (
-          <div
-            key={article.id}
-            className="card"
-            onClick={() => handleCardClick(article.id)}
-          >
-            <div className="card-img">
-              <img src={article.image} alt={article.title} loading="lazy" />
-            </div>
-            <div className="card-body">
-              <span className="card-cat">{article.category}</span>
-              <h3 className="card-title">{article.title}</h3>
-              <p className="card-excerpt">{article.excerpt}</p>
-              <button className="card-read">Read More</button>
-            </div>
+      <div className="slider-container">
+        <div className="articles-header">
+          <h2>Sozo's Top Articles</h2>
+          <div className="sort-wrap">
+            <span>Sort by:</span>
+            <select
+              id="sortSelect"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+            >
+              <option value="latest">Latest</option>
+              <option value="oldest">Oldest</option>
+              <option value="az">A–Z</option>
+            </select>
           </div>
-        ))}
-      </div>
-      <div className="pagination" id="pagination">
-        {renderPaginationButtons()}
+        </div>
+        <div className="articles-grid" id="articlesGrid">
+          {paginatedArticles.map((article) => (
+            <div
+              key={article.id}
+              className="card"
+              onClick={() => handleCardClick(article.id)}
+            >
+              <div className="card-img">
+                <img src={article.image} alt={article.title} loading="lazy" />
+              </div>
+              <div className="card-body">
+                <span className="card-cat">{article.category}</span>
+                <h3 className="card-title">{article.title}</h3>
+                <p className="card-excerpt">{article.excerpt}</p>
+                <button className="card-read">Read More</button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="pagination" id="pagination">
+          {renderPaginationButtons()}
+        </div>
       </div>
     </section>
   );

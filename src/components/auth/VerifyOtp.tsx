@@ -73,7 +73,9 @@ export default function VerifyOtp() {
         {Array.from({ length: 6 }).map((_, i) => (
           <input
             key={i}
-            ref={(el) => (refs.current[i] = el)}
+            ref={(el) => {
+              refs.current[i] = el;
+            }}
             value={digits[i]}
             onChange={(e) => handleChange(i, e.target.value.slice(-1))}
             onKeyDown={(e) => handleKeyDown(e as any, i)}

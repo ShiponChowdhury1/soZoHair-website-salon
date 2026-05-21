@@ -112,7 +112,23 @@ export const artists = [
   },
 ];
 
-function StarRating({ rating, size = 14 }) {
+interface Artist {
+  id: number;
+  name: string;
+  role: string;
+  specialty: string;
+  rating: number;
+  image: string;
+  description: string;
+  fullDescription: string;
+}
+
+interface StarRatingProps {
+  rating: number;
+  size?: number;
+}
+
+function StarRating({ rating, size = 14 }: StarRatingProps) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -124,7 +140,12 @@ function StarRating({ rating, size = 14 }) {
   );
 }
 
-export function ArtistCard({ artist, onClick }) {
+interface ArtistCardProps {
+  artist: Artist;
+  onClick: (artist: Artist) => void;
+}
+
+export function ArtistCard({ artist, onClick }: ArtistCardProps) {
   return (
     <div
       onClick={() => onClick(artist)}
@@ -175,7 +196,7 @@ export function ArtistCard({ artist, onClick }) {
 
 export default function Artists({ isStandalonePage = false }: { isStandalonePage?: boolean }) {
   const [showAll, setShowAll] = useState(isStandalonePage);
-  const [selectedArtist, setSelectedArtist] = useState(null);
+  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
   const router = useRouter();
 
   const visibleArtists = showAll ? artists : artists.slice(0, 6);

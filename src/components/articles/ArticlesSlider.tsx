@@ -1,36 +1,24 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Article } from "@/data/articles";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 interface ArticlesSliderProps {
   articles: Article[];
 }
 
 export default function ArticlesSlider({ articles }: ArticlesSliderProps) {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const router = useRouter();
-  const sliderArticles = articles.slice(0, 4);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [currentSlide]);
-
-  const handlePrev = () => {
-    setCurrentSlide((prev) => (prev === 0 ? sliderArticles.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev === sliderArticles.length - 1 ? 0 : prev + 1));
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
+  // Use the top 3 articles for the slider as requested
+  const sliderArticles = articles.slice(0, 3);
 
   const handleArticleClick = (id: number) => {
     router.push(`/articles/${id}`);
@@ -40,46 +28,56 @@ export default function ArticlesSlider({ articles }: ArticlesSliderProps) {
 
   return (
     <section className="slider-section">
-      <h2 className="section-title">Browse Sozo's Top Salon Tips</h2>
-      <div className="slider-wrap">
-        <button className="slider-arrow prev" onClick={handlePrev}>
-          &#8592;
-        </button>
-        <div
-          className="slider-track"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {sliderArticles.map((article) => (
-            <div
-              key={article.id}
-              className="slide"
-              onClick={() => handleArticleClick(article.id)}
-            >
-              <div className="slide-img">
-                <img src={article.image} alt={article.title} />
-              </div>
-              <div className="slide-body">
-                <span className="slide-cat">{article.category}</span>
-                <h3 className="slide-title">{article.title}</h3>
-                <p className="slide-excerpt">{article.excerpt}</p>
-                <button className="slide-link">Read more</button>
-              </div>
-            </div>
-          ))}
+      <div className="slider-container">
+        <h2 className="slider-heading">Browse Sozo's Top Salon Tips</h2>
+        <div className="swiper-outer-wrap">
+          <Swiper
+            modules={[Autoplay, Pagination, Navigation]}
+            spaceBetween={30}
+            slidesPerView={1}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            pagination={{
+              clickable: true,
+              el: ".slider-custom-pagination",
+            }}
+            navigation={{
+              prevEl: ".slider-arrow-btn.prev",
+              nextEl: ".slider-arrow-btn.next",
+            }}
+            loop={true}
+            className="articles-swiper"
+          >
+            {sliderArticles.map((article) => (
+              <SwiperSlide key={article.id}>
+                <div
+                  className="slide-card"
+                  onClick={() => handleArticleClick(article.id)}
+                >
+                  <div className="slide-card-body">
+                    <span className="slide-card-cat">{article.category}</span>
+                    <h3 className="slide-card-title">{article.title}</h3>
+                    <p className="slide-card-excerpt">{article.excerpt}</p>
+                    <button className="btn-readmore">Read more</button>
+                  </div>
+                  <div className="slide-card-img">
+                    <img src={article.image} alt={article.title} />
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Navigation Arrows */}
+          <button className="slider-arrow-btn prev" aria-label="Previous slide">
+            &#8592;
+          </button>
+          <button className="slider-arrow-btn next" aria-label="Next slide">
+            &#8594;
+          </button>
         </div>
-        <button className="slider-arrow next" onClick={handleNext}>
-          &#8594;
-        </button>
-      </div>
-      <div className="slider-controls">
-        {sliderArticles.map((_, i) => (
-          <button
-            key={i}
-            className={`slider-dot ${i === currentSlide ? "active" : ""}`}
-            onClick={() => goToSlide(i)}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+
+        {/* Custom Pagination Indicator */}
+        <div className="slider-custom-pagination" />
       </div>
     </section>
   );

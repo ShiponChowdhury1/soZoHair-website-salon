@@ -71,6 +71,7 @@ export type Service = {
   // shared optional
   faqs?: FAQ[];
   notes?: string[];
+  details?: string;
 };
 
 // ============================================================
