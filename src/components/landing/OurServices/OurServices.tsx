@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const services = [
-  { title: "Hair Color & Cuts", image: "/landing/services/hair-cuts.png" },
-  { title: "Specialty Hair Services", image: "/landing/services/speeialty-hair.png" },
-  { title: "Hair Extensions", image: "/landing/services/hair-extensions.png" },
-  { title: "Waxing Services", image: "/landing/services/waxing.png" },
-  { title: "Lash & Brow Services", image: "/landing/services/lash-brow.png" },
-  { title: "CryoSkin Fat Loss", image: "/landing/services/cryosking.png" },
-  { title: "Pure Plasma", image: "/landing/services/pure-plasma.png" },
-  { title: "The Relaxing Scalp Facial", image: "/landing/services/the-relaxing-Scalp-facial.png"},
+  { title: "Hair Color & Cuts", image: "/landing/services/hair-cuts.png", id: "hair-cuts-color" },
+  { title: "Specialty Hair Services", image: "/landing/services/speeialty-hair.png", id: "specialty-hair" },
+  { title: "Hair Extensions", image: "/landing/services/hair-extensions.png", id: "extensions-texturizing" },
+  { title: "Waxing Services", image: "/landing/services/waxing.png", id: "waxing" },
+  { title: "Lash & Brow Services", image: "/landing/services/lash-brow.png", id: "lash-brow" },
+  { title: "CryoSkin Fat Loss", image: "/landing/services/cryosking.png", id: "cryoskin" },
+  { title: "Pure Plasma", image: "/landing/services/pure-plasma.png", id: "pure-plasma" },
+  { title: "The Relaxing Scalp Facial", image: "/landing/services/the-relaxing-Scalp-facial.png", id: "scalp-facial" },
 ];
 
 export default function OurServices() {
@@ -31,9 +31,10 @@ export default function OurServices() {
         {/* 3-Column Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
           {services.map((service) => (
-            <div 
+            <Link 
               key={service.title} 
-              className="group relative rounded-xl overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] cursor-pointer"
+              href={`/services/${service.id}`}
+              className="group relative rounded-xl overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] no-underline display-block cursor-pointer"
             >
               <div className="relative w-full aspect-[16/11] overflow-hidden">
                 <Image
@@ -61,7 +62,7 @@ export default function OurServices() {
                   <path d="M12 5l7 7-7 7" />
                 </svg>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

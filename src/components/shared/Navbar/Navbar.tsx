@@ -10,25 +10,25 @@ import { useWishlist } from "@/context/WishlistContext";
 type ActiveMenu = "services" | "shop" | "more" | null;
 
 const dropdownLeftItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
   { label: "Wigs", href: "/wigs" },
-  { label: "Shop", href: "#premium" },
+  { label: "Shop", href: "/#premium" },
   { label: "Articles", href: "/articles" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const serviceItems = [
-  { label: "Hair Cuts & Color", href: "#services" },
-  { label: "Specialty Hair Services", href: "#services" },
-  { label: "Hair Extensions", href: "#services" },
-  { label: "Waxing Services", href: "#services" },
-  { label: "Lash & Brow Services", href: "#services" },
-  { label: "CryoSkin Fat Loss Treatment", href: "#cryoskin" },
-  { label: "Pure Plasma", href: "#pure-plasma" },
-  { label: "The Relaxing Scalp Facial", href: "#services" },
+  { label: "Hair Cuts & Color", href: "/services/hair-cuts-color" },
+  { label: "Specialty Hair Services", href: "/services/specialty-hair" },
+  { label: "Hair Extensions", href: "/services/extensions-texturizing" },
+  { label: "Waxing Services", href: "/services/waxing" },
+  { label: "Lash & Brow Services", href: "/services/lash-brow" },
+  { label: "CryoSkin Fat Loss Treatment", href: "/services/cryoskin" },
+  { label: "Pure Plasma", href: "/services/pure-plasma" },
+  { label: "The Relaxing Scalp Facial", href: "/services/scalp-facial" },
 ];
 
 const shopItems = [
@@ -55,13 +55,13 @@ const moreItemsRight = [
 // All mobile nav items combined
 const mobileNavItems = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "#services", hasSubmenu: true, menuKey: "services" as const },
+  { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
   { label: "Articles", href: "/articles" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
-  { label: "Gallery", href: "#gallery" },
+  { label: "Gallery", href: "/#gallery" },
   { label: "Teams", href: "/teams" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
   { label: "More", href: "#", hasSubmenu: true, menuKey: "more" as const },
 ];
 

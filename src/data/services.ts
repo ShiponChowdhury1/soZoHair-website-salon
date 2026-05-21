@@ -49,6 +49,7 @@ export type Service = {
   heroTitle: string;
   heroSubtitle: string;
   heroImage?: string;   // path to image, e.g. "/landing/services/hair-cuts.png"
+  heroDetailImage?: string; // detail page hero banner image
   intro: string;
   type: ServiceType;
 
@@ -87,6 +88,7 @@ export const services: Service[] = [
     heroTitle: "The Art of Beautiful Hair Cuts & Color",
     heroSubtitle: "Every visit is a personalized transformation designed around you.",
     heroImage: "/landing/services/hair-cuts.png",
+    heroDetailImage: "/landing/services/hair-color-and-cuts-details.png",
     intro:
       "Great hair coloring and hair cuts are just minutes away in West Chester. Our hair artists will satisfy and delight you with their experience, talent and skill! Consider adding hair highlighting, or get an updo for that special occasion. After your hair appointment, be sure to stay for a manicure and pedicure and a therapeutic massage to complete your SoZo HAIR by Bajon Salon & Spa experience.",
     type: "pricing-multi",
@@ -96,7 +98,7 @@ export const services: Service[] = [
         sub: "Artistic cut always includes shampoo & style",
         columns: ["Service", "Hair Artist", "Advanced", "Master", "Sr Master", "Expert"],
         rows: [
-          ["Women's Cut & Style", "$51", "$59", "$66", "$73", "$80"],
+          ["Women's Cut & Style", "$53", "$59", "$66", "$73", "$80"],
           ["Long Cut & Style", "$63", "$70", "$77", "$84", "$92"],
           ["Women's Dry Cut", "$43", "$49", "$56", "$63", "$70"],
           ["Men's Cut & Style", "$41", "$45", "$47", "$52", "$57"],
@@ -104,13 +106,14 @@ export const services: Service[] = [
           ["Kids Girl Cut (Under 10)", "$36", "$40", "$42", "$46", "$50"],
           ["Kids Boys Cut (Under 10)", "$31", "$34", "$37", "$41", "$45"],
           ["Shampoo Blowout", "$46", "$49", "$52", "$56", "$62"],
+          ["Ironwork Dry Style", "$32", "$32", "$37", "$37", "$40"],
           ["Ironwork Add On", "$24", "$24", "$24", "$28", "$30"],
           ["Formal Finish (standard)", "$66", "$71", "$76", "$81", "$90"],
-          ["Formal Finish (extravagant)", "$78", "$81", "$86", "$101", "$102"],
+          ["Formal Finish (extravagant)", "$78", "$81", "$86", "$191", "$102"],
           ["Scalp Facial", "$95", "$101", "$108", "$115", "$120"],
           ["Deep Conditioning Treatment", "$42", "$42", "$42", "$42", "$42"],
           ["Bang Trim", "$31", "$31", "$32", "$34", "$37"],
-          ["Wig Cutting Service", "$55+", "$55+", "$55+", "$55+", "$55+"],
+          ["Wig Cutting Service", "$55 & up", "$55 & up", "$55 & up", "$55 & up", "$55 & up"],
           ["Red Light Scalp Therapy", "$25", "$25", "$25", "$25", "$25"],
           ["Tape-In Extensions", "By Consultation", "By Consultation", "By Consultation", "By Consultation", "By Consultation"],
         ],
@@ -163,6 +166,7 @@ export const services: Service[] = [
     heroSubtitle:
       "Advanced to Expert artists. Premium perms, smoothing treatments, and blowouts. Specialty hair, served with style.",
     heroImage: "/landing/services/speeialty-hair.png",
+    heroDetailImage: "/landing/services/specialty-hair-services-details.png",
     details:"/landing/services/hair-cut",
     intro:
       "We believe your hair deserves a little sweetness without sacrificing an ounce of edge. Our Specialty Hair Services are crafted for those who crave show-stopping results, whether it's bouncy perms, silky-smooth keratin treatments, or frizz-defying Brazilian blowouts. Every service is tailored to your hair's unique personality, because one-size-fits-all simply isn't our style.",
@@ -181,6 +185,33 @@ export const services: Service[] = [
           ["Brazilian Blowout Express", "$130", "$130", "$130", "$130", "$149"],
           ["Brazilian Blowout Split End Treatment", "$55", "$55", "$55", "$55", "$61"],
           ["Tape-In Extensions", "By Consultation", "By Consultation", "By Consultation", "By Consultation", "By Consultation"],
+        ],
+      },
+      {
+        name: "Salon Color",
+        sub: "Prices do not include artistic cut or blowdry",
+        columns: ["Salon Color Service", "Advanced", "Master", "Sr Master", "Expert"],
+        rows: [
+          ["Full Highlight", "$105", "$115", "$125", "$140"],
+          ["Virgin Full Highlight", "$132", "$142", "$152", "$167"],
+          ["Partial Highlight", "$90", "$100", "$110", "$123"],
+          ["Virgin Partial Highlight", "$112", "$122", "$132", "$145"],
+          ["Panel Highlight", "$55", "$60", "$65", "$71"],
+          ["1/2 Panel Highlight", "$46", "$51", "$55", "$61"],
+          ["Tint Re-Touch", "$73", "$80", "$85", "$95"],
+          ["All Over Color", "$95", "$100", "$105", "$115"],
+          ["Blending Color for Men", "$52", "$54", "$56", "$63"],
+          ["Blowout with Color (& up)", "$26", "$31", "$35", "$38"],
+          ["Toning", "$55", "$60", "$65", "$73"],
+          ["Sealer & Restructuring Treatment", "$40", "$40", "$40", "$43"],
+          ["Deep Conditioning Treatment", "$39", "$39", "$39", "$42"],
+          ["Glossing", "$55", "$60", "$65", "$72"],
+          ["Premium Illumina Color (Additional)", "$24", "$25", "$26", "$31"],
+          ["Wig Color Services", "+$34", "+$37", "+$40", "+$43"],
+          ["Olaplex", "$41", "$41", "$41", "$43"],
+          ["B3", "$61", "$61", "$61", "$63"],
+          ["Ombre/Balayage Color", "By consultation", "By consultation", "By consultation", "By consultation"],
+          ["Corrective or Specialized Color", "By consultation", "By consultation", "By consultation", "By consultation"],
         ],
       },
     ],
@@ -203,6 +234,7 @@ export const services: Service[] = [
     heroSubtitle:
       "Go from short-to-long, fine-to-full, blonde to brunette in ONE visit!",
     heroImage: "/landing/services/hair-extensions.png",
+    heroDetailImage: "/landing/services/hair-extensions-details.png",
     intro:
       "SoZo HAIR by Bajon Salon & Spa's hair extensions are made of the finest human hair and we use the most advanced system to attach them. In about four (4) hours, we can take your hair from short-to-long, fine-to-full, adding length, color, texture and fullness. Add as much length as you want AND highlight your hair without coloring it by weaving in extensions that are lighter or darker than your own hair color. Your NEW hair looks like your own and will last for months with proper care and maintenance!",
     type: "info-benefits",
@@ -250,6 +282,7 @@ export const services: Service[] = [
     heroSubtitle:
       "From quick brow touch-ups to full-face waxing, our experienced professionals help you relax.",
     heroImage: "/landing/services/waxing.png",
+    heroDetailImage: "/landing/services/waxing-service-details.png",
     intro:
       "With the best waxing treatments in the Cincinnati area, you'll relax knowing you're in the hands of experienced professionals catering to your every need and pampering you with loving care.",
     type: "pricing-simple",
@@ -279,6 +312,7 @@ export const services: Service[] = [
     heroSubtitle:
       "Precision-crafted eyelash and brow services designed to bring out your natural beauty.",
     heroImage: "/landing/services/lash-brow.png",
+    heroDetailImage: "/landing/services/eyelash-and-brow services-details.png",
     intro:
       "Enhance your features with precision-crafted eyelash and brow services designed to bring out your natural beauty. From shaping to tinting, every detail is carefully tailored to suit your unique look.",
     type: "pricing-simple",
@@ -308,6 +342,7 @@ export const services: Service[] = [
     heroSubtitle:
       "Non-invasive fat loss technology to help you shape the body you want.",
     heroImage: "/landing/services/cryosking.png",
+    heroDetailImage: "/landing/services/cryoskin-details.png",
     intro:
       "CryoSkin uses cold therapy to help your body naturally eliminate fat cells. It is a non-invasive procedure that uses thermal shock through alternating hot and cold temperatures to naturally destroy fat cells and improve your overall appearance.",
     type: "faq-stats",
@@ -343,6 +378,7 @@ export const services: Service[] = [
     heroSubtitle:
       "FDA-approved technology that uses ionized gas to form plasma — delivered directly to the skin's surface.",
     heroImage: "/landing/services/pure-plasma.png",
+    heroDetailImage: "/landing/services/pure-plasma-skin-treatments.-details.png",
     intro:
       "Pure Plasma is an FDA-approved treatment that uses ionized gas to form plasma, which delivers heated plasma directly to the skin's surface without damaging the surrounding tissue. The thermal effect produced by the plasma energy works to stimulate collagen and elastin production in the skin.",
     type: "info-faq",
@@ -389,6 +425,7 @@ export const services: Service[] = [
     heroSubtitle:
       "Achieve a state of relaxation and rejuvenation for both your body and mind.",
     heroImage: "/landing/services/the-relaxing-Scalp-facial.png",
+    heroDetailImage: "/landing/services/scalp-facial-deatils.png",
     intro:
       "Our head is a reservoir of vital force energy channels and acupressure points. Through the gentle art of massage, the Relaxing Scalp Facial seeks to harmonize these energies, fostering equilibrium and holistic well-being both physically and mentally.",
     type: "info-benefits",
