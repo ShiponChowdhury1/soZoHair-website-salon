@@ -429,14 +429,7 @@ export const services: Service[] = [
     intro:
       "Our head is a reservoir of vital force energy channels and acupressure points. Through the gentle art of massage, the Relaxing Scalp Facial seeks to harmonize these energies, fostering equilibrium and holistic well-being both physically and mentally.",
     type: "info-benefits",
-    highlights: [
-      { icon: "🧘", title: "STRESS RELIEF", desc: "Gentle massaging of the scalp and head helps to release tension and promote relaxation." },
-      { icon: "🩸", title: "IMPROVED CIRCULATION", desc: "Stimulates blood flow to the scalp, nourishing hair follicles and promoting healthier hair growth." },
-      { icon: "😴", title: "DEEP RELAXATION", desc: "Induces deep relaxation through various massage techniques to alleviate anxiety and promote better sleep." },
-      { icon: "💆", title: "HEADACHE RELIEF", desc: "Provides relief from headaches and migraines by applying gentle pressure to specific points on the head." },
-      { icon: "🌿", title: "SCALP HEALTH", desc: "Removes excess oil, dead skin cells, and product buildup to prevent dandruff and other scalp-related issues." },
-      { icon: "✨", title: "ENHANCED TEXTURE & SHINE", desc: "Improved blood circulation leads to healthier hair with enhanced texture, increased shine, and reduced breakage." },
-    ],
+
     notes: [
       "* Please arrive 5-10 minutes early for your first visit.",
       "* Parties greater than 3 people and gift packages require a 50% deposit at time of booking and must be cancelled 7 days in advance.",
