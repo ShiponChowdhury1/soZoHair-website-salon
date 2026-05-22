@@ -48,6 +48,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const isInfoBenefits = service.type === "info-benefits";
   const isInfoFaq = service.type === "info-faq";
   const isFaqStats = service.type === "faq-stats";
+  const heroObjectPosition = service.id === "extensions-texturizing" ? "center center" : "right center";
 
   return (
     <main>
@@ -82,7 +83,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               src={detailImg}
               alt={service.title}
               fill
-              style={{ objectFit: "cover", objectPosition: "right center" }}
+              style={{ objectFit: "cover", objectPosition: heroObjectPosition }}
               priority
             />
           </div>
@@ -221,7 +222,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             }}
           >
             <div style={{ maxWidth: 900 }}>
-              
+
               {/* More about Scalp Facial Treatment */}
               <h2
                 style={{
@@ -245,7 +246,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               >
                 Relaxing service with expertly trained staff!
               </p>
-              
+
               <p
                 style={{
                   fontSize: 15,
@@ -745,8 +746,47 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </div>
                 )}
 
+                {service.id === "extensions-texturizing" && service.notes && (
+                  <div style={{ maxWidth: 900, marginBottom: 40 }}>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 22,
+                        fontWeight: 600,
+                        color: "#2D2D2D",
+                        marginBottom: 16,
+                      }}
+                    >
+                      Additional Information
+                    </h3>
+                    <ul
+                      style={{
+                        listStyle: "none",
+                        padding: 0,
+                        margin: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 10,
+                      }}
+                    >
+                      {service.notes.map((note, nIdx) => (
+                        <li
+                          key={nIdx}
+                          style={{
+                            fontSize: 14,
+                            lineHeight: 1.7,
+                            color: "#555",
+                          }}
+                        >
+                          {note}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {/* Highlights/Benefits grid */}
-                {service.highlights && (
+                {service.highlights && service.id !== "extensions-texturizing" && (
                   <div style={{ maxWidth: 900, marginBottom: 40 }}>
                     <h3
                       style={{
@@ -783,6 +823,41 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                           <p style={{ fontSize: 13, lineHeight: 1.6, color: "#666", margin: 0 }}>
                             {h.desc}
                           </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {service.id === "extensions-texturizing" && service.galleryImages && (
+                  <div style={{ maxWidth: 900, marginTop: 16 }}>
+                    <div
+                      className="extensions-gallery-grid"
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                        gap: 12,
+                      }}
+                    >
+                      {service.galleryImages.map((imageUrl, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            position: "relative",
+                            aspectRatio: "1 / 1.18",
+                            borderRadius: 18,
+                            overflow: "hidden",
+                            background: "#F4ECE5",
+                            boxShadow: "0 10px 24px rgba(45, 45, 45, 0.08)",
+                          }}
+                        >
+                          <Image
+                            src={imageUrl}
+                            alt={`Salon style inspiration ${idx + 1}`}
+                            fill
+                            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 180px"
+                            style={{ objectFit: "cover" }}
+                          />
                         </div>
                       ))}
                     </div>
@@ -976,7 +1051,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {/* ═══════════════════════════════════════════════════════
                 NOTES / POLICIES
             ═══════════════════════════════════════════════════════ */}
-            {service.notes && service.notes.length > 0 && (
+            {service.notes && service.notes.length > 0 && service.id !== "extensions-texturizing" && (
               <section
                 style={{
                   maxWidth: "var(--container-max-width, 1319px)",

@@ -50,6 +50,7 @@ export type Service = {
   heroSubtitle: string;
   heroImage?: string;   // path to image, e.g. "/landing/services/hair-cuts.png"
   heroDetailImage?: string; // detail page hero banner image
+  galleryImages?: string[];
   intro: string;
   type: ServiceType;
 
@@ -236,7 +237,7 @@ export const services: Service[] = [
     heroImage: "/landing/services/hair-extensions.png",
     heroDetailImage: "/landing/services/hair-extensions-details.png",
     intro:
-      "SoZo HAIR by Bajon Salon & Spa's hair extensions are made of the finest human hair and we use the most advanced system to attach them. In about four (4) hours, we can take your hair from short-to-long, fine-to-full, adding length, color, texture and fullness. Add as much length as you want AND highlight your hair without coloring it by weaving in extensions that are lighter or darker than your own hair color. Your NEW hair looks like your own and will last for months with proper care and maintenance!",
+      "SoZo HAIR by Bajon Salon & Spa’s hair extensions are made of the finest human hair and we use the most advanced system to attach them. In about four (4) hours, we can take your hair from short-to-long, fine-to-full, add length, color, texture and fullness. Add as much length as you want AND highlight your hair without coloring it by weaving in extensions that are lighter or darker than your own hair color. Your NEW hair looks like your own and will last for months with proper care and maintenance!",
     type: "info-benefits",
     highlights: [
       {
@@ -262,11 +263,25 @@ export const services: Service[] = [
     ],
     extraContent: {
       title: "Tape-In Hair Extensions**",
-      body: "Tape-In Extensions are real human hair installed with a specialty tape (adhesive weft extensions). They are completely seamless and undetectable in the hair! They're so natural and comfortable you'll forget they're there and you'll sleep with ease.\n\n**Tape-In Extensions require a consultation 5-6 days prior to service. The consultation is free, however, if you decide to get Tape-In Extensions, a deposit is due that ranges from $250–$450 depending on the amount of hair ordered.",
+      body: "Tape-In Extensions are real human hair and because they’re installed with a specialty tape (adhesive weft extensions), they are completely seamless and undetectable in the hair!! They’re so natural and comfortable you’ll forget they’re there and you’ll sleep with ease. Plus, since they’re no longer installed strand-by-strand, the time to install them is about half of what it used to be!\n\n**Tape-In Extensions require a consultation 5-6 days prior to service. The consultation is free, however, if you decide to get Tape-In Extensions, then a deposit is due that ranges from $250 -$450 depending on the amount of hair ordered.",
     },
+    galleryImages: [
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9",
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f",
+      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263",
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518",
+    ],
     notes: [
       "* Prices vary according to the Hair Artist's level and experience.",
-      "* Please arrive 5-10 minutes early for your first visit.",
+      "* Please arrive 5-10 minutes early for your first visit so that we may take care of administrative details.",
       "* Cancellations must be made 24-hours in advance.",
       "* Prices are subject to change without notice.",
       "* Gratuity IS NOT included in any of our prices or packages.",
