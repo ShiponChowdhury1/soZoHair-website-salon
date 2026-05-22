@@ -9,6 +9,19 @@ import { useWishlist } from "@/context/WishlistContext";
 
 type ActiveMenu = "services" | "shop" | "more" | null;
 
+type MobileSubItem = {
+  label: string;
+  href: string;
+  isHeading?: boolean;
+};
+
+type MobileNavItem = {
+  label: string;
+  href: string;
+  hasSubmenu?: boolean;
+  menuKey?: Exclude<ActiveMenu, null>;
+};
+
 const dropdownLeftItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
@@ -16,7 +29,7 @@ const dropdownLeftItems = [
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/#premium" },
   { label: "Articles", href: "/articles" },
-  { label: "Gallery", href: "/#gallery" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -38,14 +51,14 @@ const shopItems = [
 
 const moreItemsMiddle = [
   { label: "Teams", href: "/teams" },
-  { label: "Medical Spa Services", href: "#services" },
-  { label: "SoZo on Social Media", href: "#" },
+  { label: "Medical Spa Services", href: "/services/medical-spa-services" },
+  { label: "SoZo on Social Media", href: "/social-media" },
   { label: "Ask the Expert", href: "#" },
   { label: "View Our Ratings", href: "#" },
   { label: "Careers at SoZo Hair, Spa & Wigs", href: "#" },
 ];
 
-const moreItemsRight = [
+const moreItemsRight: MobileSubItem[] = [
   { label: "Legals", href: "#", isHeading: true },
   { label: "Return Refund Policy", href: "/return-refund" },
   { label: "Privacy Policy  Spa Services", href: "/privacy-policy" },
@@ -53,13 +66,13 @@ const moreItemsRight = [
 ];
 
 // All mobile nav items combined
-const mobileNavItems = [
+const mobileNavItems: MobileNavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
   { label: "Articles", href: "/articles" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
-  { label: "Gallery", href: "/#gallery" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Teams", href: "/teams" },
   { label: "Contact", href: "/#contact" },
   { label: "More", href: "#", hasSubmenu: true, menuKey: "more" as const },
@@ -122,7 +135,7 @@ export default function Navbar() {
     setMobileSubmenu(null);
   };
 
-  const getMobileSubItems = (key: string) => {
+  const getMobileSubItems = (key: string): MobileSubItem[] => {
     if (key === "services") return serviceItems;
     if (key === "shop") return shopItems;
     if (key === "more") return [...moreItemsMiddle, ...moreItemsRight];
@@ -199,7 +212,7 @@ export default function Navbar() {
             </button>
 
             <Link
-              href="#gallery"
+              href="/gallery"
               onClick={() => handleNavClick("gallery")}
               className="text-[15px] font-medium text-[#555] no-underline pb-1 transition-colors hover:text-[#2D2D2D]"
             >
@@ -373,7 +386,7 @@ export default function Navbar() {
                             key={sub.label}
                             href={sub.href}
                             onClick={closeMobile}
-                            className={`py-2.5 text-[14px] no-underline transition-colors ${(sub as any).isHeading
+                            className={`py-2.5 text-[14px] no-underline transition-colors ${sub.isHeading
                                 ? "text-white font-semibold uppercase tracking-wider text-[13px] mt-2"
                                 : "text-white/60 hover:text-[#D4A59A]"
                               }`}
