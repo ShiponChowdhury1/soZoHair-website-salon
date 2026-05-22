@@ -41,38 +41,87 @@ export default function MedicalSpaServicesPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-white text-[#2C2420] pt-[70px] md:pt-[90px]">
-        <section className="relative min-h-[360px] overflow-hidden">
+
+      <main className="bg-white text-[#2C2420]">
+
+        {/* Hero Section — articles hero CSS pattern */}
+        <section
+          className="relative flex items-center overflow-hidden"
+          style={{ minHeight: "540px", background: "#ffffff" }}
+        >
+          {/* Combined gradient + image — same articles hero pattern */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0"
             style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.64) 52%, rgba(255,255,255,0.12) 100%), url('/landing/background.png')",
+              background: `linear-gradient(to right, rgba(255,255,255,1) 38%, rgba(255,255,255,0.8) 55%, rgba(255,255,255,0) 100%), #ffffff url('/landing/medical-Spa-service.png') no-repeat right center / contain`,
             }}
             aria-hidden="true"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(180,131,110,0.08),rgba(255,255,255,0))]" aria-hidden="true" />
 
-          <div className="relative mx-auto flex min-h-[360px] max-w-[var(--container-max-width)] items-center px-5 py-16 sm:px-8 lg:px-10">
-            <div className="max-w-[500px]">
-              <p className="mb-4 text-[11px] font-medium uppercase tracking-[2px] text-[#8A7A72]">Spa Services</p>
-              <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-semibold leading-tight text-[#2C2420] sm:text-5xl">
+          {/* Hero content */}
+          <div
+            className="relative z-10 mx-auto flex w-full items-center"
+            style={{ maxWidth: "var(--container-max-width, 1319px)", padding: "80px 32px" }}
+          >
+            <div style={{ flex: 1, maxWidth: "500px" }}>
+
+              <p
+                style={{
+                  display: "inline-block",
+                  fontSize: "12px",
+                  letterSpacing: "3px",
+                  textTransform: "uppercase",
+                  color: "#c4956a",
+                  fontWeight: 600,
+                  marginBottom: "20px",
+                }}
+              >
+                Spa Services
+              </p>
+
+              <h1
+                className="font-[family-name:var(--font-playfair)]"
+                style={{
+                  fontSize: "clamp(34px, 4.5vw, 48px)",
+                  fontWeight: 600,
+                  lineHeight: 1.25,
+                  color: "#2B2B2B",
+                  marginBottom: "24px",
+                  letterSpacing: "-0.5px",
+                }}
+              >
                 Medical Spa Services
               </h1>
-              <p className="mt-4 max-w-[380px] text-[15px] leading-7 text-[#5A4A42]">
+
+              <p
+                style={{
+                  fontSize: "15px",
+                  color: "#6b6470",
+                  lineHeight: 1.7,
+                  maxWidth: "380px",
+                  marginBottom: "36px",
+                  fontWeight: 300,
+                }}
+              >
                 A medical spa combines a relaxing spa environment with medically supervised aesthetic treatments.
               </p>
+
               <Link
                 href="#survey"
-                className="mt-7 inline-flex items-center rounded-full bg-[#B8836E] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#2C2420]"
+                className="inline-flex items-center rounded-full bg-[#B8836E] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#2C2420]"
               >
                 Book Your Appointment
               </Link>
+
             </div>
           </div>
         </section>
 
-        <section id="survey" className="bg-[linear-gradient(180deg,rgba(248,243,238,0)_0%,#F8F3EE_53.38%,rgba(248,243,238,0)_105.74%)] py-18">
+        {/* Survey Section */}
+        <section
+          id="survey"
+          className="bg-[linear-gradient(180deg,rgba(248,243,238,0)_0%,#F8F3EE_53.38%,rgba(248,243,238,0)_105.74%)] py-18"
+        >
           <div className="mx-auto max-w-[720px] px-5 sm:px-8">
             <h2 className="font-[family-name:var(--font-playfair)] text-[30px] font-semibold text-[#2C2420]">
               Please take our short survey
@@ -143,7 +192,13 @@ export default function MedicalSpaServicesPage() {
                     <span>Yes</span>
                   </label>
                   <label className="flex items-start gap-3 text-[15px] leading-6 text-[#5A4A42]">
-                    <input type="radio" name="moreinfo" value="no" defaultChecked className="mt-1 h-4 w-4 accent-[#B8836E]" />
+                    <input
+                      type="radio"
+                      name="moreinfo"
+                      value="no"
+                      defaultChecked
+                      className="mt-1 h-4 w-4 accent-[#B8836E]"
+                    />
                     <span>No</span>
                   </label>
                 </div>
@@ -152,6 +207,7 @@ export default function MedicalSpaServicesPage() {
           </div>
         </section>
       </main>
+
       <Footer />
     </>
   );

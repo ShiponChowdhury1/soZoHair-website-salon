@@ -85,36 +85,86 @@ export default function GalleryPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-white text-[#2C2420] pt-[70px] md:pt-[90px]">
-        <section className="relative min-h-[360px] overflow-hidden">
+
+      <main className="bg-white text-[#2C2420]">
+
+        {/* Hero Section — articles hero CSS pattern */}
+        <section
+          className="relative flex items-center overflow-hidden"
+          style={{ minHeight: "540px", background: "#ffffff" }}
+        >
+          {/* Combined gradient + image — articles hero pattern */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "linear-gradient(90deg, rgba(255,255,255,0.86) 0%, rgba(255,255,255,0.62) 50%, rgba(255,255,255,0.18) 100%), url('/landing/background.png')" }}
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to right, rgba(255,255,255,1) 38%, rgba(255,255,255,0.8) 55%, rgba(255,255,255,0) 100%), #ffffff url('/landing/galleries-background.png') no-repeat right center / contain`,
+            }}
             aria-hidden="true"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(196,144,122,0.06),rgba(255,255,255,0))]" aria-hidden="true" />
 
-          <div className="relative mx-auto flex min-h-[360px] max-w-[var(--container-max-width)] items-center px-5 py-16 sm:px-8 lg:px-10">
-            <div className="max-w-[520px]">
-              <p className="mb-4 text-[11px] font-medium uppercase tracking-[2px] text-[#8A7A72]">Galleries</p>
-              <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-semibold leading-tight text-[#2C2420] sm:text-5xl">
+          {/* Hero content */}
+          <div
+            className="relative z-10 mx-auto flex w-full items-center"
+            style={{ maxWidth: "var(--container-max-width, 1319px)", padding: "80px 32px" }}
+          >
+            <div style={{ flex: 1, maxWidth: "520px" }}>
+
+              <p
+                style={{
+                  display: "inline-block",
+                  fontSize: "12px",
+                  letterSpacing: "3px",
+                  textTransform: "uppercase",
+                  color: "#c4956a",
+                  fontWeight: 600,
+                  marginBottom: "20px",
+                }}
+              >
+                Galleries
+              </p>
+
+              <h1
+                className="font-[family-name:var(--font-playfair)]"
+                style={{
+                  fontSize: "clamp(34px, 4.5vw, 48px)",
+                  fontWeight: 600,
+                  lineHeight: 1.25,
+                  color: "#2B2B2B",
+                  marginBottom: "24px",
+                  letterSpacing: "-0.5px",
+                }}
+              >
                 Before And After
                 <br />
                 Happy Clients
               </h1>
-              <p className="mt-4 max-w-[380px] text-[15px] leading-7 text-[#5A4A42]">
-                Browse SoZo Hair Spa &amp; Wigs before and after transformations, styled to highlight the work and the client result.
+
+              <p
+                style={{
+                  fontSize: "15px",
+                  color: "#6b6470",
+                  lineHeight: 1.7,
+                  maxWidth: "380px",
+                  marginBottom: "36px",
+                  fontWeight: 300,
+                }}
+              >
+                Browse SoZo Hair Spa &amp; Wigs before and after transformations, styled to highlight the work and the
+                client result.
               </p>
+
               <a
                 href="#gallery"
-                className="mt-7 inline-flex items-center rounded-full bg-[#B8836E] px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-[#2C2420]"
+                className="inline-flex items-center rounded-full bg-[#B8836E] px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-[#2C2420]"
               >
                 Browse
               </a>
+
             </div>
           </div>
         </section>
 
+        {/* Gallery Grid Section */}
         <section id="gallery" className="bg-white px-5 py-18 sm:px-8 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-[var(--container-max-width)]">
             <h2 className="max-w-[520px] font-[family-name:var(--font-playfair)] text-3xl font-semibold text-[#2C2420] sm:text-4xl">
@@ -131,6 +181,7 @@ export default function GalleryPage() {
           </div>
         </section>
       </main>
+
       <Footer />
     </>
   );

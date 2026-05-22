@@ -53,9 +53,10 @@ const moreItemsMiddle = [
   { label: "Teams", href: "/teams" },
   { label: "Medical Spa Services", href: "/services/medical-spa-services" },
   { label: "SoZo on Social Media", href: "/social-media" },
-  { label: "Ask the Expert", href: "#" },
-  { label: "View Our Ratings", href: "#" },
-  { label: "Careers at SoZo Hair, Spa & Wigs", href: "#" },
+  { label: "Ask the Expert", href: "/ask-expert" },
+  { label: "View Our Ratings", href: "/view-our-ratings" },
+  { label: "Careers at SoZo Hair, Spa & Wigs", href: "/careers" },
+  { label: "Academy", href: "/academy" },
 ];
 
 const moreItemsRight: MobileSubItem[] = [
@@ -387,8 +388,8 @@ export default function Navbar() {
                             href={sub.href}
                             onClick={closeMobile}
                             className={`py-2.5 text-[14px] no-underline transition-colors ${sub.isHeading
-                                ? "text-white font-semibold uppercase tracking-wider text-[13px] mt-2"
-                                : "text-white/60 hover:text-[#D4A59A]"
+                              ? "text-white font-semibold uppercase tracking-wider text-[13px] mt-2"
+                              : "text-white/60 hover:text-[#D4A59A]"
                               }`}
                           >
                             {sub.label}

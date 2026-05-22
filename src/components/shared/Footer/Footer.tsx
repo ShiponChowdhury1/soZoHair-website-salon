@@ -43,6 +43,7 @@ export default function Footer() {
               <li><Link href="#services" className={styles.columnLink}>Services</Link></li>
               <li><Link href="/gallery" className={styles.columnLink}>Gallery</Link></li>
               <li><Link href="#premium" className={styles.columnLink}>Products</Link></li>
+              <li><Link href="/view-our-ratings" className={styles.columnLink}>View Our Ratings</Link></li>
             </ul>
           </div>
 
