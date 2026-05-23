@@ -89,11 +89,15 @@
   font-size: 14px;
   color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
-  transition: color 0.3s ease;
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
-.columnLink:hover {
-  color: var(--color-warm-accent);
+a.columnLink:hover {
+  color: #D4A59A;
+  border-color: #D4A59A;
 }
 
 .bottomRow {
@@ -117,11 +121,15 @@
   font-size: 13px;
   color: rgba(255, 255, 255, 0.4);
   text-decoration: none;
-  transition: color 0.3s ease;
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
 .bottomLink:hover {
   color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* Responsive */

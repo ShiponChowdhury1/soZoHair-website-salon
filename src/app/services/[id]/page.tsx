@@ -6,6 +6,8 @@ import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
 import { services, getServiceById, getAllServiceIds } from "@/data/services";
 import ScalpVideoPlayer from "@/components/services/ScalpVideoPlayer";
+import PlasmaVideoPlayer from "@/components/services/PlasmaVideoPlayer";
+import PlasmaFaqAccordion from "@/components/services/PlasmaFaqAccordion";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -867,9 +869,196 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             )}
 
             {/* ═══════════════════════════════════════════════════════
-                INFO FAQ — info-faq type (Pure Plasma)
+                INFO FAQ — CUSTOM PURE PLASMA LAYOUT
             ═══════════════════════════════════════════════════════ */}
-            {isInfoFaq && (
+            {isInfoFaq && service.id === "pure-plasma" && (
+              <section
+                style={{
+                  maxWidth: "var(--container-max-width, 1319px)",
+                  margin: "0 auto",
+                  padding: "20px 40px 0",
+                }}
+              >
+                {/* ── VIDEO 1 ── */}
+                <div style={{ width: "100%", maxWidth: 1100, margin: "0 0 60px" }}>
+                  <PlasmaVideoPlayer
+                    poster="/landing/services/pure-plasma-skin-treatments.-details.png"
+                    videoUrl="https://www.youtube.com/embed/LrMMztkFEMk"
+                    duration="2:15"
+                  />
+                </div>
+
+                {/* ── WHAT IS PURE PLASMA? ── */}
+                <div style={{ maxWidth: 900, marginBottom: 48 }}>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-playfair), serif",
+                      fontSize: 32,
+                      fontWeight: 600,
+                      color: "#2D2D2D",
+                      marginBottom: 24,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    What is Pure Plasma skin treatments?
+                  </h2>
+                  <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginBottom: 18 }}>
+                    PURE PLASMA is an FDA Approved treatment that uses ionized gas to form plasma, which delivers a heated plasma pulse (thermal effect) that is applied directly to the skin&apos;s surface. Unlike lasers, the plasma energy does not destroy tissues.
+                  </p>
+                  <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginBottom: 18 }}>
+                    Plasma is an ionized gas that is formed when electrical energy passes through a gas (such as air) at a high temperature. It is composed of positively charged ions and electrons. Plasma has been used in the past to remove tattoos and other skin abnormalities without damaging the surrounding tissue.
+                  </p>
+                  <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginBottom: 0 }}>
+                    Pure Plasma skin rejuvenation offers a number of advantages over traditional skin treatments. It is non-invasive, so there is no need for anesthesia or any cutting or sutures. And since it does not damage the surrounding tissue, there is no need for extensive healing or downtime!
+                  </p>
+                  <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginTop: 18, marginBottom: 0 }}>
+                    The thermal effect produced by the plasma energy works to stimulate collagen and elastin production in the skin, which helps to further improve skin quality. This makes Pure Plasma skin rejuvenation an ideal treatment for those who are looking to reduce wrinkles and improve skin texture and tone without surgery!
+                  </p>
+                </div>
+
+                {/* ── VIDEO 2 ── */}
+                <div style={{ width: "100%", maxWidth: 1100, margin: "0 0 60px" }}>
+                  <PlasmaVideoPlayer
+                    poster="/landing/services/pure-plasma.png"
+                    videoUrl="https://www.youtube.com/embed/LrMMztkFEMk"
+                    duration="3:42"
+                  />
+                </div>
+
+                {/* ── DURING THE TREATMENT TEXT ── */}
+                <div style={{ maxWidth: 900, marginBottom: 48 }}>
+                  <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555" }}>
+                    During the Pure Plasma skin rejuvenation treatment, the practitioner will use the device to apply a stream of ionized gas directly onto the skin. The gas is then heated to create a thermal effect that stimulates collagen production and encourages cell turnover. This helps to reduce wrinkles and fine lines, as well as improve skin texture and tone. Results can start to be seen almost immediately and will continue to improve over time.
+                  </p>
+                </div>
+
+                {/* ── BENEFITS OF PURE PLASMA ── */}
+                <div style={{ maxWidth: 900, marginBottom: 20 }}>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-playfair), serif",
+                      fontSize: 32,
+                      fontWeight: 600,
+                      color: "#2D2D2D",
+                      marginBottom: 24,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    Benefits of Pure Plasma
+                  </h2>
+                  <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginBottom: 18 }}>
+                    Pure Plasma offers a number of advantages over traditional skin treatments. It is non-invasive, so there is no need for anesthesia or any cutting or stitching. It is also fast, taking roughly 15 minutes per treatment. And since it does not damage the surrounding tissue, there is no need for extensive healing or downtime! The thermal effect produced by the plasma energy also works to further improve skin quality. This makes Pure Plasma an ideal treatment for those who are looking to improve skin without surgery!
+                  </p>
+
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-playfair), serif",
+                      fontSize: 26,
+                      fontWeight: 600,
+                      color: "#2D2D2D",
+                      marginBottom: 16,
+                      marginTop: 32,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    The Latest Technology
+                  </h3>
+                  <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginBottom: 0 }}>
+                    Pure Plasma is a revolutionary treatment that uses plasma-based thermal energy to improve the skin. Medical practitioners can use the state-of-the-art technology of Pure Plasma to ensure that each client receives the best possible results.
+                  </p>
+                </div>
+
+                {/* ── VIDEO 3 ── */}
+                <div style={{ width: "100%", maxWidth: 1100, margin: "40px 0 60px" }}>
+                  <PlasmaVideoPlayer
+                    poster="/landing/services/pure-plasma-skin-treatments.-details.png"
+                    videoUrl="https://www.youtube.com/embed/LrMMztkFEMk"
+                    duration="4:10"
+                  />
+                </div>
+
+                {/* ── WHAT PURE PLASMA TREATS ── */}
+                {service.treats && (
+                  <div style={{ marginBottom: 48 }}>
+                    <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: 32, fontWeight: 600, color: "#2D2D2D", marginBottom: 24 }}>
+                      What Pure Plasma Treats
+                    </h2>
+                    <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 14 }}>
+                      {service.treats.map((t, idx) => (
+                        <li key={idx} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 15, color: "#2D2D2D", padding: "10px 0", borderBottom: "1px solid #F0EBE5" }}>
+                          <span style={{ color: "#C4956A", fontSize: 18, fontWeight: 700 }}>✓</span>
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* ── 12-IMAGE GALLERY ── */}
+                {service.galleryImages && (
+                  <div style={{ marginBottom: 60 }}>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                        gap: 12,
+                      }}
+                    >
+                      {service.galleryImages.map((imageUrl, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            position: "relative",
+                            aspectRatio: "1 / 1.18",
+                            borderRadius: 18,
+                            overflow: "hidden",
+                            background: "#F4ECE5",
+                            boxShadow: "0 10px 24px rgba(45, 45, 45, 0.08)",
+                          }}
+                        >
+                          <Image
+                            src={imageUrl}
+                            alt={`Pure Plasma treatment result ${idx + 1}`}
+                            fill
+                            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 280px"
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── FAQ SECTION WITH BACKGROUND ── */}
+                {service.faqs && (
+                  <div
+                    style={{
+                      marginBottom: 60,
+                      padding: "48px 0",
+                    }}
+                  >
+                    <div style={{ maxWidth: 800 }}>
+                      <h2 style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 32,
+                        fontWeight: 600,
+                        color: "#2D2D2D",
+                        marginBottom: 8,
+                      }}>
+                        Frequently Asked Questions
+                      </h2>
+                      <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
+                        Here&apos;s your answers to most frequently asked questions about uses of revolutionary technology
+                      </p>
+                      <PlasmaFaqAccordion faqs={service.faqs} />
+                    </div>
+                  </div>
+                )}
+              </section>
+            )}
+
+            {/* ── Generic info-faq (non pure-plasma) ── */}
+            {isInfoFaq && service.id !== "pure-plasma" && (
               <section
                 style={{
                   maxWidth: "var(--container-max-width, 1319px)",
@@ -969,83 +1158,584 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             )}
 
             {/* ═══════════════════════════════════════════════════════
-                FAQ STATS — faq-stats type (CryoSkin)
+                FAQ STATS — CUSTOM CRYOSKIN LAYOUT
             ═══════════════════════════════════════════════════════ */}
             {isFaqStats && (
-              <section
-                style={{
-                  maxWidth: "var(--container-max-width, 1319px)",
-                  margin: "0 auto",
-                  padding: "20px 40px 60px",
-                }}
-              >
-                {/* Stats */}
-                {service.stats && (
+              <>
+                {/* ── SECTION 2: Intro Banner ── */}
+                <section
+                  style={{
+                    maxWidth: "var(--container-max-width, 1319px)",
+                    margin: "0 auto",
+                    padding: "40px 40px 0",
+                  }}
+                >
                   <div
                     style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                      gap: 24,
-                      marginBottom: 48,
+                      background: "linear-gradient(135deg, rgba(232, 180, 184, 0.2) 0%, rgba(245, 230, 211, 0.2) 100%)",
+                      padding: "48px 40px",
+                      borderRadius: 16,
+                      textAlign: "center",
                     }}
                   >
-                    {service.stats.map((s, idx) => (
-                      <div
-                        key={idx}
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 32,
+                        fontWeight: 600,
+                        color: "#2D2D2D",
+                        marginBottom: 16,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      Cryoskin Cold Cryotherapy West Chester Ohio
+                    </h2>
+                    <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", maxWidth: 800, margin: "0 auto 24px" }}>
+                      {service.intro}
+                    </p>
+                    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+                      <a
+                        href="tel:5138749999"
                         style={{
-                          background: "#fff",
-                          border: "1px solid #EDE7E0",
-                          borderRadius: 8,
-                          padding: 32,
-                          textAlign: "center",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: "14px 32px",
+                          background: "#C4956A",
+                          color: "#fff",
+                          border: "none",
+                          borderRadius: 6,
+                          fontSize: 13,
+                          fontWeight: 600,
+                          letterSpacing: 1,
+                          textDecoration: "none",
+                          transition: "all 0.3s",
                         }}
                       >
-                        <div style={{ fontFamily: "var(--font-playfair), serif", fontSize: 40, fontWeight: 700, color: "#C4956A" }}>
-                          {s.num}
-                        </div>
-                        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: "#2D2D2D", marginTop: 8 }}>
-                          {s.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* FAQs */}
-                {service.faqs && (
-                  <div style={{ maxWidth: 800 }}>
-                    <h3 style={{ fontFamily: "var(--font-playfair), serif", fontSize: 24, fontWeight: 600, color: "#2D2D2D", marginBottom: 20 }}>
-                      Frequently Asked Questions
-                    </h3>
-                    {service.faqs.map((faq, idx) => (
-                      <details
-                        key={idx}
-                        style={{ borderBottom: "1px solid #EDE7E0" }}
+                        Call 513-874-9999
+                      </a>
+                      <a
+                        href="/view-our-ratings"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: "14px 32px",
+                          background: "transparent",
+                          color: "#C4956A",
+                          border: "1px solid #C4956A",
+                          borderRadius: 6,
+                          fontSize: 13,
+                          fontWeight: 600,
+                          letterSpacing: 1,
+                          textDecoration: "none",
+                          transition: "all 0.3s",
+                        }}
                       >
-                        <summary
+                        Read More Reviews
+                      </a>
+                    </div>
+                  </div>
+                </section>
+
+                {/* ── SECTION 3: Video ── */}
+                <section
+                  style={{
+                    maxWidth: "var(--container-max-width, 1319px)",
+                    margin: "0 auto",
+                    padding: "60px 40px",
+                  }}
+                >
+                  <div style={{ width: "100%", maxWidth: 1100 }}>
+                    <PlasmaVideoPlayer
+                      poster={service.heroDetailImage || service.heroImage || "/landing/services/cryoskin-details.png"}
+                      videoUrl="https://www.youtube.com/embed/LrMMztkFEMk"
+                      duration="3:20"
+                    />
+                  </div>
+                </section>
+
+                {/* ── SECTION 4: What is Cryoskin? ── */}
+                <section
+                  style={{
+                    maxWidth: "var(--container-max-width, 1319px)",
+                    margin: "0 auto",
+                    padding: "0 40px 60px",
+                  }}
+                >
+                  <div style={{ maxWidth: 900 }}>
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 32,
+                        fontWeight: 600,
+                        color: "#2D2D2D",
+                        marginBottom: 24,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      What is Cryoskin?
+                    </h2>
+                    <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginBottom: 18 }}>
+                      Cryoskin is a revolutionary machine from Europe which uses cold temperatures to permanently eliminate fat cells. The technology can be applied using both the traditional massage technique and a new application using static heads which are both painless, non-invasive, and deliver rapid results.
+                    </p>
+                    <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555", marginBottom: 18 }}>
+                      Cryoslimming, also called cryotherapy is a non-invasive technology which uses cooling technology to freeze and destroy fat cells and reduce fat instantly. It is pain-free and more effective than Botox. It is used to burn fat cells, boost collagen production and improve the skin&apos;s appearance.
+                    </p>
+                    <p style={{ fontSize: 15, lineHeight: 1.85, color: "#555" }}>
+                      Sozo is your only provider of Cryoskin in West Chester Oh and the surrounding area.
+                    </p>
+                  </div>
+                </section>
+
+                {/* ── SECTION 5: 3 Service Cards ── */}
+                {service.highlights && (
+                  <section
+                    style={{
+                      maxWidth: "var(--container-max-width, 1319px)",
+                      margin: "0 auto",
+                      padding: "0 40px 60px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(3, 1fr)",
+                        gap: 24,
+                      }}
+                    >
+                      {service.highlights.map((h, idx) => (
+                        <div
+                          key={idx}
                           style={{
-                            padding: "18px 0",
-                            cursor: "pointer",
-                            fontWeight: 600,
-                            fontSize: 15,
-                            color: "#2D2D2D",
-                            listStyle: "none",
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
+                            background: "#fff",
+                            padding: "36px 28px",
+                            borderRadius: 12,
+                            border: "1px solid #EDE7E0",
+                            textAlign: "center",
+                            transition: "transform 0.3s ease, box-shadow 0.3s ease",
                           }}
                         >
-                          {faq.q}
-                          <span style={{ color: "#C4956A", fontSize: 18, fontWeight: 300 }}>+</span>
-                        </summary>
-                        <p style={{ padding: "0 0 18px", fontSize: 14, lineHeight: 1.75, color: "#555", margin: 0 }}>
-                          {faq.a}
-                        </p>
-                      </details>
-                    ))}
-                  </div>
+                          <div style={{ fontSize: 40, marginBottom: 16 }}>{h.icon}</div>
+                          <h3
+                            style={{
+                              fontFamily: "var(--font-playfair), serif",
+                              fontSize: 22,
+                              fontWeight: 600,
+                              color: "#2D2D2D",
+                              marginBottom: 12,
+                            }}
+                          >
+                            {h.title}
+                          </h3>
+                          <p style={{ fontSize: 14, lineHeight: 1.7, color: "#666", margin: 0 }}>
+                            {h.desc}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
                 )}
-              </section>
+
+                {/* ── SECTION 6: Pricing Tables ── */}
+                {service.tables && (
+                  <section
+                    style={{
+                      maxWidth: "var(--container-max-width, 1319px)",
+                      margin: "0 auto",
+                      padding: "0 40px 60px",
+                    }}
+                  >
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 32,
+                        fontWeight: 600,
+                        color: "#2D2D2D",
+                        marginBottom: 8,
+                        textTransform: "uppercase",
+                        letterSpacing: 1,
+                      }}
+                    >
+                      CRYOSKIN PRICING
+                    </h2>
+                    {service.tables.map((table, tIdx) => (
+                      <div key={tIdx} style={{ marginBottom: tIdx < service.tables!.length - 1 ? 48 : 0, marginTop: 32 }}>
+                        <h3
+                          style={{
+                            fontFamily: "var(--font-playfair), serif",
+                            fontSize: 22,
+                            fontWeight: 600,
+                            color: "#2D2D2D",
+                            marginBottom: 4,
+                          }}
+                        >
+                          {table.name}
+                        </h3>
+                        {table.sub && (
+                          <p style={{ fontSize: 12, color: "#999", fontStyle: "italic", marginBottom: 16 }}>
+                            {table.sub}
+                          </p>
+                        )}
+                        <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+                          <table
+                            style={{
+                              width: "100%",
+                              borderCollapse: "collapse",
+                              minWidth: 700,
+                              fontSize: 14,
+                            }}
+                          >
+                            <thead>
+                              <tr>
+                                {table.columns.map((col, cIdx) => (
+                                  <th
+                                    key={cIdx}
+                                    style={{
+                                      background: cIdx === 0 ? "#C4956A" : "#D4A57A",
+                                      color: "#fff",
+                                      padding: "14px 16px",
+                                      textAlign: "left",
+                                      fontSize: 11,
+                                      fontWeight: 700,
+                                      letterSpacing: 0.5,
+                                      textTransform: "uppercase",
+                                      whiteSpace: "nowrap",
+                                      borderRight: cIdx < table.columns.length - 1 ? "1px solid rgba(255,255,255,0.2)" : "none",
+                                    }}
+                                  >
+                                    {col}
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {table.rows.map((row, rIdx) => (
+                                <tr
+                                  key={rIdx}
+                                  style={{
+                                    background: rIdx % 2 === 0 ? "#fff" : "#FDFAF7",
+                                    borderBottom: "1px solid #F0EBE5",
+                                  }}
+                                >
+                                  {row.map((cell, cellIdx) => (
+                                    <td
+                                      key={cellIdx}
+                                      style={{
+                                        padding: "12px 16px",
+                                        fontSize: 14,
+                                        color: cellIdx === 0 ? "#2D2D2D" : cellIdx === row.length - 1 && cell !== "—" && cell !== "$0.00" ? "#27AE60" : "#555",
+                                        fontWeight: cellIdx === 0 ? 500 : cellIdx === row.length - 1 && cell !== "—" && cell !== "$0.00" ? 600 : 400,
+                                        whiteSpace: "nowrap",
+                                        borderRight: cellIdx < row.length - 1 ? "1px solid #F0EBE5" : "none",
+                                      }}
+                                    >
+                                      {cell}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        <p style={{ fontSize: 12, color: "#999", marginTop: 10 }}>
+                          Showing 1 to {table.rows.length} of {table.rows.length} entries
+                        </p>
+                      </div>
+                    ))}
+                  </section>
+                )}
+
+                {/* ── SECTION 7: CTA Banner (Contained) ── */}
+                <section
+                  style={{
+                    maxWidth: "var(--container-max-width, 1319px)",
+                    margin: "0 auto 60px",
+                    padding: "0 40px",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "relative",
+                      background: "url('/landing/non-invasive.png') no-repeat left center / cover",
+                      minHeight: 480,
+                      borderRadius: 16,
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "48px 40px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <div
+                        style={{
+                          maxWidth: 540,
+                          width: "100%",
+                        }}
+                      >
+                        <h2
+                          style={{
+                            fontFamily: "var(--font-playfair), serif",
+                            fontSize: 32,
+                            fontWeight: 600,
+                            color: "#1E3B27", // Dark forest green
+                            marginBottom: 16,
+                            lineHeight: 1.3,
+                          }}
+                        >
+                          Non-invasive fat loss Technology to help you shape The body you want.
+                        </h2>
+                        <p
+                          style={{
+                            fontSize: 14,
+                            lineHeight: 1.8,
+                            color: "#555",
+                            marginBottom: 28,
+                          }}
+                        >
+                          Cryoskin uses revolutionary technology that alternates the application of hot and cold temperatures to reduce fat cells and tone and tighten the skin. Using a gentle massage technique, the service is both painless and non-invasive.
+                        </p>
+                        <a
+                          href="#cryoskin-faq"
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: "14px 44px",
+                            background: "#D4A59A",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: 30, // Pill shaped button
+                            fontSize: 13,
+                            fontWeight: 500,
+                            letterSpacing: 0.5,
+                            textDecoration: "none",
+                            transition: "all 0.3s",
+                          }}
+                        >
+                          Read FAQ&apos;s
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* ── SECTION 8: Clinical Study Results ── */}
+                {service.stats && (
+                  <section
+                    style={{
+                      background: "#F8F3EE",
+                      padding: "60px 40px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        maxWidth: "var(--container-max-width, 1319px)",
+                        margin: "0 auto",
+                        textAlign: "center",
+                      }}
+                    >
+                      <h2
+                        style={{
+                          fontFamily: "var(--font-playfair), serif",
+                          fontSize: 28,
+                          fontWeight: 600,
+                          color: "#2D2D2D",
+                          marginBottom: 40,
+                        }}
+                      >
+                        Clinical Study Results
+                      </h2>
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "repeat(3, 1fr)",
+                          gap: 32,
+                          maxWidth: 800,
+                          margin: "0 auto",
+                        }}
+                      >
+                        {service.stats.map((s, idx) => (
+                          <div key={idx}>
+                            <div
+                              style={{
+                                fontFamily: "var(--font-playfair), serif",
+                                fontSize: 52,
+                                fontWeight: 700,
+                                color: "#C4956A",
+                                lineHeight: 1,
+                              }}
+                            >
+                              {s.num}
+                            </div>
+                            <div
+                              style={{
+                                fontSize: 11,
+                                fontWeight: 700,
+                                letterSpacing: 1.5,
+                                textTransform: "uppercase",
+                                color: "#2D2D2D",
+                                marginTop: 12,
+                              }}
+                            >
+                              {s.label}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+                )}
+
+                {/* ── SECTION 9: Before & After Gallery ── */}
+                {service.galleryImages && (
+                  <section
+                    style={{
+                      maxWidth: "var(--container-max-width, 1319px)",
+                      margin: "0 auto",
+                      padding: "60px 40px",
+                    }}
+                  >
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 32,
+                        fontWeight: 600,
+                        color: "#2D2D2D",
+                        marginBottom: 32,
+                        textAlign: "center",
+                      }}
+                    >
+                      Cryoslimming Before and After with Cryoskin
+                    </h2>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                        gap: 12,
+                      }}
+                    >
+                      {service.galleryImages.map((imageUrl, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            position: "relative",
+                            aspectRatio: "1 / 1.18",
+                            borderRadius: 18,
+                            overflow: "hidden",
+                            background: "#F4ECE5",
+                            boxShadow: "0 10px 24px rgba(45, 45, 45, 0.08)",
+                          }}
+                        >
+                          <Image
+                            src={imageUrl}
+                            alt={`Cryoskin before and after result ${idx + 1}`}
+                            fill
+                            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 280px"
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {/* ── SECTION 10 & 11: FAQ ── */}
+                {service.faqs && (
+                  <section
+                    id="cryoskin-faq"
+                    style={{
+                      maxWidth: "var(--container-max-width, 1319px)",
+                      margin: "0 auto",
+                      padding: "0 40px 40px",
+                    }}
+                  >
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 32,
+                        fontWeight: 600,
+                        color: "#2D2D2D",
+                        marginBottom: 8,
+                      }}
+                    >
+                      Frequently Asked Questions
+                    </h2>
+                    <p style={{ fontSize: 15, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
+                      Here&apos;s your answers to most frequently asked questions about uses of revolutionary technology Cryoskin
+                    </p>
+                    <div style={{ maxWidth: 800 }}>
+                      <PlasmaFaqAccordion faqs={service.faqs} />
+                    </div>
+                  </section>
+                )}
+
+                {/* ── Bottom CTA ── */}
+                <section
+                  style={{
+                    maxWidth: "var(--container-max-width, 1319px)",
+                    margin: "0 auto 60px",
+                    padding: "0 40px",
+                  }}
+                >
+                  <div
+                    style={{
+                      background: "#F8F3EE",
+                      padding: "36px 40px",
+                      borderRadius: 24,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 24,
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 64,
+                        height: 64,
+                        borderRadius: "50%",
+                        backgroundColor: "#fff",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Main four-point star outline */}
+                        <path
+                          d="M12 3C12 7.97 16.03 12 21 12C16.03 12 12 16.03 12 21C12 16.03 7.97 12 3 12C7.97 12 12 7.97 12 3Z"
+                          stroke="#C4956A"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        {/* A small plus star near top-right */}
+                        <path d="M18 5V7M17 6H19" stroke="#C4956A" strokeWidth="1.5" strokeLinecap="round" />
+                        {/* A small dot near bottom-left */}
+                        <circle cx="6" cy="18" r="1.5" fill="#C4956A" />
+                      </svg>
+                    </div>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: 22,
+                        fontWeight: 500,
+                        color: "#2D2D2D",
+                        lineHeight: 1.5,
+                        margin: 0,
+                      }}
+                    >
+                      Look good. Feel great. Let go of insecurities. That&apos;s the power of Cryoskin!
+                    </p>
+                  </div>
+                </section>
+              </>
             )}
 
             {/* ═══════════════════════════════════════════════════════

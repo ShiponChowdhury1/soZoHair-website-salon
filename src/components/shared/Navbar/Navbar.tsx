@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import CartSidebar from "@/components/shared/CartSidebar/CartSidebar";
 import WishlistSidebar from "@/components/shared/WishlistSidebar/WishlistSidebar";
 import { useCart } from "@/context/CartContext";
@@ -60,10 +61,10 @@ const moreItemsMiddle = [
 ];
 
 const moreItemsRight: MobileSubItem[] = [
-  { label: "Legals", href: "#", isHeading: true },
   { label: "Return Refund Policy", href: "/return-refund" },
   { label: "Privacy Policy  Spa Services", href: "/privacy-policy" },
   { label: "Terms of Use", href: "/terms-of-service" },
+   { label: "Cookie Policy", href: "/cookie-policy", },
 ];
 
 // All mobile nav items combined
@@ -90,6 +91,25 @@ export default function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
   const { totalItems: totalCartItems } = useCart();
   const { totalItems: totalWishlistItems } = useWishlist();
+  const pathname = usePathname();
+
+  const isHomeActive = pathname === "/";
+  const isServicesActive = pathname.startsWith("/services");
+  const isWigsActive = pathname === "/wigs";
+  const isShopActive = pathname.startsWith("/premium-products") || pathname.startsWith("/special-products");
+  const isGalleryActive = pathname === "/gallery";
+
+  const isMoreActive = [
+    "/teams",
+    "/social-media",
+    "/ask-expert",
+    "/view-our-ratings",
+    "/careers",
+    "/academy",
+    "/return-refund",
+    "/privacy-policy",
+    "/terms-of-service"
+  ].some(path => pathname === path || pathname.startsWith(path + "/"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -121,6 +141,26 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isMobileOpen]);
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = useCallback((menu: ActiveMenu) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveMenu(menu);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setActiveMenu(null);
+    }, 150);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const handleNavClick = useCallback((id: ActiveMenu | "home" | "wigs" | "gallery") => {
     setIsSearchOpen(false);
@@ -177,15 +217,18 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={() => handleNavClick("home")}
-              className="text-[15px] font-medium text-[#2D2D2D] no-underline border-b-2 border-[#D4A59A] pb-1 transition-colors hover:text-[#D4A59A]"
+              onMouseEnter={() => handleMouseEnter(null)}
+              onMouseLeave={handleMouseLeave}
+              className={`text-[15px] font-medium no-underline pb-1 border-b-2 transition-all duration-300 ${isHomeActive ? "text-[#2D2D2D] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Home
             </Link>
 
             <button
               onClick={() => handleNavClick("services")}
-              className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors bg-transparent border-none cursor-pointer p-0 pb-1 ${activeMenu === "services" ? "text-[#D4A59A]" : "text-[#555] hover:text-[#2D2D2D]"
-                }`}
+              onMouseEnter={() => handleMouseEnter("services")}
+              onMouseLeave={handleMouseLeave}
+              className={`flex items-center gap-1.5 text-[15px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Services
               <svg className={`w-4 h-4 transition-transform ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -196,15 +239,18 @@ export default function Navbar() {
             <Link
               href="/wigs"
               onClick={() => handleNavClick(null)}
-              className="text-[15px] font-medium text-[#555] no-underline pb-1 transition-colors hover:text-[#2D2D2D]"
+              onMouseEnter={() => handleMouseEnter(null)}
+              onMouseLeave={handleMouseLeave}
+              className={`text-[15px] font-medium no-underline pb-1 border-b-2 transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Wigs
             </Link>
 
             <button
               onClick={() => handleNavClick("shop")}
-              className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors bg-transparent border-none cursor-pointer p-0 pb-1 ${activeMenu === "shop" ? "text-[#D4A59A]" : "text-[#555] hover:text-[#2D2D2D]"
-                }`}
+              onMouseEnter={() => handleMouseEnter("shop")}
+              onMouseLeave={handleMouseLeave}
+              className={`flex items-center gap-1.5 text-[15px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Shop
               <svg className={`w-4 h-4 transition-transform ${activeMenu === "shop" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -215,15 +261,18 @@ export default function Navbar() {
             <Link
               href="/gallery"
               onClick={() => handleNavClick("gallery")}
-              className="text-[15px] font-medium text-[#555] no-underline pb-1 transition-colors hover:text-[#2D2D2D]"
+              onMouseEnter={() => handleMouseEnter(null)}
+              onMouseLeave={handleMouseLeave}
+              className={`text-[15px] font-medium no-underline pb-1 border-b-2 transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Gallery
             </Link>
 
             <button
               onClick={() => handleNavClick("more")}
-              className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors bg-transparent border-none cursor-pointer p-0 pb-1 ${activeMenu === "more" ? "text-[#D4A59A]" : "text-[#555] hover:text-[#2D2D2D]"
-                }`}
+              onMouseEnter={() => handleMouseEnter("more")}
+              onMouseLeave={handleMouseLeave}
+              className={`flex items-center gap-1.5 text-[15px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               More
             </button>
@@ -423,6 +472,8 @@ export default function Navbar() {
 
         {/* ===== DESKTOP MEGA MENU DROPDOWN ===== */}
         <div
+          onMouseEnter={() => handleMouseEnter(activeMenu)}
+          onMouseLeave={handleMouseLeave}
           className={`absolute top-[70px] md:top-[90px] left-0 w-full bg-[#FDF8F4] border-t border-gray-100 overflow-hidden transition-all duration-300 ease-in-out shadow-xl hidden lg:block ${activeMenu ? "max-h-[500px] opacity-100 visible" : "max-h-0 opacity-0 invisible"
             }`}
         >

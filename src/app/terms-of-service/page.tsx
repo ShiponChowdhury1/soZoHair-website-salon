@@ -1,5 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
+import Navbar from "@/components/shared/Navbar/Navbar";
+import Footer from "@/components/shared/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Terms of Service | SoZo Hair, Spa & Wigs",
@@ -8,23 +10,26 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gray-50 pt-28 md:pt-36 pb-16">
+      <div className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8">
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-            Terms of Use
+      <div className="text-left mb-12">
+          <h1 className="text-1xl md:text-2xl text-gray-900 mb-4 tracking-tight">
+       Terms of useTerms of use
           </h1>
           <p className="text-lg text-gray-500">
-            SoZo HAIR SPA &amp; WIGS
+         SoZo HAIR SPA & WIGS:  Terms of use
           </p>
+          
         </div>
 
         {/* Content Card */}
-        <div className="bg-white rounded-3xl p-8 md:p-12 overflow-hidden border border-gray-100">
+        <div className=" overflow-hidden ">
           <div className="prose prose-lg max-w-none text-gray-600 space-y-6">
 
-            <h2 className="text-2xl font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-gray-200">
+            <h2 className="text-1xl font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-gray-200">
               ACCEPTANCE OF TERMS
             </h2>
             <p>
@@ -151,6 +156,8 @@ export default function TermsOfServicePage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }

@@ -1,5 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
+import Navbar from "@/components/shared/Navbar/Navbar";
+import Footer from "@/components/shared/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | SoZo Hair, Spa & Wigs",
@@ -8,20 +10,25 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gray-50 pt-28 md:pt-36 pb-16">
+      <div className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8">
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+          <div className="text-left mb-12">
+          <h1 className="text-1xl md:text-2xl text-gray-900 mb-4 tracking-tight">
             Privacy Policy
           </h1>
           <p className="text-lg text-gray-500">
+           Privacy Policy for SoZoHair.net
+          </p>
+           <p className="text-lg text-gray-500">
             Effective Date: 11/21/2024
           </p>
         </div>
 
         {/* Content Card */}
-        <div className="bg-white rounded-3xl p-8 md:p-12 overflow-hidden border border-gray-100">
+        <div className=" overflow-hidden">
           <div className="prose prose-lg max-w-none text-gray-600 space-y-6">
             <p className="lead text-xl text-gray-700">
               Welcome to SoZo Hair, Spa &amp; Wigs website, www.SoZoHair.net (the &ldquo;Site,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), we respect and prioritize your privacy. We are located at 9069 Cincinnati-Dayton Rd, West Chester, OH 45069. This Privacy Policy explains how we collect, use, and disclose your Personal Information when you visit or make a purchase from the Site.
@@ -179,6 +186,8 @@ export default function PrivacyPolicyPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }

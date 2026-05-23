@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Sozo on Facebook - SoZo Hair Spa & Wigs",
@@ -241,11 +242,9 @@ export default function SocialMediaPage() {
 
               <div className="space-y-5" id="contact-form">
                 <div className="overflow-hidden rounded-2xl border border-[#E8DDD7] bg-[#F8F3EE]">
-                  <div className="h-56 bg-[linear-gradient(135deg,#dbeaff_0%,#90bcff_100%)] p-5">
-                    <div className="flex h-full items-center justify-center rounded-xl border border-white/40 bg-white/30 text-center text-[13px] text-[#2C2420] backdrop-blur-sm">
-                      Map preview for SoZo Hair, Spa &amp; Wigs<br />West Chester, OH
-                    </div>
-                  </div>
+                 
+                    <Image src="/landing/map/map.png" alt="Map placeholder" width={400} height={200} className="h-full w-full object-cover" />
+               
                 </div>
 
                 <div className="rounded-2xl bg-[#F8F3EE] p-6 shadow-[0_12px_32px_rgba(44,36,32,0.08)]">
