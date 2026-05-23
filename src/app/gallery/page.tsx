@@ -104,8 +104,8 @@ export default function GalleryPage() {
 
           {/* Hero content */}
           <div
-            className="relative z-10 mx-auto flex w-full items-center"
-            style={{ maxWidth: "var(--container-max-width, 1319px)", padding: "80px 32px" }}
+            className="relative z-10 mx-auto flex w-full items-center px-4 sm:px-5 md:px-8"
+            style={{ maxWidth: "var(--container-max-width, 1319px)", paddingBlock: "80px" }}
           >
             <div style={{ flex: 1, maxWidth: "520px" }}>
 
@@ -165,8 +165,13 @@ export default function GalleryPage() {
         </section>
 
         {/* Gallery Grid Section */}
-        <section id="gallery" className="bg-white px-5 py-18 sm:px-8 lg:px-10 lg:py-20">
-          <div className="mx-auto max-w-[var(--container-max-width)]">
+        <section id="gallery" className="bg-white py-12 md:py-20">
+          <div
+            className="mx-auto px-4 sm:px-5 md:px-8"
+            style={{
+              maxWidth: "var(--container-max-width, 1319px)",
+            }}
+          >
             <h2 className="max-w-[520px] font-[family-name:var(--font-playfair)] text-3xl font-semibold text-[#2C2420] sm:text-4xl">
               SoZo&apos;s Before And After
               <br />
