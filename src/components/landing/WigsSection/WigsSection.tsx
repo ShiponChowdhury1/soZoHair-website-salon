@@ -7,7 +7,7 @@ export default function WigsSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/landing/wigs/wigs-background.png"
+          src="/landing/wigs.png"
           alt=""
           fill
           className="object-cover"
