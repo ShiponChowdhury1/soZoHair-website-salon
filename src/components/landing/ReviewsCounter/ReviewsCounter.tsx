@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import CountUp from "react-countup";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -51,15 +52,50 @@ interface StatItemProps {
   decimals?: number;
   suffix?: string;
   label: string;
+  isLast?: boolean;
 }
 
-function StatItem({ icon, end, decimals = 0, suffix = "", label }: StatItemProps) {
-  return (
-    <div className="flex flex-col items-center text-center group">
+function StatItem({ icon, end, decimals = 0, suffix = "", label, isLast = false }: StatItemProps) {
+  const [isInView, setIsInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-      {/* Icon circle — rose-gold gradient */}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        } else {
+          setIsInView(false);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative flex flex-col items-center text-center group px-4">
+
+      {/* Vertical divider — right side, hidden on last item and on mobile */}
+      {!isLast && (
+        <div
+          className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-20"
+          style={{
+            background: "linear-gradient(to bottom, transparent, #ddcfc1ff, transparent)",
+          }}
+        />
+      )}
+
+      {/* Icon circle */}
       <div
-        className="w-16 h-16 rounded-full flex items-center justify-center mb-7 shadow-lg group-hover:scale-105 transition-transform duration-300"
+        className="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-300"
         style={{
           background: "linear-gradient(135deg, #e8b49a 0%, #d4956e 50%, #c9856a 100%)",
         }}
@@ -68,38 +104,70 @@ function StatItem({ icon, end, decimals = 0, suffix = "", label }: StatItemProps
       </div>
 
       {/* CountUp number */}
-      <CountUp
-        end={end}
-        decimals={decimals}
-        duration={2.5}
-        separator=","
-        delay={0}
-        enableScrollSpy
-        scrollSpyOnce={false}
-      >
-        {({ countUpRef }) => (
-          <div
-            className="flex items-start leading-none mb-3"
-            style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+      {isInView ? (
+        <CountUp
+          end={end}
+          decimals={decimals}
+          duration={2.5}
+          separator=","
+          delay={0}
+        >
+          {({ countUpRef }) => (
+            <div
+              className="flex items-start leading-none mb-2"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+            >
+              <span
+                ref={countUpRef}
+                className="text-[52px] font-semibold tracking-tight"
+                style={{ color: "#2a2118" }}
+              />
+              <span
+                className="text-[28px] font-semibold mt-2 ml-0.5"
+                style={{ color: "#2a2118" }}
+              >
+                {suffix}
+              </span>
+            </div>
+          )}
+        </CountUp>
+      ) : (
+        <div
+          className="flex items-start leading-none mb-2"
+          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+        >
+          <span
+            className="text-[52px] font-semibold tracking-tight"
+            style={{ color: "#2a2118" }}
           >
-            <span
-              ref={countUpRef}
-              className="text-[56px] font-semibold tracking-tight text-[#2a2118]"
-            />
-            <span className="text-3xl font-semibold text-[#2a2118] mt-2 ml-0.5">
-              {suffix}
-            </span>
-          </div>
-        )}
-      </CountUp>
+            0
+          </span>
+          <span
+            className="text-[28px] font-semibold mt-2 ml-0.5"
+            style={{ color: "#2a2118" }}
+          >
+            {suffix}
+          </span>
+        </div>
+      )}
 
       {/* Label */}
       <p
-        className="text-[14px] font-normal text-[#7a6a5a] tracking-wide"
-        style={{ fontFamily: "'DM Sans', sans-serif" }}
+        className="text-[13px] font-normal tracking-wide"
+        style={{ fontFamily: "'DM Sans', sans-serif", color: "#9a8070" }}
       >
         {label}
       </p>
+
+      {/* Mobile horizontal divider — shows between rows on mobile */}
+      {!isLast && (
+        <div
+          className="md:hidden absolute -bottom-6 left-1/2 -translate-x-1/2 h-px w-16"
+          style={{
+            background: "linear-gradient(to right, transparent, #d4b89a, transparent)",
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -115,34 +183,58 @@ export default function StatsSection() {
 
       <section
         className="relative w-full py-20 px-6 overflow-hidden"
-        style={{ backgroundColor: "#f5efe8" }}
+        style={{
+          background: "linear-gradient(160deg, #fdf6f0 0%, #f5ece2 40%, #eeddd0 100%)",
+        }}
       >
-        {/* Heading block */}
-        <div className="text-center mb-16">
+
+        {/* Soft radial glow top-left */}
+        <div
+          className="pointer-events-none absolute -top-20 -left-20 w-80 h-80 rounded-full opacity-40"
+          style={{
+            background: "radial-gradient(circle, #e8c4a8 0%, transparent 70%)",
+            filter: "blur(40px)",
+          }}
+        />
+        {/* Soft radial glow bottom-right */}
+        <div
+          className="pointer-events-none absolute -bottom-20 -right-10 w-72 h-72 rounded-full opacity-30"
+          style={{
+            background: "radial-gradient(circle, #d4a882 0%, transparent 70%)",
+            filter: "blur(40px)",
+          }}
+        />
+
+        {/* Subtle dot pattern */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #8a6a50 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        {/* Heading */}
+        <div className="relative text-center mb-14">
           <span
-            className="text-[10px] uppercase tracking-[2px] font-medium mb-3"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              color: "#a08e7a",
-            }}
+            className="block text-[10px] uppercase tracking-[4px] font-medium mb-3"
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#b09070" }}
           >
             ✦ Trusted by Thousands ✦
           </span>
           <h2
-            className="text-[42px] md:text-[52px] font-normal leading-tight"
+            className="text-[38px] md:text-[52px] font-normal leading-tight"
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
               color: "#2a2118",
             }}
           >
-            Why{" "}
-            <em className="italic font-normal">Clients</em>{" "}
-            Choose Us
+            Why <em className="italic">Clients</em> Choose Us
           </h2>
         </div>
 
-        {/* Stats row — 4 columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-6 max-w-4xl mx-auto">
+        {/* Stats grid */}
+        <div className="relative grid grid-cols-2 md:grid-cols-4 gap-y-14 gap-x-0 max-w-4xl mx-auto">
 
           <StatItem
             icon={<UsersIcon />}
@@ -171,9 +263,19 @@ export default function StatsSection() {
             decimals={1}
             suffix="+"
             label="Stars Reviews"
+            isLast
           />
 
         </div>
+
+        {/* Bottom subtle line */}
+        <div
+          className="relative mt-14 mx-auto max-w-xs h-px"
+          style={{
+            background: "linear-gradient(to right, transparent, #c4a882, transparent)",
+          }}
+        />
+
       </section>
     </>
   );

@@ -5,7 +5,19 @@ import Link from "next/link";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 
-export default function ProductCard({ product }: { product: any }) {
+interface ProductCardItem {
+  id: number;
+  slug: string;
+  name: string;
+  price: number;
+  oldPrice?: number;
+  thumbnail: string;
+  route: string;
+  rating: number;
+  reviewCount: number;
+}
+
+export default function ProductCard({ product }: { product: ProductCardItem }) {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
   

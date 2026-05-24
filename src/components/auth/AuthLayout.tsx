@@ -13,7 +13,7 @@ interface AuthLayoutProps {
   showImage?: boolean;
 }
 
-export function AuthLayout({ variant, imageSrc, imageAlt, children, showImage = true }: AuthLayoutProps) {
+export function AuthLayout({ variant, imageAlt, children, showImage = true }: AuthLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col relative bg-[#FDF9F5]">
       <Navbar />

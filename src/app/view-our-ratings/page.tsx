@@ -52,7 +52,7 @@ export default function RatingsPage() {
                 View Our 5 Star Ratings
               </h1>
               <p className="text-[14px] text-[#5A4A42] mb-6">
-                We appreciate every client who chooses SZO. Here's what they have to say about their experience with our expert stylists and personalized care.
+                We appreciate every client who chooses SZO. Here&apos;s what they have to say about their experience with our expert stylists and personalized care.
               </p>
               <div className="flex flex-wrap gap-4 items-center">
                 <Link
@@ -111,7 +111,7 @@ export default function RatingsPage() {
 
             {/* Reviews heading + sort */}
             <div className="mb-6 flex items-center justify-between">
-              <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">Review's</h2>
+              <h2 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">Review&apos;s</h2>
               <select className="text-sm border border-[#E8DDD7] rounded-lg px-3 py-2 bg-white text-[#5A4A42]">
                 <option>Newest</option>
                 <option>Oldest</option>
@@ -167,7 +167,7 @@ export default function RatingsPage() {
                 <em className="italic" style={{ color: "#C4956A" }}>West Chester</em>
               </h3>
               <p className="text-[#B0A098] text-sm max-w-[400px] mb-8">
-                Located in the heart of West Chester, Ohio, our boutique spa is designed to be your sanctuary for beauty, wellness, and transformation. We can't wait to welcome you.
+                Located in the heart of West Chester, Ohio, our boutique spa is designed to be your sanctuary for beauty, wellness, and transformation. We can&apos;t wait to welcome you.
               </p>
 
               {/* Contact info */}

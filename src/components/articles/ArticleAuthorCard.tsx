@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import Image from "next/image";
 import { Article } from "@/data/articles";
 
 interface ArticleAuthorCardProps {
@@ -10,9 +10,11 @@ interface ArticleAuthorCardProps {
 export default function ArticleAuthorCard({ article }: ArticleAuthorCardProps) {
   return (
     <div className="author-card">
-      <img
+      <Image
         src={article.authorImage}
         alt={article.author}
+        width={64}
+        height={64}
         className="author-card-avatar"
       />
       <div>

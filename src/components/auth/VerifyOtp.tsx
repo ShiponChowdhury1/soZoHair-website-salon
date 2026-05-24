@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/Button";
 
 const MOCK_OTP = "123456";
 
@@ -78,7 +77,7 @@ export default function VerifyOtp() {
             }}
             value={digits[i]}
             onChange={(e) => handleChange(i, e.target.value.slice(-1))}
-            onKeyDown={(e) => handleKeyDown(e as any, i)}
+            onKeyDown={(e) => handleKeyDown(e as React.KeyboardEvent<HTMLInputElement>, i)}
             className="h-12 w-12 rounded-md border border-[#cfa09a] text-center text-lg focus:outline-none focus:border-[#cfa09a] focus:ring-2 focus:ring-[#cfa09a]/20 bg-white"
             maxLength={1}
             inputMode="numeric"
@@ -95,7 +94,7 @@ export default function VerifyOtp() {
           Verify
         </button>
         <p className="text-[13px] text-zinc-600">
-          Don't get the code? <button className="font-bold text-[#1a1a1a] hover:text-[#D4A59A]">Resend</button>
+          Don&apos;t get the code? <button className="font-bold text-[#1a1a1a] hover:text-[#D4A59A]">Resend</button>
         </p>
       </div>
     </div>

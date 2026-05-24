@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Article } from "@/data/articles";
 
@@ -109,13 +110,13 @@ export default function ArticlesGrid({ articles }: ArticlesGridProps) {
     <section className="articles-section">
       <div className="slider-container">
         <div className="articles-header">
-          <h2>Sozo's Top Articles</h2>
+          <h2>Sozo&apos;s Top Articles</h2>
           <div className="sort-wrap">
             <span>Sort by:</span>
             <select
               id="sortSelect"
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) => setSortBy(e.target.value as "latest" | "oldest" | "az")}
             >
               <option value="latest">Latest</option>
               <option value="oldest">Oldest</option>
@@ -131,7 +132,7 @@ export default function ArticlesGrid({ articles }: ArticlesGridProps) {
               onClick={() => handleCardClick(article.id)}
             >
               <div className="card-img">
-                <img src={article.image} alt={article.title} loading="lazy" />
+                <Image src={article.image} alt={article.title} width={400} height={300} loading="lazy" className="w-full h-auto" />
               </div>
               <div className="card-body">
                 <span className="card-cat">{article.category}</span>

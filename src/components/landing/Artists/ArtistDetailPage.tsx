@@ -1,31 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import { artists, ArtistCard } from "./Artists";
+import type { Artist } from "./Artists";
 
-interface StarRatingProps {
-  rating: number;
-  size?: number;
-}
 
-function StarRating({ rating, size = 14 }: StarRatingProps) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width={size} height={size} viewBox="0 0 14 14" fill={i < rating ? "#C4956A" : "#ddd"}>
-          <path d="M7 1l1.545 3.13L12 4.635l-2.5 2.435.59 3.44L7 8.885l-3.09 1.625.59-3.44L2 4.635l3.455-.505z" />
-        </svg>
-      ))}
-    </div>
-  );
-}
 
 interface ArtistDetailPageProps {
-  artist: any;
+  artist: Artist;
   onBack: () => void;
-  onSelectArtist: (artist: any) => void;
+  onSelectArtist: (artist: Artist) => void;
 }
 
 export default function ArtistDetailPage({ artist, onBack, onSelectArtist }: ArtistDetailPageProps) {

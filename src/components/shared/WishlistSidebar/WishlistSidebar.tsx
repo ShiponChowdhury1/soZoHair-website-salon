@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useWishlist } from "@/context/WishlistContext";
+import { useWishlist, type WishlistItem } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 
 interface WishlistSidebarProps {
@@ -14,7 +14,7 @@ export default function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProp
   const { items, removeFromWishlist, totalItems } = useWishlist();
   const { addToCart } = useCart();
 
-  const handleAddToCart = (item: any) => {
+  const handleAddToCart = (item: WishlistItem) => {
     addToCart({
       id: item.id,
       slug: item.slug,

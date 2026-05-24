@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Article } from "@/data/articles";
 
 interface ArticleDetailContentProps {
@@ -11,7 +12,7 @@ export default function ArticleDetailContent({ article }: ArticleDetailContentPr
   return (
     <div className="article-content">
       <p className="intro-text">
-        After a year of being restricted, we'll see hair become a freedom expression.
+        After a year of being restricted, we&apos;ll see hair become a freedom expression.
         This is exciting no matter how you look at it. Some will feel free to cut their
         hair, some will feel free to grow their hair. Some will start coloring and some
         will stop coloring. The fact that the trends are varied in style, length and
@@ -27,11 +28,14 @@ export default function ArticleDetailContent({ article }: ArticleDetailContentPr
             <p className="section-text">{section.text}</p>
             <div className="section-images">
               {section.images.slice(0, 4).map((img, imgIdx) => (
-                <img
+                <Image
                   key={imgIdx}
                   src={img}
                   alt={section.title}
+                  width={400}
+                  height={300}
                   loading="lazy"
+                  className="w-full h-auto"
                 />
               ))}
             </div>

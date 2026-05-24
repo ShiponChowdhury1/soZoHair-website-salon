@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Article } from "@/data/articles";
 
 interface ArticleDetailHeaderProps {
@@ -18,9 +19,11 @@ export default function ArticleDetailHeader({ article }: ArticleDetailHeaderProp
       <h1 className="article-title">{article.title}</h1>
       <p className="article-subtitle">{article.excerpt}</p>
       <div className="author-row">
-        <img
+        <Image
           src={article.authorImage}
           alt={article.author}
+          width={48}
+          height={48}
           className="author-avatar"
         />
         <div className="author-info">

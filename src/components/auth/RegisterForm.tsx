@@ -8,8 +8,6 @@ import { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 
 import { Checkbox } from "@/components/ui/Checkbox";
-import { Button } from "@/components/ui/Button";
-import { GoogleButton } from "@/components/ui/GoogleButton";
 import { Input } from "@/components/ui/Input";
 import { axiosClient } from "@/lib/axios";
 import { registerSchema, type RegisterFormValues } from "@/lib/validators/registerSchema";

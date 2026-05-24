@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { productSections } from "@/data/products";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";

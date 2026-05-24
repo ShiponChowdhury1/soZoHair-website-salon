@@ -7,8 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/Button";
-import { GoogleButton } from "@/components/ui/GoogleButton";
 import { Input } from "@/components/ui/Input";
 import { axiosClient } from "@/lib/axios";
 import { loginSchema, type LoginFormValues } from "@/lib/validators/loginSchema";
@@ -186,7 +184,7 @@ export function LoginForm() {
 
       <div className="space-y-6">
         <p className="text-center text-[13px] text-zinc-600">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href="/register"
             className="font-bold text-[#1a1a1a] hover:text-[#D4A59A]"

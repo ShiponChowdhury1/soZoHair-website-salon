@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Article, ArticleComment } from "@/data/articles";
 
 interface ArticleCommentsProps {
@@ -16,17 +16,21 @@ const defaultExtraComments = [
 ];
 
 export default function ArticleComments({ article }: ArticleCommentsProps) {
-  const [comments, setComments] = useState<ArticleComment[]>([]);
+  const [prevArticleId, setPrevArticleId] = useState(article.id);
+  const [comments, setComments] = useState<ArticleComment[]>(() => [
+    ...article.comments,
+    ...defaultExtraComments,
+  ]);
   const [shownCount, setShownCount] = useState(3);
   const [commentName, setCommentName] = useState("");
   const [commentEmail, setCommentEmail] = useState("");
   const [commentText, setCommentText] = useState("");
 
-  // Sync state when article ID changes
-  useEffect(() => {
+  if (article.id !== prevArticleId) {
+    setPrevArticleId(article.id);
     setComments([...article.comments, ...defaultExtraComments]);
     setShownCount(3);
-  }, [article.id]);
+  }
 
   const handlePostComment = (e: React.FormEvent) => {
     e.preventDefault();

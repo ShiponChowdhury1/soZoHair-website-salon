@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Article } from "@/data/articles";
+import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
@@ -29,7 +30,7 @@ export default function ArticlesSlider({ articles }: ArticlesSliderProps) {
   return (
     <section className="slider-section">
       <div className="slider-container">
-        <h2 className="slider-heading">Browse Sozo's Top Salon Tips</h2>
+        <h2 className="slider-heading">Browse Sozo&apos;s Top Salon Tips</h2>
         <div className="swiper-outer-wrap">
           <Swiper
             modules={[Autoplay, Pagination, Navigation]}
@@ -60,7 +61,7 @@ export default function ArticlesSlider({ articles }: ArticlesSliderProps) {
                     <button className="btn-readmore">Read more</button>
                   </div>
                   <div className="slide-card-img">
-                    <img src={article.image} alt={article.title} />
+                    <Image src={article.image} alt={article.title} width={600} height={400} className="w-full h-auto" />
                   </div>
                 </div>
               </SwiperSlide>

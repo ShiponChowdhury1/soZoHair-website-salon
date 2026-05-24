@@ -112,7 +112,7 @@ export const artists = [
   },
 ];
 
-interface Artist {
+export interface Artist {
   id: number;
   name: string;
   role: string;
@@ -195,7 +195,7 @@ export function ArtistCard({ artist, onClick }: ArtistCardProps) {
 }
 
 export default function Artists({ isStandalonePage = false }: { isStandalonePage?: boolean }) {
-  const [showAll, setShowAll] = useState(isStandalonePage);
+  const [showAll] = useState(isStandalonePage);
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
   const router = useRouter();
 

@@ -34,7 +34,7 @@ const dropdownLeftItems = [
   { label: "Contact", href: "/#contact" },
 ];
 
-const serviceItems = [
+const serviceItems: MobileSubItem[] = [
   { label: "Hair Cuts & Color", href: "/services/hair-cuts-color" },
   { label: "Specialty Hair Services", href: "/services/specialty-hair" },
   { label: "Hair Extensions", href: "/services/extensions-texturizing" },
@@ -45,12 +45,12 @@ const serviceItems = [
   { label: "The Relaxing Scalp Facial", href: "/services/scalp-facial" },
 ];
 
-const shopItems = [
+const shopItems: MobileSubItem[] = [
   { label: "Special Products", href: "/special-products" },
   { label: "Premium Products", href: "/premium-products" },
 ];
 
-const moreItemsMiddle = [
+const moreItemsMiddle: MobileSubItem[] = [
   { label: "Teams", href: "/teams" },
   { label: "Medical Spa Services", href: "/services/medical-spa-services" },
   { label: "SoZo on Social Media", href: "/social-media" },
@@ -88,6 +88,7 @@ export default function Navbar() {
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [activeMoreSubmenu, setActiveMoreSubmenu] = useState<"home" | "services" | "shop" | "info">("home");
   const navRef = useRef<HTMLDivElement>(null);
   const { totalItems: totalCartItems } = useCart();
   const { totalItems: totalWishlistItems } = useWishlist();
@@ -147,6 +148,13 @@ export default function Navbar() {
   const handleMouseEnter = useCallback((menu: ActiveMenu) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setActiveMenu(menu);
+    if (menu === "services") {
+      setActiveMoreSubmenu("services");
+    } else if (menu === "shop") {
+      setActiveMoreSubmenu("shop");
+    } else if (menu === "more") {
+      setActiveMoreSubmenu("home");
+    }
   }, []);
 
   const handleMouseLeave = useCallback(() => {
@@ -165,7 +173,17 @@ export default function Navbar() {
   const handleNavClick = useCallback((id: ActiveMenu | "home" | "wigs" | "gallery") => {
     setIsSearchOpen(false);
     if (id === "services" || id === "shop" || id === "more") {
-      setActiveMenu((prev) => (prev === id ? null : id));
+      setActiveMenu((prev) => {
+        const next = prev === id ? null : id;
+        if (next === "services") {
+          setActiveMoreSubmenu("services");
+        } else if (next === "shop") {
+          setActiveMoreSubmenu("shop");
+        } else if (next === "more") {
+          setActiveMoreSubmenu("home");
+        }
+        return next;
+      });
     } else {
       setActiveMenu(null);
     }
@@ -470,90 +488,163 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ===== DESKTOP MEGA MENU DROPDOWN ===== */}
+        {/* ===== UNIFIED DESKTOP MEGA MENU DROPDOWN ===== */}
         <div
           onMouseEnter={() => handleMouseEnter(activeMenu)}
           onMouseLeave={handleMouseLeave}
-          className={`absolute top-[70px] md:top-[90px] left-0 w-full bg-[#FDF8F4] border-t border-gray-100 overflow-hidden transition-all duration-300 ease-in-out shadow-xl hidden lg:block ${activeMenu ? "max-h-[500px] opacity-100 visible" : "max-h-0 opacity-0 invisible"
-            }`}
+          className={`fixed top-[70px] md:top-[90px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-300 ease-in-out shadow-2xl hidden lg:block ${
+            (activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-4 pointer-events-none"
+          }`}
         >
-          <div className="max-w-[var(--container-max-width)] mx-auto px-5 md:px-8 py-12">
-            <div className="grid grid-cols-3 gap-12">
+          <div className="max-w-[var(--container-max-width)] mx-auto px-8 py-16 flex items-start gap-16 min-h-[450px]">
+            {/* Column 1 - Main Links */}
+            <div className="w-1/3 flex flex-col gap-6 border-r border-[#EADCC9] pr-16">
+              {dropdownLeftItems.map((item) => {
+                const isInteractive = item.label === "Services" || item.label === "Shop";
+                const isCurrentActive =
+                  (item.label === "Services" && activeMoreSubmenu === "services") ||
+                  (item.label === "Shop" && activeMoreSubmenu === "shop") ||
+                  (item.label === "Home" && activeMoreSubmenu === "home");
 
-              {/* Column 1 - Main Links */}
-              <div className="flex flex-col gap-6">
-                {dropdownLeftItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setActiveMenu(null)}
-                    className="font-[family-name:var(--font-playfair)] text-[22px] uppercase tracking-[2px] text-[#8B7B6B] no-underline transition-colors hover:text-[#2D2D2D]"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+                return (
+                  <div key={item.label} className="group flex items-center justify-between">
+                    {isInteractive ? (
+                      <button
+                        onMouseEnter={() => setActiveMoreSubmenu(item.label.toLowerCase() as "services" | "shop")}
+                        onClick={() => setActiveMoreSubmenu(item.label.toLowerCase() as "services" | "shop")}
+                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${
+                          isCurrentActive ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                        }`}
+                      >
+                        <span>{item.label}</span>
+                        <svg className={`w-5 h-5 transition-all duration-300 ${isCurrentActive ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={() => setActiveMenu(null)}
+                        onMouseEnter={() => {
+                          if (item.label === "Home" || item.label === "About" || item.label === "Wigs" || item.label === "Articles" || item.label === "Gallery" || item.label === "Contact") {
+                            setActiveMoreSubmenu("home");
+                          }
+                        }}
+                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] no-underline transition-all duration-300 block w-full ${
+                          (item.label === "Home" && activeMoreSubmenu === "home")
+                            ? "text-[#D4A59A] translate-x-2"
+                            : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
 
-              {/* Column 2 - Sub Items */}
-              <div className="flex flex-col gap-6">
-                {activeMenu === "services" &&
-                  serviceItems.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setActiveMenu(null)}
-                      className="font-[family-name:var(--font-playfair)] text-[18px] uppercase tracking-[1.5px] text-[#555] no-underline transition-colors hover:text-[#D4A59A]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                {activeMenu === "shop" &&
-                  shopItems.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setActiveMenu(null)}
-                      className="font-[family-name:var(--font-playfair)] text-[18px] uppercase tracking-[1.5px] text-[#555] no-underline transition-colors hover:text-[#D4A59A]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                {activeMenu === "more" &&
-                  moreItemsMiddle.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setActiveMenu(null)}
-                      className="font-[family-name:var(--font-playfair)] text-[18px] uppercase tracking-[1.5px] text-[#555] no-underline transition-colors hover:text-[#D4A59A]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-              </div>
+              {/* Extra Info & Policies Trigger */}
+              <button
+                onMouseEnter={() => setActiveMoreSubmenu("info")}
+                onClick={() => setActiveMoreSubmenu("info")}
+                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${
+                  activeMoreSubmenu === "info" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                }`}
+              >
+                <span>Info &amp; Policies</span>
+                <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "info" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
 
-              {/* Column 3 - Extra Sub Items */}
-              <div className="flex flex-col gap-6">
+            {/* Right Column - Dynamic Submenu Panel */}
+            <div className="w-2/3 pl-8 py-2 flex flex-col justify-center">
+              <div className="transition-all duration-300">
+                {activeMoreSubmenu === "home" && (
+                  <div className="max-w-md">
+                    <span className="text-[11px] font-semibold tracking-[3px] uppercase text-[#D4A59A] block mb-2">Welcome to SoZo Hair</span>
+                    <h3 className="font-[family-name:var(--font-playfair)] text-[36px] text-[#2D2D2D] leading-tight mb-4">
+                      Your Premium Hair, Spa &amp; Wigs Experience
+                    </h3>
+                    <p className="text-[15px] text-[#777] leading-relaxed mb-6 font-sans">
+                      Discover our high-end hair design, relaxing scalp facials, medical spa treatments, and professional custom-styled wigs. We believe in providing a personalized, premium experience for every guest.
+                    </p>
+                    <div className="flex gap-4">
+                      <Link
+                        href="/#booking"
+                        onClick={() => setActiveMenu(null)}
+                        className="inline-flex items-center justify-center px-6 py-2.5 bg-[#D4A59A] text-white rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md"
+                      >
+                        Book Appointment
+                      </Link>
+                      <Link
+                        href="/#about"
+                        onClick={() => setActiveMenu(null)}
+                        className="inline-flex items-center justify-center px-6 py-2.5 border border-[#D4A59A] text-[#D4A59A] rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#D4A59A] hover:text-white hover:-translate-y-0.5"
+                      >
+                        Our Story
+                      </Link>
+                    </div>
+                  </div>
+                )}
 
-                {activeMenu === "more" &&
-                  moreItemsRight.map((item) => (
-                    <div key={item.label}>
-                      {item.isHeading ? (
-                        <span className="font-[family-name:var(--font-playfair)] text-[18px] uppercase tracking-[1.5px] text-[#2D2D2D] font-bold block mb-2">
-                          {item.label}
-                        </span>
-                      ) : (
+                {activeMoreSubmenu === "services" && (
+                  <div>
+                    <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Our Premium Services</h3>
+                    <div className="grid grid-cols-2 gap-x-12 gap-y-6">
+                      {serviceItems.map((item) => (
                         <Link
+                          key={item.label}
                           href={item.href}
                           onClick={() => setActiveMenu(null)}
-                          className="font-[family-name:var(--font-playfair)] text-[18px] uppercase tracking-[1.5px] text-[#555] no-underline transition-colors hover:text-[#D4A59A]"
+                          className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
                         >
                           {item.label}
                         </Link>
-                      )}
+                      ))}
                     </div>
-                  ))}
-              </div>
+                  </div>
+                )}
 
+                {activeMoreSubmenu === "shop" && (
+                  <div>
+                    <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Shop Collection</h3>
+                    <div className="grid grid-cols-1 gap-y-6">
+                      {shopItems.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {activeMoreSubmenu === "info" && (
+                  <div>
+                    <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Information &amp; Policies</h3>
+                    <div className="grid grid-cols-2 gap-x-12 gap-y-6">
+                      {[...moreItemsMiddle, ...moreItemsRight].map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className={`font-[family-name:var(--font-playfair)] text-[16px] uppercase tracking-[1.5px] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block ${
+                            item.isHeading ? "text-[#2D2D2D] font-bold mt-4" : "text-[#555]"
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

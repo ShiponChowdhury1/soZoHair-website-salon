@@ -11,10 +11,10 @@ type PaymentMethod = "cod" | "paypal" | "credit-card";
 type OrderStatus = "idle" | "processing" | "success" | "failed";
 
 export default function CheckoutPage() {
-  const { items, totalItems, totalPrice, clearCart } = useCart();
+  const { items, totalPrice, clearCart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cod");
   const [orderStatus, setOrderStatus] = useState<OrderStatus>("idle");
-  const [orderId] = useState(`#${String(Math.floor(Math.random() * 99999)).padStart(5, "0")}`);
+  const [orderId, setOrderId] = useState("");
 
   const shipping = 6.95;
   const subtotal = totalPrice;
@@ -25,6 +25,7 @@ export default function CheckoutPage() {
     setTimeout(() => {
       // Simulate success (80% chance) or failure (20% chance)
       if (Math.random() > 0.2) {
+        setOrderId(`#${String(Math.floor(Math.random() * 99999)).padStart(5, "0")}`);
         setOrderStatus("success");
         clearCart();
       } else {

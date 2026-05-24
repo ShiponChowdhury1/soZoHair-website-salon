@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 
 export default function ResetNewPassword() {

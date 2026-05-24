@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 
 const MOCK_EMAIL = "admin@gmail.com";
