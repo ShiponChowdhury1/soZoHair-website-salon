@@ -12,8 +12,8 @@ export default function SpecialsPopup() {
   const specialProducts = specialSection?.products.slice(0, 2) || [];
 
   useEffect(() => {
-    // Check if the user has already dismissed this promotion
-    const dismissed = localStorage.getItem("sozo_specials_dismissed_v1");
+    // Check if the user has already dismissed this promotion in this session
+    const dismissed = sessionStorage.getItem("sozo_specials_dismissed_v1");
     if (!dismissed) {
       // Slide in the card 1.5 seconds after page load
       const timer = setTimeout(() => setVisible(true), 1500);
@@ -23,7 +23,7 @@ export default function SpecialsPopup() {
 
   const handleClose = () => {
     setVisible(false);
-    localStorage.setItem("sozo_specials_dismissed_v1", "true");
+    sessionStorage.setItem("sozo_specials_dismissed_v1", "true");
   };
 
   if (!visible || specialProducts.length === 0) return null;

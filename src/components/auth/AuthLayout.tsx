@@ -19,7 +19,7 @@ export function AuthLayout({ variant, imageAlt, children, showImage = true }: Au
       <Navbar />
 
       {/* Main Content Area */}
-      <main className="flex-grow relative flex items-center justify-center py-20 px-4 pt-32">
+      <main className="flex-grow relative flex items-center justify-center py-20 px-4 sm:px-5 md:px-8 pt-32">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -35,7 +35,7 @@ export function AuthLayout({ variant, imageAlt, children, showImage = true }: Au
         {/* Card Container */}
         <div className={`relative z-10 w-full bg-[#FFFFFF] mx-auto shadow-2xl ${
           showImage 
-            ? "max-w-[1320px] overflow-hidden flex flex-col lg:flex-row" 
+            ? "max-w-[var(--container-max-width)] overflow-hidden flex flex-col lg:flex-row" 
             : "max-w-[570px] rounded-2xl py-12 px-6 sm:px-10 flex flex-col items-center justify-center"
         }`}>
           
