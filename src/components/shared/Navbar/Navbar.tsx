@@ -88,6 +88,12 @@ export default function Navbar() {
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("sozo_auth") === "true");
+  }, []);
+
   const [activeMoreSubmenu, setActiveMoreSubmenu] = useState<"home" | "services" | "shop" | "info">("home");
   const navRef = useRef<HTMLDivElement>(null);
   const { totalItems: totalCartItems } = useCart();
@@ -309,9 +315,10 @@ export default function Navbar() {
           </div>
 
           {/* Right Side */}
-          <div className="flex items-center gap-3 sm:gap-5 md:gap-8">
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
             {/* Icons */}
-            <div className="flex items-center gap-3 sm:gap-5">
+            <div className="flex items-center gap-3 sm:gap-4">
+              {/* Search — always visible */}
               <button
                 aria-label="Search"
                 onClick={() => { setIsSearchOpen(!isSearchOpen); setActiveMenu(null); }}
@@ -322,20 +329,29 @@ export default function Navbar() {
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
               </button>
-              <button
-                aria-label="Wishlist"
-                onClick={() => setIsWishlistOpen(true)}
-                className="relative text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0"
-              >
-                <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                </svg>
-                {totalWishlistItems > 0 && (
-                  <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[#D4A59A] text-white text-[10px] font-bold flex items-center justify-center">
-                    {totalWishlistItems}
-                  </span>
-                )}
-              </button>
+
+              {/* Notification Bell — only when logged in */}
+              {isLoggedIn && <NotificationDropdown />}
+
+              {/* Wishlist — only when logged in */}
+              {isLoggedIn && (
+                <button
+                  aria-label="Wishlist"
+                  onClick={() => setIsWishlistOpen(true)}
+                  className="relative text-[#2D2D2D] hover:text-[#D4A59A] transition-colors bg-transparent border-none cursor-pointer p-0"
+                >
+                  <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg>
+                  {totalWishlistItems > 0 && (
+                    <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[#D4A59A] text-white text-[10px] font-bold flex items-center justify-center">
+                      {totalWishlistItems}
+                    </span>
+                  )}
+                </button>
+              )}
+
+              {/* Cart — always visible */}
               <button
                 aria-label="Shopping Bag"
                 onClick={() => setIsCartOpen(true)}
@@ -354,13 +370,18 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Sign in Button — hidden on very small screens */}
-            <Link
-              href="/register"
-              className="hidden sm:inline-flex items-center justify-center px-5 md:px-7 py-2 md:py-2.5 bg-[#D4A59A] text-white rounded-full text-sm md:text-[15px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md"
-            >
-              Sign in
-            </Link>
+            {/* User Profile / Sign In */}
+            <UserProfileDropdown
+              isLoggedIn={isLoggedIn}
+              onLogin={() => {
+                localStorage.setItem("sozo_auth", "true");
+                setIsLoggedIn(true);
+              }}
+              onLogout={() => {
+                localStorage.removeItem("sozo_auth");
+                setIsLoggedIn(false);
+              }}
+            />
           </div>
 
           {/* Search Overlay Inside Navbar */}
