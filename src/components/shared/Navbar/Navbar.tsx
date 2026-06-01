@@ -1,12 +1,17 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CartSidebar from "@/components/shared/CartSidebar/CartSidebar";
 import WishlistSidebar from "@/components/shared/WishlistSidebar/WishlistSidebar";
+import { productSections } from "@/data/products";
+import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import NotificationDropdown from "./NotificationDropdown";
+import UserProfileDropdown from "./UserProfileDropdown";
+import { useAuth } from "@/context/AuthContext";
 
 type ActiveMenu = "services" | "shop" | "more" | null;
 
@@ -88,17 +93,12 @@ export default function Navbar() {
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    setIsLoggedIn(localStorage.getItem("sozo_auth") === "true");
-  }, []);
-
   const [activeMoreSubmenu, setActiveMoreSubmenu] = useState<"home" | "services" | "shop" | "info">("home");
   const navRef = useRef<HTMLDivElement>(null);
   const { totalItems: totalCartItems } = useCart();
   const { totalItems: totalWishlistItems } = useWishlist();
   const pathname = usePathname();
+  const { isLoggedIn } = useAuth();
 
   const isHomeActive = pathname === "/";
   const isServicesActive = pathname.startsWith("/services");
@@ -150,6 +150,24 @@ export default function Navbar() {
   }, [isMobileOpen]);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const searchResults = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return [] as any;
+    const all = productSections.flatMap((s) => s.products || []);
+    return all.filter((p) => {
+      return (
+        p.name?.toLowerCase().includes(q) ||
+        p.category?.toLowerCase().includes(q) ||
+        p.description?.toLowerCase().includes(q)
+      );
+    }).slice(0, 12);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (!isSearchOpen) setSearchQuery("");
+  }, [isSearchOpen]);
 
   const handleMouseEnter = useCallback((menu: ActiveMenu) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -318,7 +336,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
             {/* Icons */}
             <div className="flex items-center gap-3 sm:gap-4">
-              {/* Search — always visible */}
+              {/* Search */}
               <button
                 aria-label="Search"
                 onClick={() => { setIsSearchOpen(!isSearchOpen); setActiveMenu(null); }}
@@ -351,7 +369,7 @@ export default function Navbar() {
                 </button>
               )}
 
-              {/* Cart — always visible */}
+              {/* Cart */}
               <button
                 aria-label="Shopping Bag"
                 onClick={() => setIsCartOpen(true)}
@@ -371,17 +389,7 @@ export default function Navbar() {
             </div>
 
             {/* User Profile / Sign In */}
-            <UserProfileDropdown
-              isLoggedIn={isLoggedIn}
-              onLogin={() => {
-                localStorage.setItem("sozo_auth", "true");
-                setIsLoggedIn(true);
-              }}
-              onLogout={() => {
-                localStorage.removeItem("sozo_auth");
-                setIsLoggedIn(false);
-              }}
-            />
+            <UserProfileDropdown />
           </div>
 
           {/* Search Overlay Inside Navbar */}
@@ -396,6 +404,8 @@ export default function Navbar() {
               </svg>
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search for services, products, or artists..."
                 className="flex-1 bg-transparent border-none outline-none text-lg sm:text-xl md:text-2xl font-[family-name:var(--font-playfair)] text-[#2D2D2D] placeholder:text-gray-300 focus:ring-0"
                 autoFocus={isSearchOpen}
@@ -410,6 +420,20 @@ export default function Navbar() {
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
               </button>
+            </div>
+            {/* Search results */}
+            <div className="w-full max-w-3xl px-4 sm:px-5 md:px-8 mt-6">
+              {searchQuery && searchResults.length === 0 && (
+                <p className="text-center text-[#666]">No results found.</p>
+              )}
+
+              {searchResults.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {searchResults.map((p: any) => (
+                    <ProductCard key={`${p.id}-${p.slug}`} product={p} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </nav>
@@ -505,6 +529,13 @@ export default function Navbar() {
               className="mt-6 inline-flex items-center justify-center px-6 py-3 bg-[#D4A59A] text-white rounded-full text-[15px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a]"
             >
               Sign in
+            </Link>
+            <Link
+              href="/profile"
+              onClick={closeMobile}
+              className="mt-3 inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white/80 rounded-full text-[15px] font-medium no-underline transition-all duration-300 hover:border-[#D4A59A] hover:text-[#D4A59A]"
+            >
+              My Profile
             </Link>
           </div>
         </div>

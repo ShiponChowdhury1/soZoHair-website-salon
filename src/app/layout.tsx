@@ -3,8 +3,8 @@ import { Geist, Geist_Mono, Playfair_Display, Cormorant_Garamond, Jost } from "n
 import "./globals.css";
 import { StoreProvider } from "@/store/StoreProvider";
 import { CartProvider } from "@/context/CartContext";
-
 import { WishlistProvider } from "@/context/WishlistContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,11 +55,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <StoreProvider>
-          <CartProvider>
-            <WishlistProvider>
-              {children}
-            </WishlistProvider>
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <WishlistProvider>
+                {children}
+              </WishlistProvider>
+            </CartProvider>
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>

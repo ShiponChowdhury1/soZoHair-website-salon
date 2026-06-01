@@ -1,41 +1,23 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { User, ShoppingCart, Heart, LogOut, ChevronRight } from "lucide-react";
+import { User, ShoppingCart, Heart, LogOut, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutModal from "./LogoutModal";
+import { useAuth } from "@/context/AuthContext";
 
-// ─── Mock Auth State ────────────────────────────────────────────────────────
-const MOCK_USER = {
-  name: "Angelina Cherry",
-  email: "angelina@gmail.com",
-  image: "https://i.pravatar.cc/150?img=47",
-  cartCount: 2,
-  wishlistCount: 5,
-};
-
-const MOCK_CREDENTIALS = {
-  email: "admin@gmail.com",
-  password: "123456",
-};
-// ────────────────────────────────────────────────────────────────────────────
-
-interface UserProfileDropdownProps {
-  isLoggedIn: boolean;
-  onLogin: () => void;
-  onLogout: () => void;
-}
-
-export default function UserProfileDropdown({ isLoggedIn, onLogin, onLogout }: UserProfileDropdownProps) {
+export default function UserProfileDropdown() {
+  const { isLoggedIn, user, login, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const [loginEmail, setLoginEmail] = useState(MOCK_CREDENTIALS.email);
-  const [loginPassword, setLoginPassword] = useState(MOCK_CREDENTIALS.password);
-  const [loginError, setLoginError] = useState("");
+
+  // Login Form States
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -47,218 +29,189 @@ export default function UserProfileDropdown({ isLoggedIn, onLogin, onLogout }: U
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogin = () => {
-    const email = loginEmail.trim().toLowerCase();
-    const password = loginPassword.trim();
-    if (
-      email === MOCK_CREDENTIALS.email.toLowerCase() &&
-      password === MOCK_CREDENTIALS.password
-    ) {
-      onLogin();
-      setLoginError("");
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const success = login(email, password);
+    if (success) {
+      setError("");
       setIsDropdownOpen(false);
     } else {
-      setLoginError("Invalid email or password.");
+      setError("Incorrect email or password");
     }
   };
 
-  const handleLogout = () => {
-    onLogout();
+  const handleLogoutConfirm = () => {
+    logout();
     setIsLogoutModalOpen(false);
     setIsDropdownOpen(false);
+    setEmail("");
+    setPassword("");
   };
 
   return (
     <>
-      <div ref={dropdownRef} className="relative flex items-center">
-        {/* Trigger Button */}
-        {isLoggedIn ? (
-          /* User Avatar + Name Button */
+      <div ref={dropdownRef} className="relative">
+        {isLoggedIn && user ? (
+          /* Profile Trigger (Avatar, Name, Email, Arrow) */
           <button
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2 bg-white border border-gray-200 rounded-full pl-1 pr-3 py-1 hover:border-[#D4A59A] hover:shadow-md transition-all duration-200 cursor-pointer"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="flex items-center gap-3 bg-[#FDF8F6] border border-[#F3ECE9] hover:border-[#D4A59A] px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-[#D4A59A]/30 flex-shrink-0">
+            <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
               <Image
-                src={MOCK_USER.image}
-                alt={MOCK_USER.name}
+                src={user.image}
+                alt={user.name}
                 width={32}
                 height={32}
                 className="w-full h-full object-cover"
                 unoptimized
               />
             </div>
-            <div className="hidden md:flex flex-col items-start leading-none">
-              <span className="text-[13px] font-semibold text-[#2D2D2D] whitespace-nowrap">
-                {MOCK_USER.name}
-              </span>
-              <span className="text-[11px] text-gray-400 whitespace-nowrap">
-                {MOCK_USER.email}
-              </span>
+            <div className="hidden md:flex flex-col items-start text-left leading-tight">
+              <span className="text-[14px] font-bold text-[#2D2D2D]">{user.name}</span>
+              <span className="text-[11px] text-gray-500">{user.email}</span>
             </div>
+            <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`} />
           </button>
         ) : (
           /* Sign In Button when logged out */
           <button
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
-            className="hidden sm:inline-flex items-center justify-center px-5 md:px-7 py-2 md:py-2.5 bg-[#D4A59A] text-white rounded-full text-sm md:text-[15px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md border-none cursor-pointer"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="inline-flex items-center justify-center px-6 py-2.5 bg-[#D4A59A] text-white rounded-full text-[15px] font-medium transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md border-none cursor-pointer"
           >
             Sign in
           </button>
         )}
 
-        {/* Dropdown Panel */}
+        {/* Dropdown Menu */}
         {isDropdownOpen && (
           <div
-            className="absolute right-0 top-[calc(100%+12px)] w-[280px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[200]"
-            style={{ animation: "profile-drop 0.2s ease" }}
+            className="absolute right-0 top-[calc(100%+12px)] w-[320px] bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden z-[200] p-5 flex flex-col gap-4"
+            style={{ animation: "profile-drop 0.25s cubic-bezier(0.16, 1, 0.3, 1)" }}
           >
-            {/* Arrow */}
-            <div className="absolute -top-2 right-5 w-4 h-4 bg-white border-l border-t border-gray-100 rotate-45" />
-
-            {isLoggedIn ? (
-              /* ── Logged-in View ── */
-              <div className="p-2">
-                {/* User Header */}
-                <div className="flex items-center gap-3 px-4 py-3 mb-1">
-                  <div className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-[#D4A59A]/40 flex-shrink-0">
+            {isLoggedIn && user ? (
+              /* LOGGED IN DROPDOWN MENU */
+              <div className="flex flex-col gap-2">
+                {/* User Header Info Card */}
+                <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
+                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#D4A59A]/20">
                     <Image
-                      src={MOCK_USER.image}
-                      alt={MOCK_USER.name}
-                      width={44}
-                      height={44}
+                      src={user.image}
+                      alt={user.name}
+                      width={48}
+                      height={48}
                       className="w-full h-full object-cover"
                       unoptimized
                     />
                   </div>
-                  <div>
-                    <p className="text-[15px] font-semibold text-[#2D2D2D] leading-tight">
-                      {MOCK_USER.name}
-                    </p>
-                    <p className="text-[12px] text-gray-400">{MOCK_USER.email}</p>
+                  <div className="flex flex-col items-start leading-tight">
+                    <span className="text-[16px] font-bold text-[#2D2D2D]">{user.name}</span>
+                    <span className="text-[12px] text-gray-500">{user.email}</span>
                   </div>
                 </div>
 
-                {/* Divider */}
-                <div className="h-px bg-gray-100 mx-4 mb-1" />
+                {/* Dropdown List Items */}
+                <div className="flex flex-col gap-1 mt-2">
+                  {/* Profile */}
+                  <Link
+                    href="/profile"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-[16px] font-semibold text-[#2D2D2D] hover:bg-[#FDF8F6] hover:text-[#D4A59A] transition-all duration-200 group no-underline"
+                  >
+                    <User className="w-5 h-5 text-gray-400 group-hover:text-[#D4A59A] transition-colors" />
+                    <span>Profile</span>
+                  </Link>
 
-                {/* Menu Items */}
-                <Link
-                  href="/profile"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] text-[#444] hover:bg-[#FDF6F4] hover:text-[#D4A59A] transition-all duration-150 group no-underline"
-                >
-                  <User className="w-4 h-4 text-[#aaa] group-hover:text-[#D4A59A] transition-colors" />
-                  <span className="font-medium">Profile</span>
-                  <ChevronRight className="w-4 h-4 ml-auto text-gray-300 group-hover:text-[#D4A59A] transition-colors" />
-                </Link>
+                  {/* Cart */}
+                  <Link
+                    href="/cart"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-[16px] font-semibold text-[#2D2D2D] hover:bg-[#FDF8F6] hover:text-[#D4A59A] transition-all duration-200 group no-underline"
+                  >
+                    <div className="relative">
+                      <ShoppingCart className="w-5 h-5 text-gray-400 group-hover:text-[#D4A59A] transition-colors" />
+                      <span className="absolute -top-1.5 -right-1.5 bg-[#D4A59A] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white">
+                        {user.cartCount}
+                      </span>
+                    </div>
+                    <span>Cart ({user.cartCount})</span>
+                  </Link>
 
-                <Link
-                  href="/cart"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] text-[#444] hover:bg-[#FDF6F4] hover:text-[#D4A59A] transition-all duration-150 group no-underline"
-                >
-                  <ShoppingCart className="w-4 h-4 text-[#aaa] group-hover:text-[#D4A59A] transition-colors" />
-                  <span className="font-medium">Cart</span>
-                  <span className="ml-auto bg-[#D4A59A] text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                    {MOCK_USER.cartCount}
-                  </span>
-                </Link>
+                  {/* Whish list */}
+                  <Link
+                    href="/wishlist"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-[16px] font-semibold text-[#2D2D2D] hover:bg-[#FDF8F6] hover:text-[#D4A59A] transition-all duration-200 group no-underline"
+                  >
+                    <Heart className="w-5 h-5 text-gray-400 group-hover:text-[#D4A59A] transition-colors" />
+                    <span>Whish list</span>
+                  </Link>
 
-                <Link
-                  href="/wishlist"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] text-[#444] hover:bg-[#FDF6F4] hover:text-[#D4A59A] transition-all duration-150 group no-underline"
-                >
-                  <Heart className="w-4 h-4 text-[#aaa] group-hover:text-[#D4A59A] transition-colors" />
-                  <span className="font-medium">Wish list</span>
-                </Link>
-
-                {/* Divider */}
-                <div className="h-px bg-gray-100 mx-4 my-1" />
-
-                {/* Sign Out */}
-                <button
-                  onClick={() => {
-                    setIsDropdownOpen(false);
-                    setIsLogoutModalOpen(true);
-                  }}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] text-red-500 hover:bg-red-50 transition-all duration-150 group bg-transparent border-none cursor-pointer"
-                >
-                  <LogOut className="w-4 h-4 text-red-400 group-hover:text-red-500 transition-colors" />
-                  <span className="font-medium">Sign Out</span>
-                </button>
+                  {/* Sign Out */}
+                  <button
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      setIsLogoutModalOpen(true);
+                    }}
+                    className="w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-[16px] font-semibold text-[#2D2D2D] hover:bg-red-50 hover:text-red-500 transition-all duration-200 group bg-transparent border-none cursor-pointer text-left"
+                  >
+                    <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors" />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
               </div>
             ) : (
-              /* ── Login Form View ── */
-              <div className="p-5">
-                <h3 className="text-[17px] font-semibold text-[#2D2D2D] mb-1 tracking-tight">
-                  Welcome back 👋
-                </h3>
-                <p className="text-[13px] text-gray-400 mb-4">
-                  Sign in to your SoZo account
-                </p>
+              /* LOG IN FORM */
+              <form onSubmit={handleLogin} className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1">
+                  <h4 className="text-[18px] font-bold text-[#2D2D2D] tracking-tight">Login</h4>
+                  <p className="text-[13px] text-gray-500">Enter your credentials to continue</p>
+                </div>
 
                 <div className="flex flex-col gap-3">
                   <div>
-                    <label className="text-[12px] font-medium text-[#555] block mb-1">
-                      Email
-                    </label>
+                    <label className="text-[12px] font-semibold text-[#555] block mb-1">Email Address</label>
                     <input
-                      type="text"
-                      value={loginEmail}
-                      onChange={(e) => setLoginEmail(e.target.value)}
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="admin@gmail.com"
-                      autoComplete="off"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-[14px] text-[#2D2D2D] outline-none focus:border-[#D4A59A] focus:ring-2 focus:ring-[#D4A59A]/20 transition-all"
+                      required
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-[14px] outline-none focus:border-[#D4A59A] transition-all"
                     />
                   </div>
+
                   <div>
-                    <label className="text-[12px] font-medium text-[#555] block mb-1">
-                      Password
-                    </label>
+                    <label className="text-[12px] font-semibold text-[#555] block mb-1">Password</label>
                     <input
                       type="password"
-                      value={loginPassword}
-                      onChange={(e) => setLoginPassword(e.target.value)}
-                      placeholder="••••••"
-                      onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-[14px] text-[#2D2D2D] outline-none focus:border-[#D4A59A] focus:ring-2 focus:ring-[#D4A59A]/20 transition-all"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="123456"
+                      required
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-[14px] outline-none focus:border-[#D4A59A] transition-all"
                     />
                   </div>
-
-                  {loginError && (
-                    <p className="text-[12px] text-red-500 font-medium">{loginError}</p>
-                  )}
-
-                  <button
-                    onClick={handleLogin}
-                    className="w-full py-2.5 rounded-full bg-[#D4A59A] hover:bg-[#c4958a] text-white text-[14px] font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md border-none cursor-pointer mt-1"
-                  >
-                    Sign In
-                  </button>
                 </div>
 
-                <p className="text-[12px] text-center text-gray-400 mt-4">
-                  Don&apos;t have an account?{" "}
-                  <Link
-                    href="/register"
-                    onClick={() => setIsDropdownOpen(false)}
-                    className="text-[#D4A59A] font-medium hover:underline"
-                  >
-                    Sign up
-                  </Link>
-                </p>
-              </div>
+                {error && <span className="text-[12px] font-medium text-red-500">{error}</span>}
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-[#D4A59A] hover:bg-[#c4958a] text-white rounded-full text-[14px] font-bold transition-all duration-200 hover:-translate-y-0.5 cursor-pointer border-none shadow-sm"
+                >
+                  Sign In
+                </button>
+              </form>
             )}
           </div>
         )}
       </div>
 
-      {/* Logout Confirmation Modal */}
+      {/* Logout confirmation modal */}
       <LogoutModal
         isOpen={isLogoutModalOpen}
-        onConfirm={handleLogout}
+        onConfirm={handleLogoutConfirm}
         onCancel={() => setIsLogoutModalOpen(false)}
       />
 
@@ -266,7 +219,7 @@ export default function UserProfileDropdown({ isLoggedIn, onLogin, onLogout }: U
         @keyframes profile-drop {
           from {
             opacity: 0;
-            transform: translateY(-8px) scale(0.97);
+            transform: translateY(-8px) scale(0.98);
           }
           to {
             opacity: 1;
