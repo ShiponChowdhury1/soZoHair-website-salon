@@ -61,7 +61,7 @@ export default function AboutSozo() {
 
       <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)] order-first md:order-last">
         <Image
-          src="/landing/banner/Container.png"
+          src="/landing/about.png"
           alt="SoZo Hair Salon Building"
           fill
           className="object-cover"
