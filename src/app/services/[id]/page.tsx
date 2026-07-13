@@ -1617,8 +1617,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     <div
                       style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-                        gap: 12,
+                        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                        gap: 20,
                       }}
                     >
                       {service.galleryImages.map((imageUrl, idx) => (
@@ -1637,7 +1637,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                             src={imageUrl}
                             alt={`Cryoskin before and after result ${idx + 1}`}
                             fill
-                            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 280px"
+                            sizes="(max-width: 768px) 50vw, 50vw"
                             style={{ objectFit: "cover" }}
                           />
                         </div>
