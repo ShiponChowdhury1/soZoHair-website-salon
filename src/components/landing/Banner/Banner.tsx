@@ -1,20 +1,37 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Banner.module.css";
 
 export default function Banner() {
+  const [videoError, setVideoError] = useState(false);
+
   return (
     <section className={styles.section} id="home">
-      {/* Background Image */}
+      {/* Background Media */}
       <div className={styles.backgroundImage}>
-        <Image
-          src="/landing/background.png"
-          alt="SoZo Hair Salon Interior"
-          fill
-          style={{ objectFit: "cover" }}
-          sizes="100vw"
-          priority
-        />
+        {!videoError ? (
+          <video
+            src="/landing/banner-video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            onError={() => setVideoError(true)}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <Image
+            src="/landing/background.png"
+            alt="SoZo Hair Salon Interior"
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="100vw"
+            priority
+          />
+        )}
       </div>
 
       {/* Gradient Overlay */}
