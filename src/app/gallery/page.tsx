@@ -93,20 +93,7 @@ export const metadata: Metadata = {
 function GalleryCardView({ name, beforeTone, afterTone, beforeImage, afterImage }: GalleryCard) {
   return (
     <article className="overflow-hidden rounded-2xl border border-[#E8DDD7] bg-[#F8F3EE] shadow-[0_12px_30px_rgba(44,36,32,0.08)] transition-transform duration-300 hover:-translate-y-1">
-      <div className="flex items-center justify-between bg-[#3D3020] px-4 py-3">
-        <div>
-          <p className="font-[family-name:var(--font-playfair)] text-[13px] font-semibold text-white">
-            SoZo Hair, Spa &amp; Wigs
-          </p>
-          <p className="text-[10px] tracking-[1px] text-white/60">WOMEN OF VALUE</p>
-        </div>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
-          <path d="M12 8v4l3 3" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      </div>
-
-      <div className="grid h-[170px] grid-cols-2">
+      <div className="grid h-[220px] grid-cols-2">
         <div className="relative overflow-hidden" style={{ backgroundColor: beforeTone }}>
           <div className="relative h-full w-full">
             <Image

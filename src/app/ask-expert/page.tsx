@@ -352,28 +352,28 @@ export default function AskExpertPage() {
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Your Name</span>
                       <input
                         className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]"
-                        placeholder="Jane Doe"
+                        placeholder="your name"
                       />
                     </label>
                     <label className="block">
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Email Address</span>
                       <input
                         className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]"
-                        placeholder="jane@example.com"
+                        placeholder="email@example.com"
                       />
                     </label>
                     <label className="block">
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Phone Number</span>
                       <input
                         className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]"
-                        placeholder="(513) 123-4567"
+                        placeholder="Enter your phone number"
                       />
                     </label>
                     <label className="block">
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Message</span>
                       <textarea
                         className="min-h-[120px] w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]"
-                        placeholder="Tell us what you're looking for..."
+                        placeholder="Write your message here..."
                       />
                     </label>
                     <button className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#B8836E] px-4 py-3 text-[14px] font-medium text-white transition-colors hover:bg-[#2C2420]">

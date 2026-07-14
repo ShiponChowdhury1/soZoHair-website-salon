@@ -36,6 +36,7 @@ const dropdownLeftItems = [
   { label: "Shop", href: "/#premium" },
   { label: "Articles", href: "/articles" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Academy", href: "/academy" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -48,6 +49,7 @@ const serviceItems: MobileSubItem[] = [
   { label: "CryoSkin Fat Loss Treatment", href: "/services/cryoskin" },
   { label: "Pure Plasma", href: "/services/pure-plasma" },
   { label: "The Relaxing Scalp Facial", href: "/services/scalp-facial" },
+  { label: "Medical Spa Services", href: "/services/medical-spa-services" },
 ];
 
 const shopItems: MobileSubItem[] = [
@@ -57,19 +59,17 @@ const shopItems: MobileSubItem[] = [
 
 const moreItemsMiddle: MobileSubItem[] = [
   { label: "Teams", href: "/teams" },
-  { label: "Medical Spa Services", href: "/services/medical-spa-services" },
   { label: "SoZo on Social Media", href: "/social-media" },
   { label: "Ask the Expert", href: "/ask-expert" },
   { label: "View Our Ratings", href: "/view-our-ratings" },
   { label: "Careers at SoZo Hair, Spa & Wigs", href: "/careers" },
-  { label: "Academy", href: "/academy" },
 ];
 
 const moreItemsRight: MobileSubItem[] = [
   { label: "Return Refund Policy", href: "/return-refund" },
-  { label: "Privacy Policy  Spa Services", href: "/privacy-policy" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Use", href: "/terms-of-service" },
-   { label: "Cookie Policy", href: "/cookie-policy", },
+  { label: "Cookie Policy", href: "/cookie-policy" },
 ];
 
 // All mobile nav items combined
@@ -77,10 +77,9 @@ const mobileNavItems: MobileNavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
-  { label: "Articles", href: "/articles" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
   { label: "Gallery", href: "/gallery" },
-  { label: "Teams", href: "/teams" },
+  { label: "Academy", href: "/academy" },
   { label: "Contact", href: "/#contact" },
   { label: "More", href: "#", hasSubmenu: true, menuKey: "more" as const },
 ];
@@ -93,7 +92,7 @@ export default function Navbar() {
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
-  const [activeMoreSubmenu, setActiveMoreSubmenu] = useState<"home" | "services" | "shop" | "info">("home");
+  const [activeMoreSubmenu, setActiveMoreSubmenu] = useState<"home" | "services" | "shop" | "about_careers" | "policies">("home");
   const navRef = useRef<HTMLDivElement>(null);
   const { totalItems: totalCartItems } = useCart();
   const { totalItems: totalWishlistItems } = useWishlist();
@@ -105,6 +104,7 @@ export default function Navbar() {
   const isWigsActive = pathname === "/wigs";
   const isShopActive = pathname.startsWith("/premium-products") || pathname.startsWith("/special-products");
   const isGalleryActive = pathname === "/gallery";
+  const isAcademyActive = pathname === "/academy";
 
   const isMoreActive = [
     "/teams",
@@ -112,10 +112,10 @@ export default function Navbar() {
     "/ask-expert",
     "/view-our-ratings",
     "/careers",
-    "/academy",
     "/return-refund",
     "/privacy-policy",
-    "/terms-of-service"
+    "/terms-of-service",
+    "/cookie-policy"
   ].some(path => pathname === path || pathname.startsWith(path + "/"));
 
   useEffect(() => {
@@ -177,7 +177,7 @@ export default function Navbar() {
     } else if (menu === "shop") {
       setActiveMoreSubmenu("shop");
     } else if (menu === "more") {
-      setActiveMoreSubmenu("home");
+      setActiveMoreSubmenu("about_careers");
     }
   }, []);
 
@@ -194,7 +194,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleNavClick = useCallback((id: ActiveMenu | "home" | "wigs" | "gallery") => {
+  const handleNavClick = useCallback((id: ActiveMenu | "home" | "wigs" | "gallery" | "academy") => {
     setIsSearchOpen(false);
     if (id === "services" || id === "shop" || id === "more") {
       setActiveMenu((prev) => {
@@ -204,7 +204,7 @@ export default function Navbar() {
         } else if (next === "shop") {
           setActiveMoreSubmenu("shop");
         } else if (next === "more") {
-          setActiveMoreSubmenu("home");
+          setActiveMoreSubmenu("about_careers");
         }
         return next;
       });
@@ -255,13 +255,13 @@ export default function Navbar() {
           </button>
 
           {/* Left Nav Links — hidden below lg */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
             <Link
               href="/"
               onClick={() => handleNavClick("home")}
               onMouseEnter={() => handleMouseEnter(null)}
               onMouseLeave={handleMouseLeave}
-              className={`text-[15px] font-medium no-underline pb-1 border-b-2 transition-all duration-300 ${isHomeActive ? "text-[#2D2D2D] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
+              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isHomeActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Home
             </Link>
@@ -270,10 +270,10 @@ export default function Navbar() {
               onClick={() => handleNavClick("services")}
               onMouseEnter={() => handleMouseEnter("services")}
               onMouseLeave={handleMouseLeave}
-              className={`flex items-center gap-1.5 text-[15px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
+              className={`flex items-center gap-1 text-[14px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Services
-              <svg className={`w-4 h-4 transition-transform ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
@@ -283,7 +283,7 @@ export default function Navbar() {
               onClick={() => handleNavClick(null)}
               onMouseEnter={() => handleMouseEnter(null)}
               onMouseLeave={handleMouseLeave}
-              className={`text-[15px] font-medium no-underline pb-1 border-b-2 transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
+              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Wigs
             </Link>
@@ -292,10 +292,10 @@ export default function Navbar() {
               onClick={() => handleNavClick("shop")}
               onMouseEnter={() => handleMouseEnter("shop")}
               onMouseLeave={handleMouseLeave}
-              className={`flex items-center gap-1.5 text-[15px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
+              className={`flex items-center gap-1 text-[14px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Shop
-              <svg className={`w-4 h-4 transition-transform ${activeMenu === "shop" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "shop" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
@@ -305,35 +305,48 @@ export default function Navbar() {
               onClick={() => handleNavClick("gallery")}
               onMouseEnter={() => handleMouseEnter(null)}
               onMouseLeave={handleMouseLeave}
-              className={`text-[15px] font-medium no-underline pb-1 border-b-2 transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
+              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               Gallery
+            </Link>
+
+            <Link
+              href="/academy"
+              onClick={() => handleNavClick("academy")}
+              onMouseEnter={() => handleMouseEnter(null)}
+              onMouseLeave={handleMouseLeave}
+              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAcademyActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
+            >
+              Academy
             </Link>
 
             <button
               onClick={() => handleNavClick("more")}
               onMouseEnter={() => handleMouseEnter("more")}
               onMouseLeave={handleMouseLeave}
-              className={`flex items-center gap-1.5 text-[15px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
+              className={`flex items-center gap-1 text-[14px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
             >
               More
+              <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "more" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
             </button>
           </div>
 
           {/* Center Logo */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Link href="/" className="flex flex-col items-center justify-center no-underline" onClick={() => { setActiveMenu(null); closeMobile(); }}>
-              <span className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold text-[#2D2D2D] leading-none mb-1">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
+            <Link href="/" className="flex flex-col items-center justify-center no-underline pointer-events-auto" onClick={() => { setActiveMenu(null); closeMobile(); }}>
+              <span className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold text-[#2D2D2D] leading-none mb-1 whitespace-nowrap">
                 SoZo Hair
               </span>
-              <span className="text-[10px] md:text-[11px] font-medium text-[#555] tracking-[1px] uppercase">
+              <span className="text-[10px] md:text-[11px] font-medium text-[#555] tracking-[1px] uppercase whitespace-nowrap">
                 Hair, Spa &amp; Wigs
               </span>
             </Link>
           </div>
 
           {/* Right Side */}
-          <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-5 z-20">
             {/* Icons */}
             <div className="flex items-center gap-3 sm:gap-4">
               {/* Search */}
@@ -540,12 +553,12 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ===== UNIFIED DESKTOP MEGA MENU DROPDOWN ===== */}
+        {/* ===== DESKTOP DROPDOWN PANEL ===== */}
         <div
           onMouseEnter={() => handleMouseEnter(activeMenu)}
           onMouseLeave={handleMouseLeave}
-          className={`fixed top-[70px] md:top-[90px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-300 ease-in-out shadow-2xl hidden lg:block ${
-            (activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-4 pointer-events-none"
+          className={`fixed top-[70px] md:top-[90px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-2xl hidden lg:block ${
+            (activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
           }`}
         >
           <div className="max-w-[var(--container-max-width)] mx-auto px-8 py-16 flex items-start gap-16 min-h-[450px]">
@@ -578,7 +591,7 @@ export default function Navbar() {
                         href={item.href}
                         onClick={() => setActiveMenu(null)}
                         onMouseEnter={() => {
-                          if (item.label === "Home" || item.label === "About" || item.label === "Wigs" || item.label === "Articles" || item.label === "Gallery" || item.label === "Contact") {
+                          if (item.label === "Home" || item.label === "About" || item.label === "Wigs" || item.label === "Articles" || item.label === "Gallery" || item.label === "Academy" || item.label === "Contact") {
                             setActiveMoreSubmenu("home");
                           }
                         }}
@@ -595,107 +608,150 @@ export default function Navbar() {
                 );
               })}
 
-              {/* Extra Info & Policies Trigger */}
+              {/* About & Info Trigger */}
               <button
-                onMouseEnter={() => setActiveMoreSubmenu("info")}
-                onClick={() => setActiveMoreSubmenu("info")}
+                onMouseEnter={() => setActiveMoreSubmenu("about_careers")}
+                onClick={() => setActiveMoreSubmenu("about_careers")}
                 className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${
-                  activeMoreSubmenu === "info" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                  activeMoreSubmenu === "about_careers" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
                 }`}
               >
-                <span>Info &amp; Policies</span>
-                <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "info" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <span>About &amp; Info</span>
+                <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "about_careers" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              {/* Policies Trigger */}
+              <button
+                onMouseEnter={() => setActiveMoreSubmenu("policies")}
+                onClick={() => setActiveMoreSubmenu("policies")}
+                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${
+                  activeMoreSubmenu === "policies" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                }`}
+              >
+                <span>Policies</span>
+                <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "policies" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </button>
             </div>
 
             {/* Right Column - Dynamic Submenu Panel */}
-            <div className="w-2/3 pl-8 py-2 flex flex-col justify-center">
-              <div className="transition-all duration-300">
-                {activeMoreSubmenu === "home" && (
-                  <div className="max-w-md">
-                    <span className="text-[11px] font-semibold tracking-[3px] uppercase text-[#D4A59A] block mb-2">Welcome to SoZo Hair</span>
-                    <h3 className="font-[family-name:var(--font-playfair)] text-[36px] text-[#2D2D2D] leading-tight mb-4">
-                      Your Premium Hair, Spa &amp; Wigs Experience
-                    </h3>
-                    <p className="text-[15px] text-[#777] leading-relaxed mb-6 font-sans">
-                      Discover our high-end hair design, relaxing scalp facials, medical spa treatments, and professional custom-styled wigs. We believe in providing a personalized, premium experience for every guest.
-                    </p>
-                    <div className="flex gap-4">
+            <div className="w-2/3 pl-8 py-2 relative min-h-[350px]">
+              {/* Home Welcome Panel */}
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
+                activeMoreSubmenu === "home" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+              }`}>
+                <div className="max-w-md">
+                  <span className="text-[11px] font-semibold tracking-[3px] uppercase text-[#D4A59A] block mb-2">Welcome to SoZo Hair</span>
+                  <h3 className="font-[family-name:var(--font-playfair)] text-[36px] text-[#2D2D2D] leading-tight mb-4">
+                    Your Premium Hair, Spa &amp; Wigs Experience
+                  </h3>
+                  <p className="text-[15px] text-[#777] leading-relaxed mb-6 font-sans">
+                    Discover our high-end hair design, relaxing scalp facials, medical spa treatments, and professional custom-styled wigs. We believe in providing a personalized, premium experience for every guest.
+                  </p>
+                  <div className="flex gap-4">
+                    <Link
+                      href="/#booking"
+                      onClick={() => setActiveMenu(null)}
+                      className="inline-flex items-center justify-center px-6 py-2.5 bg-[#D4A59A] text-white rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      Book Appointment
+                    </Link>
+                    <Link
+                      href="/#about"
+                      onClick={() => setActiveMenu(null)}
+                      className="inline-flex items-center justify-center px-6 py-2.5 border border-[#D4A59A] text-[#D4A59A] rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#D4A59A] hover:text-white hover:-translate-y-0.5"
+                    >
+                      Our Story
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Services Panel */}
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
+                activeMoreSubmenu === "services" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+              }`}>
+                <div>
+                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Our Premium Services</h3>
+                  <div className="grid grid-cols-2 gap-x-12 gap-y-6">
+                    {serviceItems.map((item) => (
                       <Link
-                        href="/#booking"
+                        key={item.label}
+                        href={item.href}
                         onClick={() => setActiveMenu(null)}
-                        className="inline-flex items-center justify-center px-6 py-2.5 bg-[#D4A59A] text-white rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md"
+                        className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
                       >
-                        Book Appointment
+                        {item.label}
                       </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Shop Panel */}
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
+                activeMoreSubmenu === "shop" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+              }`}>
+                <div>
+                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Shop Collection</h3>
+                  <div className="grid grid-cols-1 gap-y-6">
+                    {shopItems.map((item) => (
                       <Link
-                        href="/#about"
+                        key={item.label}
+                        href={item.href}
                         onClick={() => setActiveMenu(null)}
-                        className="inline-flex items-center justify-center px-6 py-2.5 border border-[#D4A59A] text-[#D4A59A] rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#D4A59A] hover:text-white hover:-translate-y-0.5"
+                        className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
                       >
-                        Our Story
+                        {item.label}
                       </Link>
-                    </div>
+                    ))}
                   </div>
-                )}
+                </div>
+              </div>
 
-                {activeMoreSubmenu === "services" && (
-                  <div>
-                    <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Our Premium Services</h3>
-                    <div className="grid grid-cols-2 gap-x-12 gap-y-6">
-                      {serviceItems.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          onClick={() => setActiveMenu(null)}
-                          className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
+              {/* About & Info Panel */}
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
+                activeMoreSubmenu === "about_careers" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+              }`}>
+                <div>
+                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">About &amp; Information</h3>
+                  <div className="grid grid-cols-2 gap-x-12 gap-y-6">
+                    {moreItemsMiddle.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setActiveMenu(null)}
+                        className="font-[family-name:var(--font-playfair)] text-[16px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
                   </div>
-                )}
+                </div>
+              </div>
 
-                {activeMoreSubmenu === "shop" && (
-                  <div>
-                    <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Shop Collection</h3>
-                    <div className="grid grid-cols-1 gap-y-6">
-                      {shopItems.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          onClick={() => setActiveMenu(null)}
-                          className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
+              {/* Policies Panel */}
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
+                activeMoreSubmenu === "policies" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+              }`}>
+                <div>
+                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Policies</h3>
+                  <div className="grid grid-cols-1 gap-y-6">
+                    {moreItemsRight.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setActiveMenu(null)}
+                        className="font-[family-name:var(--font-playfair)] text-[16px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
                   </div>
-                )}
-
-                {activeMoreSubmenu === "info" && (
-                  <div>
-                    <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Information &amp; Policies</h3>
-                    <div className="grid grid-cols-2 gap-x-12 gap-y-6">
-                      {[...moreItemsMiddle, ...moreItemsRight].map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          onClick={() => setActiveMenu(null)}
-                          className={`font-[family-name:var(--font-playfair)] text-[16px] uppercase tracking-[1.5px] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block ${
-                            item.isHeading ? "text-[#2D2D2D] font-bold mt-4" : "text-[#555]"
-                          }`}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                </div>
               </div>
             </div>
           </div>

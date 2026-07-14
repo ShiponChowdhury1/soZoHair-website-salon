@@ -242,9 +242,9 @@ export default function SocialMediaPage() {
 
               <div className="space-y-5" id="contact-form">
                 <div className="overflow-hidden rounded-2xl border border-[#E8DDD7] bg-[#F8F3EE]">
-                 
-                    <Image src="/landing/map/map.png" alt="Map placeholder" width={400} height={200} className="h-full w-full object-cover" />
-               
+
+                  <Image src="/landing/map/map.png" alt="Map placeholder" width={400} height={200} className="h-full w-full object-cover" />
+
                 </div>
 
                 <div className="rounded-2xl bg-[#F8F3EE] p-6 shadow-[0_12px_32px_rgba(44,36,32,0.08)]">
@@ -252,19 +252,19 @@ export default function SocialMediaPage() {
                   <div className="mt-5 space-y-4">
                     <label className="block">
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Your Name</span>
-                      <input className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="Jane Doe" />
+                      <input className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="Enter your full name" />
                     </label>
                     <label className="block">
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Email Address</span>
-                      <input className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="jane@example.com" />
+                      <input className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="Enter your email address" />
                     </label>
                     <label className="block">
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Phone Number</span>
-                      <input className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="(513) 123-4567" />
+                      <input className="w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="Enter your phone number" />
                     </label>
                     <label className="block">
                       <span className="mb-2 block text-[13px] text-[#5A4A42]">Message</span>
-                      <textarea className="min-h-[120px] w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="Tell us what you're looking for..." />
+                      <textarea className="min-h-[120px] w-full rounded-lg border border-[#E8DDD7] bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-[#C4907A]" placeholder="Write your message here..." />
                     </label>
                     <button className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#B8836E] px-4 py-3 text-[14px] font-medium text-white transition-colors hover:bg-[#2C2420]">
                       Send Message

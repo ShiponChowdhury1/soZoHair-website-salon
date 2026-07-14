@@ -51,11 +51,11 @@ export default function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Services</h4>
             <ul className={styles.columnLinks}>
-              <li><Link href="#services" className={styles.columnLink}>Hair Color &amp; Cuts</Link></li>
-              <li><Link href="#services" className={styles.columnLink}>Specialty Hair</Link></li>
-              <li><Link href="#cryoskin" className={styles.columnLink}>CryoSkin</Link></li>
-              <li><Link href="#services" className={styles.columnLink}>Waxing</Link></li>
-              <li><Link href="#services" className={styles.columnLink}>Lash &amp; Brow</Link></li>
+              <li><Link href="/services/hair-cuts-color" className={styles.columnLink}>Hair Color &amp; Cuts</Link></li>
+              <li><Link href="/services/specialty-hair" className={styles.columnLink}>Specialty Hair</Link></li>
+              <li><Link href="/services/cryoskin" className={styles.columnLink}>CryoSkin</Link></li>
+              <li><Link href="/services/waxing" className={styles.columnLink}>Waxing</Link></li>
+              <li><Link href="/services/lash-brow" className={styles.columnLink}>Lash &amp; Brow</Link></li>
             </ul>
           </div>
 
