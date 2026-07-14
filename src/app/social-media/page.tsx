@@ -5,7 +5,7 @@ import Footer from "@/components/shared/Footer/Footer";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Sozo on Facebook - SoZo Hair Spa & Wigs",
+  title: "Sozo on Social Media - SoZo Hair Spa & Wigs",
   description: "Connect with SoZo Hair Spa & Wigs on social media and get in touch with the salon.",
 };
 
@@ -43,6 +43,71 @@ const quickLinks = [
   },
 ];
 
+const socialChannels = [
+  {
+    name: "Instagram",
+    handle: "@sozohair",
+    desc: "Follow us for daily hair transformations, styling tips, and client spotlights.",
+    color: "#E1306C",
+    url: "https://www.instagram.com/",
+    icon: (
+      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </svg>
+    ),
+  },
+  {
+    name: "Facebook",
+    handle: "SoZo Hair Spa & Wigs",
+    desc: "Join our community for news, salon specials, reviews, and updates.",
+    color: "#1877F2",
+    url: "https://www.facebook.com/",
+    icon: (
+      <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+      </svg>
+    ),
+  },
+  {
+    name: "YouTube",
+    handle: "SoZo Hair & Spa",
+    desc: "Subscribe for professional wig guides, hair tutorials, and beauty tips.",
+    color: "#FF0000",
+    url: "https://www.youtube.com/",
+    icon: (
+      <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+        <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+      </svg>
+    ),
+  },
+  {
+    name: "TikTok",
+    handle: "@sozohair",
+    desc: "Watch our quick hair tutorials, transformation trends, and salon clips.",
+    color: "#000000",
+    url: "https://www.tiktok.com/",
+    icon: (
+      <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.08-.07-.17-.17-.25-.25v6.23c.01 2.14-.62 4.35-2.22 5.8-1.74 1.64-4.37 2.22-6.66 1.65-2.61-.62-4.75-2.73-5.21-5.38-.63-3.23.95-6.67 4.09-7.69.75-.24 1.54-.34 2.33-.35v4.07c-1.26.06-2.52.79-3.08 1.93-.61 1.17-.41 2.71.48 3.67.92.98 2.5 1.2 3.73.53.94-.48 1.48-1.5 1.5-2.57V0h.28z" />
+      </svg>
+    ),
+  },
+  {
+    name: "X (Twitter)",
+    handle: "@sozohair",
+    desc: "Stay updated with real-time news, schedule openings, and quick updates.",
+    color: "#0F1419",
+    url: "https://x.com/",
+    icon: (
+      <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+];
+
 export default function SocialMediaPage() {
   return (
     <>
@@ -50,12 +115,12 @@ export default function SocialMediaPage() {
 
       <main className="bg-white text-[#2C2420]">
 
-        {/* Hero Section — same CSS pattern as articles hero */}
+        {/* Hero Section */}
         <section
           className="relative flex items-center overflow-hidden"
           style={{ minHeight: "540px", background: "#ffffff" }}
         >
-          {/* Combined gradient + image — exact articles hero pattern */}
+          {/* Combined gradient + image */}
           <div
             className="absolute inset-0"
             style={{
@@ -96,7 +161,7 @@ export default function SocialMediaPage() {
                   letterSpacing: "-0.5px",
                 }}
               >
-                Sozo On Facebook
+                Sozo On Social Media
               </h1>
 
               <p
@@ -109,13 +174,13 @@ export default function SocialMediaPage() {
                   fontWeight: 300,
                 }}
               >
-                Come Follow us on Facebook for the latest updates! We&apos;re sharing our favorite moments and news over on Facebook.
+                Come follow us across all our social platforms for the latest style updates, wig tutorials, special discounts, and behind-the-scenes transformations!
               </p>
 
               <div className="flex flex-wrap gap-3" style={{ marginBottom: "28px" }}>
                 <a
-                  href="#contact-form"
-                  className="inline-flex items-center rounded-full bg-[#B8836E] px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-[#2C2420]"
+                  href="#social-channels"
+                  className="inline-flex items-center rounded-full bg-[#B8836E] px-7 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-[#2C2420] hover:shadow-md"
                 >
                   Connect with us!
                 </a>
@@ -123,31 +188,36 @@ export default function SocialMediaPage() {
                   href="#contact-form"
                   className="inline-flex items-center rounded-full border border-[#E8DDD7] bg-transparent px-6 py-3 text-sm font-medium text-[#2C2420] transition-colors hover:border-[#C4907A] hover:text-[#C4907A]"
                 >
-                  Learn more
+                  Send a Message
                 </a>
               </div>
 
               <div className="flex gap-3">
-                <a href="#" aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
                   <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                   </svg>
                 </a>
-                <a href="#" aria-label="Instagram" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="1.8" />
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" strokeWidth="1.8" />
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" strokeWidth="1.8" />
                   </svg>
                 </a>
-                <a href="#" aria-label="Twitter" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
+                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
                   <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </a>
-                <a href="#" aria-label="Pinterest" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
+                <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
                   <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.08-.07-.17-.17-.25-.25v6.23c.01 2.14-.62 4.35-2.22 5.8-1.74 1.64-4.37 2.22-6.66 1.65-2.61-.62-4.75-2.73-5.21-5.38-.63-3.23.95-6.67 4.09-7.69.75-.24 1.54-.34 2.33-.35v4.07c-1.26.06-2.52.79-3.08 1.93-.61 1.17-.41 2.71.48 3.67.92.98 2.5 1.2 3.73.53.94-.48 1.48-1.5 1.5-2.57V0h.28z"/>
+                  </svg>
+                </a>
+                <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
+                  <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
               </div>
@@ -156,10 +226,54 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        <div className="h-20" />
+        {/* Social Channels Section */}
+        <section id="social-channels" className="px-5 py-24 sm:px-8 lg:px-10 bg-[#FDF9F5] border-t border-b border-gray-50">
+          <div className="mx-auto max-w-[var(--container-max-width)]">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-[2px] text-[#B8836E]">Stay Connected</p>
+              <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-semibold text-[#2C2420] sm:text-4xl mb-4">
+                Follow Our Social Channels
+              </h2>
+              <p className="text-[14px] leading-7 text-[#5A4A42]">
+                Explore our latest styles, luxury hair transformations, wig guides, and daily salon clips. Select a platform to follow our journey.
+              </p>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              {socialChannels.map((channel) => (
+                <div
+                  key={channel.name}
+                  className="rounded-2xl bg-white p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_30px_rgba(44,36,32,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 text-white"
+                      style={{ backgroundColor: channel.color }}
+                    >
+                      {channel.icon}
+                    </div>
+                    <h3 className="font-[family-name:var(--font-playfair)] text-[17px] font-semibold text-[#2C2420] mb-0.5">
+                      {channel.name}
+                    </h3>
+                    <p className="text-[11px] font-medium text-[#B8836E] mb-3">{channel.handle}</p>
+                    <p className="text-[13px] leading-6 text-[#5A4A42] mb-6">{channel.desc}</p>
+                  </div>
+                  <a
+                    href={channel.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center w-full py-2.5 rounded-full text-[12px] font-semibold tracking-wide border transition-all duration-200 hover:bg-[#F8F3EE] hover:border-[#C4907A] text-[#2c2420] border-[#E8DDD7] bg-transparent"
+                  >
+                    Visit Channel
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Contact + Map Section */}
-        <section className="px-5 pb-18 sm:px-8 lg:px-10">
+        <section className="px-5 py-24 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[var(--container-max-width)]">
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
               <div>
@@ -188,7 +302,7 @@ export default function SocialMediaPage() {
                   <div className="flex items-start gap-4">
                     <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#F8F3EE] text-[#B8836E]">
                       <svg className="h-4 w-4 fill-none stroke-current" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.74A16 16 0 0 0 16 16.83l1.08-.54a2 2 0 0 1 2.11.44 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" strokeWidth="2" />
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 a12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.74A16 16 0 0 0 16 16.83l1.08-.54a2 2 0 0 1 2.11.44 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" strokeWidth="2" />
                       </svg>
                     </div>
                     <div>
@@ -242,9 +356,7 @@ export default function SocialMediaPage() {
 
               <div className="space-y-5" id="contact-form">
                 <div className="overflow-hidden rounded-2xl border border-[#E8DDD7] bg-[#F8F3EE]">
-
                   <Image src="/landing/map/map.png" alt="Map placeholder" width={400} height={200} className="h-full w-full object-cover" />
-
                 </div>
 
                 <div className="rounded-2xl bg-[#F8F3EE] p-6 shadow-[0_12px_32px_rgba(44,36,32,0.08)]">

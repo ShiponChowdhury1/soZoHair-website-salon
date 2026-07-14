@@ -14,21 +14,31 @@ export default function Footer() {
               Experience the difference with our expert team.
             </p>
             <div className={styles.socials}>
-              <a href="#" className={styles.socialLink} aria-label="Facebook">
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Facebook">
                 <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                 </svg>
               </a>
-              <a href="#" className={styles.socialLink} aria-label="Instagram">
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
                 <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
               </a>
-              <a href="#" className={styles.socialLink} aria-label="Twitter">
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="YouTube">
                 <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="TikTok">
+                <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.08-.07-.17-.17-.25-.25v6.23c.01 2.14-.62 4.35-2.22 5.8-1.74 1.64-4.37 2.22-6.66 1.65-2.61-.62-4.75-2.73-5.21-5.38-.63-3.23.95-6.67 4.09-7.69.75-.24 1.54-.34 2.33-.35v4.07c-1.26.06-2.52.79-3.08 1.93-.61 1.17-.41 2.71.48 3.67.92.98 2.5 1.2 3.73.53.94-.48 1.48-1.5 1.5-2.57V0h.28z"/>
+                </svg>
+              </a>
+              <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="X (Twitter)">
+                <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
             </div>
