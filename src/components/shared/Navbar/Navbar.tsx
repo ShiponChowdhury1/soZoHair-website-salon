@@ -334,7 +334,7 @@ export default function Navbar() {
           </div>
 
           {/* Center Logo */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
+          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
             <Link href="/" className="flex flex-col items-center justify-center no-underline pointer-events-auto" onClick={() => { setActiveMenu(null); closeMobile(); }}>
               <span className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold text-[#2D2D2D] leading-none mb-1 whitespace-nowrap">
                 SoZo Hair
@@ -405,13 +405,15 @@ export default function Navbar() {
             <UserProfileDropdown />
           </div>
 
-          {/* Search Overlay Inside Navbar */}
+          {/* Search Overlay — inside navbar */}
           <div
-            className={`absolute inset-0 bg-white z-[60] flex items-center justify-center transition-all duration-300 ease-in-out ${isSearchOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-              }`}
+            className={`absolute top-0 left-0 w-full bg-white z-[120] shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 ease-in-out ${
+              isSearchOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+            }`}
           >
-            <div className="w-full max-w-3xl px-4 sm:px-5 md:px-8 flex items-center gap-3 sm:gap-4">
-              <svg className="w-5 h-5 md:w-6 md:h-6 text-[#C4956A] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {/* Search Input Row — matches navbar height */}
+            <div className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 h-[70px] md:h-[90px] flex items-center gap-3 sm:gap-4">
+              <svg className="w-5 h-5 md:w-6 md:h-6 text-[#C4956A] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
@@ -420,34 +422,37 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search for services, products, or artists..."
-                className="flex-1 bg-transparent border-none outline-none text-lg sm:text-xl md:text-2xl font-[family-name:var(--font-playfair)] text-[#2D2D2D] placeholder:text-gray-300 focus:ring-0"
+                className="flex-1 bg-transparent border-none outline-none text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] text-[#2D2D2D] placeholder:text-gray-300 focus:ring-0"
                 autoFocus={isSearchOpen}
               />
               <button
                 onClick={() => setIsSearchOpen(false)}
-                className="text-gray-400 hover:text-[#D4A59A] transition-colors p-1 sm:p-2 flex-shrink-0 bg-transparent border-none cursor-pointer"
+                className="text-gray-400 hover:text-[#D4A59A] transition-colors p-1 flex-shrink-0 bg-transparent border-none cursor-pointer"
                 aria-label="Close search"
               >
-                <svg className="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
               </button>
             </div>
-            {/* Search results */}
-            <div className="w-full max-w-3xl px-4 sm:px-5 md:px-8 mt-6">
-              {searchQuery && searchResults.length === 0 && (
-                <p className="text-center text-[#666]">No results found.</p>
-              )}
 
-              {searchResults.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {searchResults.map((p: any) => (
-                    <ProductCard key={`${p.id}-${p.slug}`} product={p} />
-                  ))}
+            {/* Search Results Dropdown */}
+            {searchQuery && (
+              <div className="border-t border-gray-100 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.1)]">
+                <div className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 py-6 max-h-[60vh] overflow-y-auto">
+                  {searchResults.length === 0 ? (
+                    <p className="text-center text-[#666] py-8 text-[14px]">No results found.</p>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                      {searchResults.map((p: any) => (
+                        <ProductCard key={`${p.id}-${p.slug}`} product={p} />
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </nav>
 
@@ -557,9 +562,8 @@ export default function Navbar() {
         <div
           onMouseEnter={() => handleMouseEnter(activeMenu)}
           onMouseLeave={handleMouseLeave}
-          className={`fixed top-[70px] md:top-[90px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-2xl hidden lg:block ${
-            (activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
-          }`}
+          className={`fixed top-[70px] md:top-[90px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-2xl hidden lg:block ${(activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
+            }`}
         >
           <div className="max-w-[var(--container-max-width)] mx-auto px-8 py-16 flex items-start gap-16 min-h-[450px]">
             {/* Column 1 - Main Links */}
@@ -577,9 +581,8 @@ export default function Navbar() {
                       <button
                         onMouseEnter={() => setActiveMoreSubmenu(item.label.toLowerCase() as "services" | "shop")}
                         onClick={() => setActiveMoreSubmenu(item.label.toLowerCase() as "services" | "shop")}
-                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${
-                          isCurrentActive ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                        }`}
+                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${isCurrentActive ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                          }`}
                       >
                         <span>{item.label}</span>
                         <svg className={`w-5 h-5 transition-all duration-300 ${isCurrentActive ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -595,11 +598,10 @@ export default function Navbar() {
                             setActiveMoreSubmenu("home");
                           }
                         }}
-                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] no-underline transition-all duration-300 block w-full ${
-                          (item.label === "Home" && activeMoreSubmenu === "home")
-                            ? "text-[#D4A59A] translate-x-2"
-                            : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                        }`}
+                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] no-underline transition-all duration-300 block w-full ${(item.label === "Home" && activeMoreSubmenu === "home")
+                          ? "text-[#D4A59A] translate-x-2"
+                          : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                          }`}
                       >
                         {item.label}
                       </Link>
@@ -612,9 +614,8 @@ export default function Navbar() {
               <button
                 onMouseEnter={() => setActiveMoreSubmenu("about_careers")}
                 onClick={() => setActiveMoreSubmenu("about_careers")}
-                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${
-                  activeMoreSubmenu === "about_careers" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                }`}
+                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${activeMoreSubmenu === "about_careers" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                  }`}
               >
                 <span>About &amp; Info</span>
                 <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "about_careers" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -626,9 +627,8 @@ export default function Navbar() {
               <button
                 onMouseEnter={() => setActiveMoreSubmenu("policies")}
                 onClick={() => setActiveMoreSubmenu("policies")}
-                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${
-                  activeMoreSubmenu === "policies" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                }`}
+                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${activeMoreSubmenu === "policies" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
+                  }`}
               >
                 <span>Policies</span>
                 <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "policies" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -640,9 +640,8 @@ export default function Navbar() {
             {/* Right Column - Dynamic Submenu Panel */}
             <div className="w-2/3 pl-8 py-2 relative min-h-[350px]">
               {/* Home Welcome Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
-                activeMoreSubmenu === "home" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-              }`}>
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "home" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+                }`}>
                 <div className="max-w-md">
                   <span className="text-[11px] font-semibold tracking-[3px] uppercase text-[#D4A59A] block mb-2">Welcome to SoZo Hair</span>
                   <h3 className="font-[family-name:var(--font-playfair)] text-[36px] text-[#2D2D2D] leading-tight mb-4">
@@ -671,9 +670,8 @@ export default function Navbar() {
               </div>
 
               {/* Services Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
-                activeMoreSubmenu === "services" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-              }`}>
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "services" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+                }`}>
                 <div>
                   <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Our Premium Services</h3>
                   <div className="grid grid-cols-2 gap-x-12 gap-y-6">
@@ -692,9 +690,8 @@ export default function Navbar() {
               </div>
 
               {/* Shop Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
-                activeMoreSubmenu === "shop" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-              }`}>
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "shop" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+                }`}>
                 <div>
                   <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Shop Collection</h3>
                   <div className="grid grid-cols-1 gap-y-6">
@@ -713,9 +710,8 @@ export default function Navbar() {
               </div>
 
               {/* About & Info Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
-                activeMoreSubmenu === "about_careers" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-              }`}>
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "about_careers" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+                }`}>
                 <div>
                   <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">About &amp; Information</h3>
                   <div className="grid grid-cols-2 gap-x-12 gap-y-6">
@@ -734,9 +730,8 @@ export default function Navbar() {
               </div>
 
               {/* Policies Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${
-                activeMoreSubmenu === "policies" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-              }`}>
+              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "policies" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
+                }`}>
                 <div>
                   <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Policies</h3>
                   <div className="grid grid-cols-1 gap-y-6">
