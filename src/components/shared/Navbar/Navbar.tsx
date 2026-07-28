@@ -103,16 +103,30 @@ export default function Navbar() {
   const pathname = usePathname();
   const { isLoggedIn } = useAuth();
 
-  const isHomeActive = pathname === "/";
-  const isAboutActive = pathname === "/about";
-  const isServicesActive = pathname.startsWith("/services");
-  const isWigsActive = pathname === "/wigs";
-  const isShopActive = pathname.startsWith("/premium-products") || pathname.startsWith("/special-products");
-  const isGalleryActive = pathname === "/gallery";
-  const isAcademyActive = pathname === "/academy";
-  const isArticlesActive = pathname.startsWith("/articles");
+  const [currentHash, setCurrentHash] = useState("");
 
-  const isMoreActive = [
+  useEffect(() => {
+    const updateHash = () => {
+      if (typeof window !== "undefined") {
+        setCurrentHash(window.location.hash);
+      }
+    };
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
+  }, []);
+
+  const isServicesActive = !activeMenu && (pathname.startsWith("/services") || currentHash === "#services");
+  const isContactActive = !activeMenu && currentHash === "#contact";
+  const isHomeActive = !activeMenu && pathname === "/" && currentHash !== "#services" && currentHash !== "#contact";
+  const isAboutActive = !activeMenu && pathname === "/about";
+  const isWigsActive = !activeMenu && pathname === "/wigs";
+  const isShopActive = !activeMenu && (pathname.startsWith("/premium-products") || pathname.startsWith("/special-products"));
+  const isGalleryActive = !activeMenu && pathname === "/gallery";
+  const isAcademyActive = !activeMenu && pathname === "/academy";
+  const isArticlesActive = !activeMenu && pathname.startsWith("/articles");
+
+  const isMoreActive = !activeMenu && [
     "/teams",
     "/social-media",
     "/ask-expert",
@@ -127,6 +141,10 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      if (window.scrollY < 200 && (window.location.hash === "#services" || window.location.hash === "#contact")) {
+        window.history.replaceState(null, "", window.location.pathname);
+        setCurrentHash("");
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -262,8 +280,8 @@ export default function Navbar() {
           </button>
 
           {/* Left Container with Logo & Nav Links */}
-          <div className="flex items-center gap-4 xl:gap-6">
-            <Link href="/" className="flex items-center justify-center no-underline mr-2" onClick={() => { setActiveMenu(null); closeMobile(); }}>
+          <div className="flex items-center gap-4 xl:gap-8">
+            <Link href="/" className="flex items-center justify-center no-underline mr-2" onClick={() => { setActiveMenu(null); closeMobile(); setCurrentHash(""); }}>
               <Image
                 src="/logo.png"
                 alt="SoZo Hair, Spa & Wigs"
@@ -275,13 +293,13 @@ export default function Navbar() {
             </Link>
 
             {/* Left Nav Links — hidden below lg */}
-            <div className="hidden lg:flex items-center gap-2.5 xl:gap-4 2xl:gap-5 mr-2 xl:mr-5">
+            <div className="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-6 mr-3 xl:mr-6">
               <Link
                 href="/"
-                onClick={() => handleNavClick("home")}
+                onClick={() => { handleNavClick("home"); setCurrentHash(""); }}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isHomeActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHomeActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 Home
               </Link>
@@ -291,7 +309,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick(null)}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAboutActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isAboutActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 About
               </Link>
@@ -302,12 +320,14 @@ export default function Navbar() {
                   if (pathname === "/") {
                     e.preventDefault();
                     document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, "", "#services");
+                    setCurrentHash("#services");
                   }
                   setActiveMenu(null);
                 }}
                 onMouseEnter={() => handleMouseEnter("services")}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap flex items-center gap-1 text-[14px] xl:text-[15px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid no-underline ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 whitespace-nowrap flex items-center gap-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide transition-colors duration-300 bg-transparent border-none cursor-pointer p-0 no-underline after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 Services
                 <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -320,29 +340,43 @@ export default function Navbar() {
                 onClick={() => handleNavClick(null)}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isWigsActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 Wigs
               </Link>
 
-              <button
-                onClick={() => handleNavClick("shop")}
+              <div
+                className="relative flex items-center"
                 onMouseEnter={() => handleMouseEnter("shop")}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap flex items-center gap-1 text-[14px] xl:text-[15px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
-                Shop
-                <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "shop" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
+                <Link
+                  href="/premium-products"
+                  onClick={() => setActiveMenu(null)}
+                  className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                >
+                  Shop
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNavClick("shop");
+                  }}
+                  className="p-1 bg-transparent border-none cursor-pointer transition-colors ml-0.5"
+                  aria-label="Toggle Shop menu"
+                >
+                  <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "shop" ? "rotate-180 text-[#D4A59A]" : "text-[#111111]"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
 
               <Link
                 href="/gallery"
                 onClick={() => handleNavClick("gallery")}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isGalleryActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 Gallery
               </Link>
@@ -352,7 +386,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick("academy")}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAcademyActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isAcademyActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 Academy
               </Link>
@@ -362,7 +396,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick(null)}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isArticlesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isArticlesActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 Articles
               </Link>
@@ -373,12 +407,14 @@ export default function Navbar() {
                   if (pathname === "/") {
                     e.preventDefault();
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, "", "#contact");
+                    setCurrentHash("#contact");
                   }
                   setActiveMenu(null);
                 }}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className="whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"
+                className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isContactActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 Contact
               </a>
@@ -387,7 +423,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick("more")}
                 onMouseEnter={() => handleMouseEnter("more")}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap flex items-center gap-1 text-[14px] xl:text-[15px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`relative py-1 whitespace-nowrap flex items-center gap-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide transition-colors duration-300 bg-transparent border-none cursor-pointer p-0 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
                 More
                 <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "more" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -589,7 +625,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     onClick={closeMobile}
-                    className="block py-3.5 text-white/90 text-[16px] font-normal no-underline border-b border-white/10 transition-colors hover:text-[#D4A59A]"
+                    className="block py-3.5 text-white/90 text-[17px] sm:text-[18px] font-semibold no-underline border-b border-white/10 transition-colors hover:text-[#D4A59A]"
                   >
                     {item.label}
                   </Link>

@@ -11,7 +11,7 @@ export default function SpecialProductsPage() {
     <main className="min-h-screen bg-[#FDF9F5] flex flex-col">
       <Navbar />
 
-      <section className="flex-1 w-full pt-32 pb-24 md:py-32">
+      <section className="flex-1 w-full pt-44 md:pt-48 pb-24 md:pb-32">
         <div className="max-w-[var(--container-max-width)] mx-auto px-5 sm:px-8 lg:px-10">
           
           {/* Header */}

@@ -23,63 +23,63 @@ export default function TopHeader() {
 
   return (
     <div className="w-full bg-[#2C1F2D] text-white text-xs font-medium border-b border-white/10 z-50 relative">
-      <div className="max-w-[var(--container-max-width)] mx-auto px-3 sm:px-6 lg:px-10 h-9 sm:h-10 flex items-center justify-between gap-2 relative">
+      <div className="max-w-[var(--container-max-width)] mx-auto px-3 sm:px-6 lg:px-10 h-10 sm:h-11 flex items-center justify-between gap-3 relative">
         {/* Left Section: Phone Number */}
-        <div className="flex items-center gap-1.5 flex-shrink-0">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <a
             href="tel:5138749999"
-            className="group flex items-center gap-1.5 text-white/90 hover:text-[#D4A59A] transition-colors no-underline whitespace-nowrap"
+            className="group flex items-center gap-2 text-white/95 hover:text-[#D4A59A] transition-colors no-underline whitespace-nowrap"
           >
-            <Phone className="w-3.5 h-3.5 text-[#D4A59A] group-hover:scale-110 transition-transform flex-shrink-0" />
-            <span className="font-sans text-[12px] sm:text-[13px] tracking-wide font-medium whitespace-nowrap">
+            <Phone className="w-4 h-4 text-[#D4A59A] group-hover:scale-110 transition-transform flex-shrink-0" />
+            <span className="font-sans text-[13px] sm:text-[14px] tracking-wide font-semibold whitespace-nowrap">
               (513) 874-9999
             </span>
           </a>
         </div>
 
         {/* Right Section: Responsive Quick Links */}
-        <div className="flex items-center gap-2.5 sm:gap-4 lg:gap-5 flex-shrink-0" ref={moreRef}>
-          {/* Always Visible: Online Booking (Shortened 'Booking' on tiny mobile screens) */}
+        <div className="flex items-center gap-3 sm:gap-4 lg:gap-6 flex-shrink-0" ref={moreRef}>
+          {/* Always Visible: Online Booking */}
           <Link
             href="/booking"
-            className="group inline-flex items-center gap-1 sm:gap-1.5 text-white/90 hover:text-[#D4A59A] transition-colors whitespace-nowrap font-medium no-underline text-[11px] sm:text-[12px]"
+            className="group inline-flex items-center gap-1.5 text-white/95 hover:text-[#D4A59A] transition-colors whitespace-nowrap font-semibold no-underline text-[12px] sm:text-[13.5px]"
           >
-            <Calendar className="w-3.5 h-3.5 text-[#D4A59A] group-hover:scale-110 transition-transform flex-shrink-0" />
+            <Calendar className="w-4 h-4 text-[#D4A59A] group-hover:scale-110 transition-transform flex-shrink-0" />
             <span><span className="hidden sm:inline">Online </span>Booking</span>
           </Link>
 
           {/* Desktop & Tablet Links */}
           <Link
             href="/specials"
-            className="group hidden md:inline-flex items-center gap-1 text-[#D4A59A] hover:text-white transition-colors whitespace-nowrap font-semibold no-underline text-[12px]"
+            className="group hidden md:inline-flex items-center gap-1.5 text-[#D4A59A] hover:text-white transition-colors whitespace-nowrap font-semibold no-underline text-[12px] sm:text-[13.5px]"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#D4A59A] group-hover:rotate-12 transition-transform flex-shrink-0" />
+            <Sparkles className="w-4 h-4 text-[#D4A59A] group-hover:rotate-12 transition-transform flex-shrink-0" />
             <span>Specials</span>
           </Link>
 
           <Link
             href="/premium-products"
-            className="group hidden lg:inline-flex items-center gap-1.5 text-white/90 hover:text-[#D4A59A] transition-colors whitespace-nowrap font-medium no-underline text-[12px]"
+            className="group hidden lg:inline-flex items-center gap-1.5 text-white/95 hover:text-[#D4A59A] transition-colors whitespace-nowrap font-semibold no-underline text-[12px] sm:text-[13.5px]"
           >
-            <ShoppingBag className="w-3.5 h-3.5 text-white/70 group-hover:text-[#D4A59A] transition-colors" />
+            <ShoppingBag className="w-4 h-4 text-white/80 group-hover:text-[#D4A59A] transition-colors flex-shrink-0" />
             <span>Shop</span>
           </Link>
 
           <Link
             href="/checkout"
-            className="group hidden xl:inline-flex items-center gap-1.5 text-white/90 hover:text-[#D4A59A] transition-colors whitespace-nowrap font-medium no-underline text-[12px]"
+            className="group hidden xl:inline-flex items-center gap-1.5 text-white/95 hover:text-[#D4A59A] transition-colors whitespace-nowrap font-semibold no-underline text-[12px] sm:text-[13.5px]"
           >
-            <CreditCard className="w-3.5 h-3.5 text-white/70 group-hover:text-[#D4A59A] transition-colors" />
+            <CreditCard className="w-4 h-4 text-white/80 group-hover:text-[#D4A59A] transition-colors flex-shrink-0" />
             <span>Checkout</span>
           </Link>
 
           {/* Cart Badge */}
           <Link
             href="/cart"
-            className="group inline-flex items-center gap-1.5 bg-white/10 hover:bg-[#D4A59A]/20 text-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full transition-all no-underline border border-white/10 hover:border-[#D4A59A]/40 flex-shrink-0"
+            className="group inline-flex items-center gap-2 bg-white/10 hover:bg-[#D4A59A]/25 text-white px-2.5 py-1 rounded-full transition-all no-underline border border-white/15 hover:border-[#D4A59A]/50 flex-shrink-0"
           >
-            <ShoppingCart className="w-3.5 h-3.5 text-[#D4A59A] group-hover:scale-110 transition-transform flex-shrink-0" />
-            <span className="text-[10px] font-bold px-1.5 py-0.2 bg-[#D4A59A] text-[#2C1F2D] rounded-full min-w-[15px] text-center leading-none">
+            <ShoppingCart className="w-4 h-4 text-[#D4A59A] group-hover:scale-110 transition-transform flex-shrink-0" />
+            <span className="text-[11px] font-bold px-2 py-0.5 bg-[#D4A59A] text-[#2C1F2D] rounded-full min-w-[18px] text-center leading-none">
               {totalItems}
             </span>
           </Link>
@@ -89,36 +89,36 @@ export default function TopHeader() {
             <button
               onClick={() => setIsMoreOpen(!isMoreOpen)}
               aria-label="More options"
-              className="flex items-center justify-center p-1 rounded-full bg-white/10 hover:bg-[#D4A59A]/20 text-[#D4A59A] transition-all border border-white/10"
+              className="flex items-center justify-center p-1.5 rounded-full bg-white/10 hover:bg-[#D4A59A]/20 text-[#D4A59A] transition-all border border-white/15"
             >
-              {isMoreOpen ? <X className="w-3.5 h-3.5" /> : <MoreHorizontal className="w-3.5 h-3.5" />}
+              {isMoreOpen ? <X className="w-4 h-4" /> : <MoreHorizontal className="w-4 h-4" />}
             </button>
 
             {/* Mobile More Popover Menu */}
             {isMoreOpen && (
-              <div className="absolute right-0 top-8 w-44 bg-[#2C1F2D] border border-white/15 rounded-xl shadow-2xl p-2 z-50 flex flex-col gap-1.5">
+              <div className="absolute right-0 top-9 w-48 bg-[#2C1F2D] border border-white/20 rounded-xl shadow-2xl p-2.5 z-50 flex flex-col gap-1.5">
                 <Link
                   href="/specials"
                   onClick={() => setIsMoreOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 text-[#D4A59A] font-semibold hover:bg-white/5 rounded-lg transition-colors no-underline text-xs"
+                  className="flex items-center gap-2.5 px-3 py-2.5 text-[#D4A59A] font-semibold hover:bg-white/10 rounded-lg transition-colors no-underline text-[13px]"
                 >
-                  <Sparkles className="w-4 h-4 text-[#D4A59A]" />
+                  <Sparkles className="w-4.5 h-4.5 text-[#D4A59A]" />
                   <span>Specials ✨</span>
                 </Link>
                 <Link
                   href="/premium-products"
                   onClick={() => setIsMoreOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 text-white/90 hover:text-[#D4A59A] hover:bg-white/5 rounded-lg transition-colors no-underline text-xs"
+                  className="flex items-center gap-2.5 px-3 py-2.5 text-white/95 hover:text-[#D4A59A] hover:bg-white/10 rounded-lg transition-colors no-underline text-[13px]"
                 >
-                  <ShoppingBag className="w-4 h-4 text-white/70" />
+                  <ShoppingBag className="w-4.5 h-4.5 text-white/80" />
                   <span>Shop</span>
                 </Link>
                 <Link
                   href="/checkout"
                   onClick={() => setIsMoreOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 text-white/90 hover:text-[#D4A59A] hover:bg-white/5 rounded-lg transition-colors no-underline text-xs"
+                  className="flex items-center gap-2.5 px-3 py-2.5 text-white/95 hover:text-[#D4A59A] hover:bg-white/10 rounded-lg transition-colors no-underline text-[13px]"
                 >
-                  <CreditCard className="w-4 h-4 text-white/70" />
+                  <CreditCard className="w-4.5 h-4.5 text-white/80" />
                   <span>Checkout</span>
                 </Link>
               </div>
