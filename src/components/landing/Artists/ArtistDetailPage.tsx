@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { artists, ArtistCard } from "./Artists";
 import type { Artist } from "./Artists";
@@ -78,8 +79,9 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }: Art
 
             {/* Book Button */}
             <div className="flex flex-col gap-2 mt-2">
-              <button
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-white font-medium text-[15px] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(212,165,154,0.35)]"
+              <Link
+                href="/booking"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-white font-medium text-[15px] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(212,165,154,0.35)] no-underline"
                 style={{ backgroundColor: "#D4A59A" }}
               >
                 <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
@@ -87,7 +89,7 @@ export default function ArtistDetailPage({ artist, onBack, onSelectArtist }: Art
                   <path d="M5 2v2M11 2v2M2 7h12" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
                 </svg>
                 Book Your Appointment
-              </button>
+              </Link>
               <p className="text-[#666] text-[14px] mt-2">
                 Online Booking – Best Rates and No Booking Fees
               </p>

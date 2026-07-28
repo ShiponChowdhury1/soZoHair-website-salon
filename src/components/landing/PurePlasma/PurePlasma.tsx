@@ -53,7 +53,7 @@ export default function PurePlasma() {
               ))}
             </div>
             <Link
-              href="#"
+              href="/services/pure-plasma"
               className="inline-flex items-center justify-center px-9 py-3.5 bg-[#D4A59A] text-white border-none rounded-md text-sm font-medium no-underline w-fit mt-2 transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(212,165,154,0.3)]"
             >
               Learn More
