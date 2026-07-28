@@ -151,36 +151,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* MISSION & VISION SECTION */}
-        <section className="py-16 px-5 sm:px-8 lg:px-12 bg-white border-y border-[#E8DFD8]">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Mission */}
-            <div className="bg-[#FAF6F0] p-8 sm:p-10 rounded-2xl border border-[#E8DFD8] flex flex-col gap-4">
-              <span className="text-xs text-[#C4956A] uppercase tracking-[3px] font-semibold">
-                Our Mission
-              </span>
-              <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#2D2D2D]">
-                To Save, Heal, Deliver &amp; Make Whole
-              </h3>
-              <p className="text-sm text-[#555] leading-relaxed">
-                Our mission is to provide an outstanding, welcoming salon &amp; spa experience where every client leaves feeling beautiful, confident, and genuinely cared for — while dedicating a portion of our work to helping children in need.
-              </p>
-            </div>
 
-            {/* Vision */}
-            <div className="bg-[#FAF6F0] p-8 sm:p-10 rounded-2xl border border-[#E8DFD8] flex flex-col gap-4">
-              <span className="text-xs text-[#C4956A] uppercase tracking-[3px] font-semibold">
-                Our Vision
-              </span>
-              <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#2D2D2D]">
-                Pioneering Beauty Excellence with Heart
-              </h3>
-              <p className="text-sm text-[#555] leading-relaxed">
-                To remain the region&apos;s premier destination for hair artistry, medical spa innovations, and compassionate wig services by combining continuous global education with philanthropic purpose.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* WHY CHOOSE US SECTION */}
         <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#FAF6F0]">

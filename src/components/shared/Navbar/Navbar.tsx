@@ -32,7 +32,7 @@ type MobileNavItem = {
 
 const dropdownLeftItems = [
   { label: "Home", href: "/" },
-  { label: "About & Info", href: "/about" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "/#services" },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products" },
@@ -77,7 +77,7 @@ const moreItemsRight: MobileSubItem[] = [
 // All mobile nav items combined
 const mobileNavItems: MobileNavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About & Info", href: "/about" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
@@ -293,7 +293,7 @@ export default function Navbar() {
                 onMouseLeave={handleMouseLeave}
                 className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAboutActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
-                About &amp; Info
+                About
               </Link>
 
               <a

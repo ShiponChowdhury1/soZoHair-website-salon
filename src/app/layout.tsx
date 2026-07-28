@@ -40,6 +40,11 @@ export const metadata: Metadata = {
   title: "SoZo Hair, Spa & Wigs | Premium Salon Experience",
   description:
     "Discover luxury hair, spa, and wig services at SoZo Hair. Expert stylists, premium products, and a relaxing environment tailored just for you.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
