@@ -21,7 +21,7 @@ export default function Banner() {
             muted
             playsInline
             onError={() => setVideoError(true)}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
         ) : (
           <Image
