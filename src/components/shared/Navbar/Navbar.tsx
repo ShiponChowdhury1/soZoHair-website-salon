@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CartSidebar from "@/components/shared/CartSidebar/CartSidebar";
 import WishlistSidebar from "@/components/shared/WishlistSidebar/WishlistSidebar";
@@ -12,6 +13,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import NotificationDropdown from "./NotificationDropdown";
 import UserProfileDropdown from "./UserProfileDropdown";
 import { useAuth } from "@/context/AuthContext";
+import TopHeader from "@/components/layout/TopHeader";
 
 type ActiveMenu = "services" | "shop" | "more" | null;
 
@@ -30,13 +32,13 @@ type MobileNavItem = {
 
 const dropdownLeftItems = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/#about" },
+  { label: "About & Info", href: "/about" },
   { label: "Services", href: "/#services" },
   { label: "Wigs", href: "/wigs" },
-  { label: "Shop", href: "/#premium" },
-  { label: "Articles", href: "/articles" },
+  { label: "Shop", href: "/premium-products" },
   { label: "Gallery", href: "/gallery" },
   { label: "Academy", href: "/academy" },
+  { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -58,7 +60,7 @@ const shopItems: MobileSubItem[] = [
 ];
 
 const moreItemsMiddle: MobileSubItem[] = [
-  { label: "Teams", href: "/teams" },
+  { label: "Our Team", href: "/teams" },
   { label: "SoZo on Social Media", href: "/social-media" },
   { label: "Ask the Expert", href: "/ask-expert" },
   { label: "View Our Ratings", href: "/view-our-ratings" },
@@ -75,11 +77,13 @@ const moreItemsRight: MobileSubItem[] = [
 // All mobile nav items combined
 const mobileNavItems: MobileNavItem[] = [
   { label: "Home", href: "/" },
+  { label: "About & Info", href: "/about" },
   { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
   { label: "Gallery", href: "/gallery" },
   { label: "Academy", href: "/academy" },
+  { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/#contact" },
   { label: "More", href: "#", hasSubmenu: true, menuKey: "more" as const },
 ];
@@ -100,11 +104,13 @@ export default function Navbar() {
   const { isLoggedIn } = useAuth();
 
   const isHomeActive = pathname === "/";
+  const isAboutActive = pathname === "/about";
   const isServicesActive = pathname.startsWith("/services");
   const isWigsActive = pathname === "/wigs";
   const isShopActive = pathname.startsWith("/premium-products") || pathname.startsWith("/special-products");
   const isGalleryActive = pathname === "/gallery";
   const isAcademyActive = pathname === "/academy";
+  const isArticlesActive = pathname.startsWith("/articles");
 
   const isMoreActive = [
     "/teams",
@@ -229,9 +235,10 @@ export default function Navbar() {
     <>
       <div
         ref={navRef}
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${isScrolled || activeMenu ? "bg-white shadow-md" : "bg-white/95"
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${isScrolled || activeMenu ? "bg-white border-b border-[#E8DFD8]/60 shadow-[0_4px_25px_rgba(0,0,0,0.03)]" : "bg-white/95 border-b border-transparent"
           }`}
       >
+        <TopHeader />
         <nav className="relative max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 h-[70px] md:h-[90px] flex items-center justify-between">
 
           {/* Hamburger — visible on mobile/tablet (below lg) */}
@@ -254,95 +261,140 @@ export default function Navbar() {
             />
           </button>
 
-          {/* Left Nav Links — hidden below lg */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
-            <Link
-              href="/"
-              onClick={() => handleNavClick("home")}
-              onMouseEnter={() => handleMouseEnter(null)}
-              onMouseLeave={handleMouseLeave}
-              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isHomeActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
-            >
-              Home
+          {/* Left Container with Logo & Nav Links */}
+          <div className="flex items-center gap-4 xl:gap-6">
+            <Link href="/" className="flex items-center justify-center no-underline mr-2" onClick={() => { setActiveMenu(null); closeMobile(); }}>
+              <Image
+                src="/logo.png"
+                alt="SoZo Hair, Spa & Wigs"
+                width={140}
+                height={45}
+                className="object-contain max-h-[48px] md:max-h-[55px] w-auto transition-transform duration-300 hover:scale-105"
+                priority
+              />
             </Link>
 
-            <button
-              onClick={() => handleNavClick("services")}
-              onMouseEnter={() => handleMouseEnter("services")}
-              onMouseLeave={handleMouseLeave}
-              className={`flex items-center gap-1 text-[14px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
-            >
-              Services
-              <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
+            {/* Left Nav Links — hidden below lg */}
+            <div className="hidden lg:flex items-center gap-3.5 xl:gap-5 2xl:gap-6">
+              <Link
+                href="/"
+                onClick={() => handleNavClick("home")}
+                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isHomeActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                Home
+              </Link>
 
-            <Link
-              href="/wigs"
-              onClick={() => handleNavClick(null)}
-              onMouseEnter={() => handleMouseEnter(null)}
-              onMouseLeave={handleMouseLeave}
-              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
-            >
-              Wigs
-            </Link>
+              <Link
+                href="/about"
+                onClick={() => handleNavClick(null)}
+                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAboutActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                About &amp; Info
+              </Link>
 
-            <button
-              onClick={() => handleNavClick("shop")}
-              onMouseEnter={() => handleMouseEnter("shop")}
-              onMouseLeave={handleMouseLeave}
-              className={`flex items-center gap-1 text-[14px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
-            >
-              Shop
-              <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "shop" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
+              <a
+                href="/#services"
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                  setActiveMenu(null);
+                }}
+                onMouseEnter={() => handleMouseEnter("services")}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap flex items-center gap-1 text-[13px] 2xl:text-[14px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid no-underline ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                Services
+                <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </a>
 
-            <Link
-              href="/gallery"
-              onClick={() => handleNavClick("gallery")}
-              onMouseEnter={() => handleMouseEnter(null)}
-              onMouseLeave={handleMouseLeave}
-              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
-            >
-              Gallery
-            </Link>
+              <Link
+                href="/wigs"
+                onClick={() => handleNavClick(null)}
+                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                Wigs
+              </Link>
 
-            <Link
-              href="/academy"
-              onClick={() => handleNavClick("academy")}
-              onMouseEnter={() => handleMouseEnter(null)}
-              onMouseLeave={handleMouseLeave}
-              className={`text-[14px] font-medium no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAcademyActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
-            >
-              Academy
-            </Link>
+              <button
+                onClick={() => handleNavClick("shop")}
+                onMouseEnter={() => handleMouseEnter("shop")}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap flex items-center gap-1 text-[13px] 2xl:text-[14px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                Shop
+                <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "shop" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
 
-            <button
-              onClick={() => handleNavClick("more")}
-              onMouseEnter={() => handleMouseEnter("more")}
-              onMouseLeave={handleMouseLeave}
-              className={`flex items-center gap-1 text-[14px] font-medium transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#555] border-transparent hover:text-[#2D2D2D] hover:border-[#D4A59A]"}`}
-            >
-              More
-              <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "more" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-          </div>
+              <Link
+                href="/gallery"
+                onClick={() => handleNavClick("gallery")}
+                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                Gallery
+              </Link>
 
-          {/* Center Logo */}
-          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
-            <Link href="/" className="flex flex-col items-center justify-center no-underline pointer-events-auto" onClick={() => { setActiveMenu(null); closeMobile(); }}>
-              <span className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold text-[#2D2D2D] leading-none mb-1 whitespace-nowrap">
-                SoZo Hair
-              </span>
-              <span className="text-[10px] md:text-[11px] font-medium text-[#555] tracking-[1px] uppercase whitespace-nowrap">
-                Hair, Spa &amp; Wigs
-              </span>
-            </Link>
+              <Link
+                href="/academy"
+                onClick={() => handleNavClick("academy")}
+                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAcademyActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                Academy
+              </Link>
+
+              <Link
+                href="/articles"
+                onClick={() => handleNavClick(null)}
+                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isArticlesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                Articles
+              </Link>
+
+              <a
+                href="/#contact"
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                  setActiveMenu(null);
+                }}
+                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseLeave={handleMouseLeave}
+                className="whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"
+              >
+                Contact
+              </a>
+
+              <button
+                onClick={() => handleNavClick("more")}
+                onMouseEnter={() => handleMouseEnter("more")}
+                onMouseLeave={handleMouseLeave}
+                className={`whitespace-nowrap flex items-center gap-1 text-[13px] 2xl:text-[14px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+              >
+                More
+                <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "more" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* Right Side */}
@@ -471,9 +523,14 @@ export default function Navbar() {
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-white/10">
             <Link href="/" onClick={closeMobile} className="no-underline">
-              <span className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-white leading-none">
-                SoZo Hair
-              </span>
+              <Image
+                src="/logo.png"
+                alt="SoZo Hair"
+                width={120}
+                height={40}
+                className="object-contain max-h-[40px] w-auto filter brightness-0 invert"
+                priority
+              />
             </Link>
             <button
               onClick={closeMobile}
@@ -562,7 +619,7 @@ export default function Navbar() {
         <div
           onMouseEnter={() => handleMouseEnter(activeMenu)}
           onMouseLeave={handleMouseLeave}
-          className={`fixed top-[70px] md:top-[90px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-2xl hidden lg:block ${(activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
+          className={`fixed top-[110px] md:top-[130px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-2xl hidden lg:block ${(activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
             }`}
         >
           <div className="max-w-[var(--container-max-width)] mx-auto px-8 py-16 flex items-start gap-16 min-h-[450px]">
@@ -659,7 +716,7 @@ export default function Navbar() {
                       Book Appointment
                     </Link>
                     <Link
-                      href="/#about"
+                      href="/about"
                       onClick={() => setActiveMenu(null)}
                       className="inline-flex items-center justify-center px-6 py-2.5 border border-[#D4A59A] text-[#D4A59A] rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#D4A59A] hover:text-white hover:-translate-y-0.5"
                     >

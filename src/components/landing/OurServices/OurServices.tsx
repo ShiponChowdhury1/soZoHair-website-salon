@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import BookOnlineButton from "@/components/common/BookOnlineButton";
 
 const services = [
   { title: "Hair Color & Cuts", image: "/landing/services/hair-cuts.png", id: "hair-cuts-color" },
@@ -31,38 +32,43 @@ export default function OurServices() {
         {/* 3-Column Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
           {services.map((service) => (
-            <Link 
-              key={service.title} 
-              href={`/services/${service.id}`}
-              className="group relative rounded-xl overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] no-underline display-block cursor-pointer"
+            <div
+              key={service.title}
+              className="group relative rounded-xl overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] flex flex-col justify-between"
             >
-              <div className="relative w-full aspect-[16/11] overflow-hidden">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                />
+              <Link href={`/services/${service.id}`} className="no-underline block">
+                <div className="relative w-full aspect-[16/11] overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="px-5 pt-4 pb-2 flex items-center justify-between">
+                  <span className="font-[family-name:var(--font-playfair)] text-[17px] font-semibold text-[#2D2D2D]">
+                    {service.title}
+                  </span>
+                  <svg
+                    className="w-5 h-5 text-[#C4956A] transition-transform duration-300 group-hover:translate-x-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+
+              <div className="px-5 pb-5 pt-2">
+                <BookOnlineButton size="sm" fullWidth />
               </div>
-              <div className="px-5 py-4 flex items-center justify-between">
-                <span className="font-[family-name:var(--font-playfair)] text-[16px] font-semibold text-[#2D2D2D]">
-                  {service.title}
-                </span>
-                <svg 
-                  className="w-5 h-5 text-[#C4956A] transition-transform duration-300 group-hover:translate-x-1" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14" />
-                  <path d="M12 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
+            </div>
           ))}
         </div>
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
+import BookOnlineButton from "@/components/common/BookOnlineButton";
 
 export const metadata: Metadata = {
   title: "Medical Spa Services - SoZo Hair Spa & Wigs",
@@ -44,24 +45,23 @@ export default function MedicalSpaServicesPage() {
 
       <main className="bg-white text-[#2C2420]">
 
-        {/* Hero Section — articles hero CSS pattern */}
+        {/* Hero Section — full bleed background with navbar padding */}
         <section
-          className="relative flex items-center overflow-hidden"
-          style={{ minHeight: "540px", background: "#ffffff" }}
+          className="relative flex items-center overflow-hidden bg-white min-h-[500px] md:min-h-[540px]"
         >
-          {/* Combined gradient + image — same articles hero pattern */}
+          {/* Combined gradient + image — full bleed from top */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 z-0"
             style={{
               background: `linear-gradient(to right, rgba(255,255,255,1) 38%, rgba(255,255,255,0.8) 55%, rgba(255,255,255,0) 100%), #ffffff url('/landing/medical-Spa-service.png') no-repeat right center / contain`,
             }}
             aria-hidden="true"
           />
 
-          {/* Hero content */}
+          {/* Hero content — padded below fixed navbar */}
           <div
             className="relative z-10 mx-auto flex w-full items-center"
-            style={{ maxWidth: "var(--container-max-width, 1319px)", padding: "80px 32px" }}
+            style={{ maxWidth: "var(--container-max-width, 1319px)", padding: "140px 32px 64px" }}
           >
             <div style={{ flex: 1, maxWidth: "500px" }}>
 
@@ -106,12 +106,7 @@ export default function MedicalSpaServicesPage() {
                 A medical spa combines a relaxing spa environment with medically supervised aesthetic treatments.
               </p>
 
-              <Link
-                href="#survey"
-                className="inline-flex items-center rounded-full bg-[#B8836E] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#2C2420]"
-              >
-                Book Your Appointment
-              </Link>
+              <BookOnlineButton size="md" />
 
             </div>
           </div>

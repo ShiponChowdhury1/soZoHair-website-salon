@@ -8,6 +8,7 @@ import { services, getServiceById, getAllServiceIds } from "@/data/services";
 import ScalpVideoPlayer from "@/components/services/ScalpVideoPlayer";
 import PlasmaVideoPlayer from "@/components/services/PlasmaVideoPlayer";
 import PlasmaFaqAccordion from "@/components/services/PlasmaFaqAccordion";
+import BookOnlineButton from "@/components/common/BookOnlineButton";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -50,42 +51,36 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const isInfoBenefits = service.type === "info-benefits";
   const isInfoFaq = service.type === "info-faq";
   const isFaqStats = service.type === "faq-stats";
-  const heroObjectPosition = service.id === "extensions-texturizing" ? "center center" : "right center";
+  const getHeroObjectPosition = (serviceId: string) => {
+    if (serviceId === "cryoskin") return "right 35%";
+    if (serviceId === "lash-brow") return "right 25%";
+    if (serviceId === "extensions-texturizing") return "center center";
+    return "right center";
+  };
+
+  const heroObjectPosition = getHeroObjectPosition(service.id);
 
   return (
     <main>
       <Navbar />
 
       {/* ═══════════════════════════════════════════════════════
-          HERO SECTION — Figma-matching split layout
+          HERO SECTION — Full bleed background with navbar padding
       ═══════════════════════════════════════════════════════ */}
       <section
-        style={{
-          position: "relative",
-          width: "100%",
-          minHeight: 420,
-          overflow: "hidden",
-          background: "#fff",
-          paddingTop: 90,
-        }}
+        className="relative w-full overflow-hidden bg-white min-h-[500px] md:min-h-[560px] flex items-center"
       >
-        {/* Background image positioned right */}
+        {/* Background image positioned right — full bleed from top */}
         {detailImg && (
           <div
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              width: "100%",
-              zIndex: 0,
-            }}
+            className="absolute inset-0 z-0"
           >
             <Image
               src={detailImg}
               alt={service.title}
               fill
-              style={{ objectFit: "cover", objectPosition: heroObjectPosition }}
+              className="object-cover"
+              style={{ objectPosition: heroObjectPosition }}
               priority
             />
           </div>
@@ -93,27 +88,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
         {/* White gradient overlay from left */}
         <div
+          className="absolute inset-0 z-[1]"
           style={{
-            position: "absolute",
-            inset: 0,
             background:
-              "linear-gradient(to right, #ffffff 30%, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.6) 55%, transparent 75%)",
-            zIndex: 1,
+              "linear-gradient(to right, #ffffff 32%, rgba(255,255,255,0.96) 48%, rgba(255,255,255,0.55) 65%, transparent 88%)",
           }}
         />
 
-        {/* Hero text content */}
+        {/* Hero text content — padded below fixed navbar */}
         <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            maxWidth: "var(--container-max-width, 1319px)",
-            margin: "0 auto",
-            padding: "80px 40px 80px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-          }}
+          className="relative z-[2] w-full max-w-[var(--container-max-width,1319px)] mx-auto px-5 sm:px-8 md:px-10 pt-[140px] md:pt-[165px] pb-16 md:pb-20 flex flex-col gap-4"
         >
           <span
             style={{
@@ -154,27 +138,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </p>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 8 }}>
-            <Link
-              href="/#contact"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "14px 32px",
-                background: "#C4956A",
-                color: "#fff",
-                border: "none",
-                borderRadius: 6,
-                fontSize: 13,
-                fontWeight: 600,
-                letterSpacing: 1,
-                textDecoration: "none",
-                width: "fit-content",
-                transition: "all 0.3s",
-              }}
-            >
-              Book an Appointment →
-            </Link>
+            <BookOnlineButton size="md" />
 
             {service.id === "scalp-facial" && (
               <a

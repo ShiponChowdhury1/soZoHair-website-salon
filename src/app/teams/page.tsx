@@ -6,7 +6,7 @@ export default function TeamsPage() {
   return (
     <main className="bg-[#FDF9F5] min-h-screen flex flex-col">
       <Navbar />
-      <div className="flex-1 pt-[90px]">
+      <div className="flex-1 pt-[110px] md:pt-[130px]">
         <Artists isStandalonePage={true} />
       </div>
       <Footer />

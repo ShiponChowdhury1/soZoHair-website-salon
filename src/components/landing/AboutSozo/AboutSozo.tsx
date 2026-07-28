@@ -42,7 +42,7 @@ export default function AboutSozo() {
 
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
           <Link
-            href="#services"
+            href="/about"
             className="inline-flex items-center justify-center px-9 py-3.5 bg-[#C4956A] text-white border-none rounded-md text-sm font-medium no-underline w-full sm:w-auto transition-all duration-300 hover:bg-[#b0845a] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(196,149,106,0.3)]"
           >
             Learn More

@@ -49,7 +49,7 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Quick Links</h4>
             <ul className={styles.columnLinks}>
               <li><Link href="#home" className={styles.columnLink}>Home</Link></li>
-              <li><Link href="#about" className={styles.columnLink}>About Us</Link></li>
+              <li><Link href="/about" className={styles.columnLink}>About Us</Link></li>
               <li><Link href="#services" className={styles.columnLink}>Services</Link></li>
               <li><Link href="/gallery" className={styles.columnLink}>Gallery</Link></li>
               <li><Link href="#premium" className={styles.columnLink}>Products</Link></li>
