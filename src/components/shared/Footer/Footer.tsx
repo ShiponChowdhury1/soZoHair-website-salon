@@ -48,11 +48,11 @@ export default function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Quick Links</h4>
             <ul className={styles.columnLinks}>
-              <li><Link href="#home" className={styles.columnLink}>Home</Link></li>
+              <li><Link href="/" className={styles.columnLink}>Home</Link></li>
               <li><Link href="/about" className={styles.columnLink}>About Us</Link></li>
-              <li><Link href="#services" className={styles.columnLink}>Services</Link></li>
+              <li><Link href="/#services" className={styles.columnLink}>Services</Link></li>
               <li><Link href="/gallery" className={styles.columnLink}>Gallery</Link></li>
-              <li><Link href="#premium" className={styles.columnLink}>Products</Link></li>
+              <li><Link href="/premium-products" className={styles.columnLink}>Products</Link></li>
               <li><Link href="/view-our-ratings" className={styles.columnLink}>View Our Ratings</Link></li>
             </ul>
           </div>
@@ -76,7 +76,7 @@ export default function Footer() {
             <ul className={styles.columnLinks}>
               <li><span className={styles.columnLink}>123 Beauty Lane</span></li>
               <li><span className={styles.columnLink}>Winter Garden, FL</span></li>
-              <li><a href="tel:+1234567890" className={styles.columnLink}>(123) 456-7890</a></li>
+              <li><a href="tel:5138749999" className={styles.columnLink}>(513) 874-9999</a></li>
               <li><a href="mailto:info@sozohair.com" className={styles.columnLink}>info@sozohair.com</a></li>
             </ul>
           </div>

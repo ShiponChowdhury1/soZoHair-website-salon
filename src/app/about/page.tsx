@@ -101,11 +101,11 @@ export default function AboutPage() {
         </section>
 
         {/* COMPANY STORY SECTION */}
-        <section className="py-20 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <section className="py-20 md:py-28 px-5 sm:px-8 lg:px-12 max-w-[var(--container-max-width)] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image Container */}
-            <div className="relative">
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.12)]">
+            <div className="relative w-full">
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] lg:min-h-[520px] rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.15)] ring-1 ring-black/5">
                 <Image
                   src="/landing/about.png"
                   alt="SoZo Hair Salon & Spa"
@@ -117,11 +117,11 @@ export default function AboutPage() {
               </div>
 
               {/* Floating Highlight Card */}
-              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-white p-6 rounded-xl shadow-[0_12px_35px_rgba(0,0,0,0.1)] border border-[#E8DFD8] max-w-[260px] hidden sm:block">
+              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-6 sm:p-7 rounded-2xl shadow-[0_15px_45px_rgba(0,0,0,0.12)] border border-[#E8DFD8] max-w-[280px] sm:max-w-[300px] hidden sm:block z-10">
                 <p className="font-[family-name:var(--font-playfair)] text-xl font-bold text-[#C4956A]">
                   The Meaning of &ldquo;SoZo&rdquo;
                 </p>
-                <p className="text-xs text-[#666] mt-2 leading-relaxed">
+                <p className="text-xs text-[#666] mt-2.5 leading-relaxed">
                   An ancient Greek, Biblical word meaning to <em>save, heal, deliver, protect, and make whole</em>.
                 </p>
               </div>
