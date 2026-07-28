@@ -14,7 +14,8 @@ export default function Banner() {
       <div className={styles.backgroundImage}>
         {!videoError ? (
           <video
-            src="/landing/banner-video.mp4"
+            src="/sozo_hair_banner-video.mp4"
+            poster="/landing/background.png"
             autoPlay
             loop
             muted
