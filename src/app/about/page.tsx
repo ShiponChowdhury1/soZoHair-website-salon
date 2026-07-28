@@ -95,7 +95,7 @@ export default function AboutPage() {
 
             <p className="text-[#666] text-base sm:text-lg leading-[1.8] max-w-2xl font-light">
               At SoZo Hair, Spa &amp; Wigs, every person deserves to look and feel extraordinary. 
-              With over 36 years of beauty fashion leadership, we combine artistry with compassionate service.
+              With over 25 years of beauty fashion leadership, we combine artistry with compassionate service.
             </p>
           </div>
         </section>
@@ -137,7 +137,7 @@ export default function AboutPage() {
               </div>
 
               <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl text-[#2D2D2D] font-bold leading-tight">
-                Over 36 Years of Hair Fashion Excellence &amp; Purpose
+                Over 25 Years of Hair Fashion Excellence &amp; Purpose
               </h2>
 
               <p className="text-[#555] text-sm sm:text-base leading-relaxed">
