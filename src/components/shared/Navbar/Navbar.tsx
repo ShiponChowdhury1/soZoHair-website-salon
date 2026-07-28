@@ -239,7 +239,7 @@ export default function Navbar() {
           }`}
       >
         <TopHeader />
-        <nav className="relative max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 h-[70px] md:h-[90px] flex items-center justify-between">
+        <nav className="relative max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 h-[70px] md:h-[90px] flex items-center justify-between gap-4">
 
           {/* Hamburger — visible on mobile/tablet (below lg) */}
           <button
@@ -275,13 +275,13 @@ export default function Navbar() {
             </Link>
 
             {/* Left Nav Links — hidden below lg */}
-            <div className="hidden lg:flex items-center gap-3.5 xl:gap-5 2xl:gap-6">
+            <div className="hidden lg:flex items-center gap-2.5 xl:gap-4 2xl:gap-5 mr-2 xl:mr-5">
               <Link
                 href="/"
                 onClick={() => handleNavClick("home")}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isHomeActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isHomeActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 Home
               </Link>
@@ -291,7 +291,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick(null)}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAboutActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAboutActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 About
               </Link>
@@ -307,7 +307,7 @@ export default function Navbar() {
                 }}
                 onMouseEnter={() => handleMouseEnter("services")}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap flex items-center gap-1 text-[13px] 2xl:text-[14px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid no-underline ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap flex items-center gap-1 text-[14px] xl:text-[15px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid no-underline ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 Services
                 <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -320,7 +320,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick(null)}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isWigsActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 Wigs
               </Link>
@@ -329,7 +329,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick("shop")}
                 onMouseEnter={() => handleMouseEnter("shop")}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap flex items-center gap-1 text-[13px] 2xl:text-[14px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap flex items-center gap-1 text-[14px] xl:text-[15px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 Shop
                 <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "shop" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -342,7 +342,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick("gallery")}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isGalleryActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 Gallery
               </Link>
@@ -352,7 +352,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick("academy")}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAcademyActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isAcademyActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 Academy
               </Link>
@@ -362,7 +362,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick(null)}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isArticlesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 ${isArticlesActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 Articles
               </Link>
@@ -378,7 +378,7 @@ export default function Navbar() {
                 }}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className="whitespace-nowrap text-[13px] 2xl:text-[14px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"
+                className="whitespace-nowrap text-[14px] xl:text-[15px] font-semibold tracking-wide no-underline pb-1 border-b-2 border-solid transition-all duration-300 text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"
               >
                 Contact
               </a>
@@ -387,7 +387,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick("more")}
                 onMouseEnter={() => handleMouseEnter("more")}
                 onMouseLeave={handleMouseLeave}
-                className={`whitespace-nowrap flex items-center gap-1 text-[13px] 2xl:text-[14px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
+                className={`whitespace-nowrap flex items-center gap-1 text-[14px] xl:text-[15px] font-semibold tracking-wide transition-all duration-300 bg-transparent border-none cursor-pointer p-0 pb-1 border-b-2 border-solid ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] border-[#D4A59A]" : "text-[#111111] border-transparent hover:text-[#D4A59A] hover:border-[#D4A59A]"}`}
               >
                 More
                 <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "more" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -398,7 +398,7 @@ export default function Navbar() {
           </div>
 
           {/* Right Side */}
-          <div className="flex items-center gap-3 sm:gap-4 md:gap-5 z-20">
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-5 z-20 flex-shrink-0 ml-auto">
             {/* Icons */}
             <div className="flex items-center gap-3 sm:gap-4">
               {/* Search */}

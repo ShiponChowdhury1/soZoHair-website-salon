@@ -55,9 +55,9 @@ export default function UserProfileDropdown() {
           /* Profile Trigger (Avatar, Name, Email, Arrow) */
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="flex items-center gap-3 bg-[#FDF8F6] border border-[#F3ECE9] hover:border-[#D4A59A] px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer"
+            className="flex items-center gap-2 sm:gap-2.5 bg-[#FDF8F6] border border-[#F3ECE9] hover:border-[#D4A59A] px-2.5 py-1 sm:px-3 sm:py-1 rounded-full transition-all duration-300 cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden flex-shrink-0">
               <Image
                 src={user.image}
                 alt={user.name}
@@ -67,11 +67,10 @@ export default function UserProfileDropdown() {
                 unoptimized
               />
             </div>
-            <div className="hidden md:flex flex-col items-start text-left leading-tight">
-              <span className="text-[14px] font-bold text-[#2D2D2D]">{user.name}</span>
-              <span className="text-[11px] text-gray-500">{user.email}</span>
-            </div>
-            <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`} />
+            <span className="hidden sm:inline-block text-[13px] sm:text-[14px] font-bold text-[#2D2D2D] whitespace-nowrap">
+              {user.name}
+            </span>
+            <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`} />
           </button>
         ) : (
           /* Sign In Button when logged out */
