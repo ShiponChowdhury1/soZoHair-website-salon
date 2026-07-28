@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Phone, Calendar, Sparkles, ShoppingBag, CreditCard, ShoppingCart, MoreHorizontal, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { BOOKING_ENABLED } from "@/config/bookingConfig";
 
 export default function TopHeader() {
   const { totalItems } = useCart();
@@ -39,13 +40,13 @@ export default function TopHeader() {
 
         {/* Right Section: Responsive Quick Links */}
         <div className="flex items-center gap-3 sm:gap-4 lg:gap-6 flex-shrink-0" ref={moreRef}>
-          {/* Always Visible: Online Booking */}
+          {/* Always Visible: Online Booking / Call to Book */}
           <Link
-            href="/booking"
+            href={BOOKING_ENABLED ? "/booking" : "tel:5138749999"}
             className="group inline-flex items-center gap-1.5 text-white/95 hover:text-[#D4A59A] transition-colors whitespace-nowrap font-semibold no-underline text-[12px] sm:text-[13.5px]"
           >
             <Calendar className="w-4 h-4 text-[#D4A59A] group-hover:scale-110 transition-transform flex-shrink-0" />
-            <span><span className="hidden sm:inline">Online </span>Booking</span>
+            <span>{BOOKING_ENABLED ? <><span className="hidden sm:inline">Online </span>Booking</> : "Call to Book"}</span>
           </Link>
 
           {/* Desktop & Tablet Links */}

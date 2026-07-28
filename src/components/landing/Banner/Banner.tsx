@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Banner.module.css";
+import { BOOKING_ENABLED } from "@/config/bookingConfig";
 
 export default function Banner() {
   const [videoError, setVideoError] = useState(false);
@@ -47,8 +48,8 @@ export default function Banner() {
           Let our expert stylists bring out the best in your look.
         </p>
         <div className={styles.buttons}>
-          <Link href="/booking" className={styles.bookNowBtn}>
-            Book Now
+          <Link href={BOOKING_ENABLED ? "/booking" : "tel:5138749999"} className={styles.bookNowBtn}>
+            {BOOKING_ENABLED ? "Book Now" : "Call to Book"}
           </Link>
           <a href="tel:5138749999" className={styles.callBtn}>
             <svg className={styles.callIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

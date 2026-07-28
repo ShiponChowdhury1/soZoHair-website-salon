@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
+import { BOOKING_ENABLED } from "@/config/bookingConfig";
 
 const serviceCategories = [
   { id: "hair-cuts-color", name: "Hair Color & Cuts", duration: "60 - 120 mins" },
@@ -40,6 +41,44 @@ export default function BookingPage() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  if (!BOOKING_ENABLED) {
+    return (
+      <div className="min-h-screen flex flex-col bg-[#F8F3EE]">
+        <Navbar />
+        <main className="flex-grow pt-36 pb-24 px-5 sm:px-8 lg:px-12 flex items-center justify-center">
+          <div className="max-w-xl mx-auto text-center bg-white rounded-3xl p-8 sm:p-12 border border-[#E8DFD8] shadow-[0_15px_40px_rgba(0,0,0,0.06)]">
+            <div className="w-16 h-16 rounded-full bg-[#C4956A]/15 flex items-center justify-center text-[#C4956A] mx-auto mb-6">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h1 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl font-bold text-[#2D2D2D] mb-4">
+              Online Booking Coming Soon
+            </h1>
+            <p className="text-[#666] text-sm sm:text-base leading-relaxed mb-8">
+              We are currently upgrading our online booking system with Meevo for an improved scheduling experience. In the meantime, please call us directly to book your appointment!
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="tel:5138749999"
+                className="w-full sm:w-auto px-8 py-3.5 bg-[#C4956A] hover:bg-[#b0845a] text-white rounded-xl text-sm font-semibold transition-all no-underline shadow-md"
+              >
+                Call Us: (513) 874-9999
+              </a>
+              <Link
+                href="/"
+                className="w-full sm:w-auto px-8 py-3.5 border border-[#E8DFD8] hover:border-[#C4956A] text-[#2D2D2D] rounded-xl text-sm font-semibold transition-all no-underline bg-transparent"
+              >
+                Return to Home
+              </Link>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

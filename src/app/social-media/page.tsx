@@ -63,7 +63,7 @@ const socialChannels = [
     handle: "SoZo Hair Spa & Wigs",
     desc: "Join our community for news, salon specials, reviews, and updates.",
     color: "#1877F2",
-    url: "https://www.facebook.com/",
+    url: "https://www.facebook.com/SoZoHairSpaWigs/",
     icon: (
       <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -193,7 +193,7 @@ export default function SocialMediaPage() {
               </div>
 
               <div className="flex gap-3">
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
+                <a href="https://www.facebook.com/SoZoHairSpaWigs/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-full border border-[#E8DDD7] text-[#5A4A42] transition-colors hover:border-[#C4907A] hover:bg-[#F8F3EE]">
                   <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                   </svg>

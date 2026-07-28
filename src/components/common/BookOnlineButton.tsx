@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
+import { BOOKING_ENABLED } from "@/config/bookingConfig";
 
 interface BookOnlineButtonProps {
   href?: string;
@@ -18,6 +19,7 @@ export default function BookOnlineButton({
   variant = "primary",
   fullWidth = false,
 }: BookOnlineButtonProps) {
+  const targetHref = BOOKING_ENABLED ? href : (href === "/booking" ? "tel:5138749999" : href);
   const sizeClasses = {
     sm: "px-4 py-2 text-xs",
     md: "px-6 py-3 text-sm",
@@ -35,7 +37,7 @@ export default function BookOnlineButton({
 
   return (
     <Link
-      href={href}
+      href={targetHref}
       className={`group inline-flex items-center justify-center gap-2.5 rounded-md font-medium no-underline transition-all duration-300 transform hover:-translate-y-0.5 ${
         sizeClasses[size]
       } ${variantClasses[variant]} ${fullWidth ? "w-full" : "w-auto"} ${className}`}
