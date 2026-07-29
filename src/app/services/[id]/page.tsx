@@ -564,10 +564,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   )}
                 </div>
 
-                {/* Right Column (50% Width): Plain Featured Image Card (Vertically Centered) */}
+                {/* Right Column (50% Width): Plain Featured Image Card (Full Height Section Fit) */}
                 {(service.heroImage || service.heroDetailImage) && (
-                  <div className="w-full rounded-3xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-[#E8DDD7] bg-white group">
-                    <div className="relative w-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] overflow-hidden">
+                  <div className="w-full h-full flex flex-col rounded-3xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-[#E8DDD7] bg-white group">
+                    <div className="relative w-full h-full flex-1 min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] overflow-hidden">
                       <Image
                         src={service.heroImage || service.heroDetailImage || ""}
                         alt={service.title}

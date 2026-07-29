@@ -63,12 +63,15 @@ export default function Footer() {
             <ul className={styles.columnLinks}>
               <li><Link href="/services/hair-cuts-color" className={styles.columnLink}>Hair Color &amp; Cuts</Link></li>
               <li><Link href="/services/specialty-hair" className={styles.columnLink}>Specialty Hair</Link></li>
+              <li><Link href="/services/extensions-texturizing" className={styles.columnLink}>Hair Extensions</Link></li>
               <li><Link href="/services/skin-services" className={styles.columnLink}>Skin Services</Link></li>
               <li><Link href="/services/headspa" className={styles.columnLink}>HeadSpa</Link></li>
               <li><Link href="/services/cryoskin" className={styles.columnLink}>CryoSkin</Link></li>
               <li><Link href="/services/pure-plasma" className={styles.columnLink}>Pure Plasma</Link></li>
+              <li><Link href="/services/scalp-facial" className={styles.columnLink}>Scalp Facial</Link></li>
               <li><Link href="/services/waxing" className={styles.columnLink}>Waxing</Link></li>
               <li><Link href="/services/lash-brow" className={styles.columnLink}>Lash &amp; Brow</Link></li>
+              <li><Link href="/services/medical-spa-services" className={styles.columnLink}>Medical Spa</Link></li>
             </ul>
           </div>
 

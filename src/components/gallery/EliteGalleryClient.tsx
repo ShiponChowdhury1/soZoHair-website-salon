@@ -104,23 +104,23 @@ const filters = ["All", "COLOR + STYLE TRANSFORMATION", "Women of 45069"];
 
 function BeforeAfterCard({ item }: { item: TransformationItem }) {
   return (
-    <article className="overflow-hidden rounded-2xl bg-[#FAF3EA] p-4 sm:p-5 shadow-lg border border-[#E8DDD7] transition-all duration-300 hover:shadow-2xl hover:border-[#D7B46A]/60 flex flex-col justify-between">
+    <article className="overflow-hidden rounded-2xl bg-[#FAF3EA] p-4 sm:p-6 shadow-lg border border-[#E8DDD7] transition-all duration-300 hover:shadow-2xl hover:border-[#D7B46A]/60 flex flex-col justify-between">
       <div>
         {/* ── CARD HEADER (Matching Screenshot) ── */}
         <div className="mb-3 text-center">
           <div className="flex justify-center mb-1">
             <Sparkles className="w-4 h-4 text-[#C4956A]" />
           </div>
-          <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#2D2D2D] tracking-tight">
+          <h3 className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl font-bold text-[#2D2D2D] tracking-tight">
             SoZo Hair, Spa & Wigs
           </h3>
-          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C4956A] mt-0.5">
+          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[#C4956A] mt-0.5">
             — WOMEN OF 45069 —
           </p>
         </div>
 
         {/* ── SIDE-BY-SIDE BEFORE & AFTER IMAGES (Fixed 50-50 Split) ── */}
-        <div className="relative w-full h-[260px] sm:h-[300px] overflow-hidden rounded-xl bg-stone-100 grid grid-cols-2 gap-[2px] border border-[#E8DDD7]">
+        <div className="relative w-full h-[280px] sm:h-[340px] overflow-hidden rounded-xl bg-stone-100 grid grid-cols-2 gap-[2px] border border-[#E8DDD7]">
           {/* Left Side: BEFORE Image */}
           <div className="relative w-full h-full overflow-hidden">
             <Image
@@ -128,7 +128,7 @@ function BeforeAfterCard({ item }: { item: TransformationItem }) {
               alt={`${item.name} Before`}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 50vw, 33vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority
             />
             <div className="absolute left-2.5 top-2.5 z-10 rounded-md bg-black/90 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-white">
@@ -143,7 +143,7 @@ function BeforeAfterCard({ item }: { item: TransformationItem }) {
               alt={`${item.name} After`}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 50vw, 33vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority
             />
             <div className="absolute right-2.5 top-2.5 z-10 rounded-md bg-black/90 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-white">
@@ -154,41 +154,49 @@ function BeforeAfterCard({ item }: { item: TransformationItem }) {
           {/* Center SZ Emblem Badge & Vertical Divider Line */}
           <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center pointer-events-none">
             <div className="h-full w-[1.5px] bg-[#D7B46A]" />
-            <div className="absolute flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#D7B46A] bg-[#FAF3EA] text-[#C4956A] font-bold text-[11px] shadow-md font-[family-name:var(--font-playfair)]">
+            <div className="absolute flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#D7B46A] bg-[#FAF3EA] text-[#C4956A] font-bold text-xs shadow-md font-[family-name:var(--font-playfair)]">
               SZ
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── CARD FOOTER (Clean Stacked Layout for 3 Columns) ── */}
-      <div className="mt-4 pt-3 border-t border-[#E8DDD7] flex flex-col gap-3">
-        {/* Name & Category */}
+      {/* ── CARD FOOTER (Exact 3-Column Split Matching Katie M Screenshot) ── */}
+      <div className="mt-4 pt-4 border-t border-[#E8DDD7] grid grid-cols-1 md:grid-cols-[1.1fr_1.3fr_1.1fr] gap-4 items-center">
+        {/* Left Column: Name + Lotus Line + Category */}
         <div className="text-center">
-          <h4 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-[#2D2D2D] italic">
+          <h4 className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-[#2D2D2D] italic">
             {item.name}
           </h4>
-          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#C4956A] mt-1">
+
+          {/* Lotus Line Divider matching screenshot */}
+          <div className="flex items-center justify-center gap-2 my-1.5">
+            <div className="h-[1px] w-8 bg-[#D7B46A]/60" />
+            <Sparkles className="w-3.5 h-3.5 text-[#C4956A]" />
+            <div className="h-[1px] w-8 bg-[#D7B46A]/60" />
+          </div>
+
+          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#C4956A]">
             {item.category}
           </p>
         </div>
 
-        {/* Quote */}
-        <div className="text-center bg-white/70 p-3 rounded-lg border border-[#E8DDD7]/70">
-          <p className="text-[11px] leading-relaxed text-[#4A4A4A] italic font-normal">
-            <span className="text-[#C4956A] font-bold text-xs not-italic mr-1">&ldquo;</span>
+        {/* Middle Column: Vertical Divider + Quote + Author */}
+        <div className="text-left border-t md:border-t-0 md:border-l border-[#E8DDD7] pt-3 md:pt-0 md:pl-4">
+          <p className="text-[11.5px] leading-snug text-[#4A4A4A] italic font-normal">
+            <span className="text-[#C4956A] font-bold text-sm not-italic mr-1">&ldquo;</span>
             {item.quote}
-            <span className="text-[#C4956A] font-bold text-xs not-italic ml-0.5">&rdquo;</span>
+            <span className="text-[#C4956A] font-bold text-sm not-italic ml-0.5">&rdquo;</span>
           </p>
-          <p className="text-[9px] font-semibold text-[#C4956A] mt-1">
+          <p className="text-[10px] font-semibold text-[#C4956A] mt-1">
             – SoZo Design Team
           </p>
         </div>
 
-        {/* Book Button & Note */}
-        <div className="flex flex-col items-center gap-1 mt-1">
-          <BookOnlineButton size="sm" fullWidth />
-          <span className="text-[10px] text-[#777] flex items-center justify-center gap-1 mt-1">
+        {/* Right Column: Book Button & Note */}
+        <div className="flex flex-col items-center md:items-end gap-1.5">
+          <BookOnlineButton size="sm" />
+          <span className="text-[10px] text-[#777] flex items-center gap-1">
             <Calendar className="w-3 h-3 text-[#C4956A]" /> Book your transformation today.
           </span>
         </div>
@@ -200,18 +208,18 @@ function BeforeAfterCard({ item }: { item: TransformationItem }) {
 export default function EliteGalleryClient() {
   return (
     <div className="min-h-screen bg-[#FBF8F4] text-stone-700">
-      {/* ── ORIGINAL HERO BANNER SECTION (Full Height Image Fit) ── */}
+      {/* ── ORIGINAL HERO BANNER SECTION (Shifted Below Fixed Navbar) ── */}
       <section
-        className="relative w-full overflow-hidden bg-white min-h-[520px] md:min-h-[620px] lg:min-h-[680px] flex items-center"
+        className="relative w-full overflow-hidden bg-white min-h-[500px] md:min-h-[580px] flex items-center"
       >
-        {/* Hero image positioned right-top to ensure full head & hair are visible */}
-        <div className="absolute inset-0 z-0 flex justify-end overflow-hidden pointer-events-none">
+        {/* Hero image positioned right-top starting cleanly below fixed navbar (top-[80px]) */}
+        <div className="absolute inset-0 top-[80px] z-0 flex justify-end overflow-hidden pointer-events-none">
           <div className="relative w-full lg:w-[65%] h-full">
             <Image
               src="/landing/galleries-background.png"
               alt="Gallery Hero"
               fill
-              className="object-cover md:object-contain object-right-top"
+              className="object-contain object-right-top"
               priority
             />
           </div>
@@ -229,7 +237,7 @@ export default function EliteGalleryClient() {
 
         {/* Hero text content */}
         <div
-          className="relative z-[2] w-full max-w-[var(--container-max-width,1319px)] mx-auto px-5 sm:px-8 md:px-10 pt-[130px] md:pt-[160px] pb-16 md:pb-20"
+          className="relative z-[2] w-full max-w-[var(--container-max-width,1319px)] mx-auto px-5 sm:px-8 md:px-10 pt-[110px] md:pt-[130px] pb-12 md:pb-16"
         >
           <div style={{ maxWidth: "520px" }}>
             <span
@@ -262,9 +270,7 @@ export default function EliteGalleryClient() {
         </div>
       </section>
 
-
-
-      {/* ── GALLERY GRID SECTION (3 CARDS PER ROW ON DESKTOP) ── */}
+      {/* ── GALLERY GRID SECTION (2 CARDS PER ROW MATCHING KATIE M SCREENSHOT) ── */}
       <section id="gallery" className="px-5 py-16 sm:py-24 md:px-10">
         <div className="mx-auto max-w-[1400px]">
           <div className="mb-12 text-center">
@@ -281,18 +287,14 @@ export default function EliteGalleryClient() {
             </p>
           </div>
 
-
-
-          {/* 3 Cards Per Row Grid */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {/* 2 Cards Per Row Grid */}
+          <div className="grid gap-10 lg:grid-cols-2">
             {transformations.map((item) => (
               <BeforeAfterCard key={item.name} item={item} />
             ))}
           </div>
         </div>
       </section>
-
-
     </div>
   );
 }
