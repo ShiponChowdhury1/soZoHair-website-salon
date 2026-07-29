@@ -97,9 +97,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const hasRightSideFeaturedCard = service.id === "headspa" || service.id === "skin-services";
   const getHeroObjectPosition = (serviceId: string) => {
     if (serviceId === "cryoskin") return "right 35%";
-    if (serviceId === "lash-brow") return "right 25%";
-    if (serviceId === "extensions-texturizing") return "center center";
-    return "right center";
+    if (serviceId === "lash-brow") return "right top";
+    if (serviceId === "extensions-texturizing") return "center top";
+    return "right top";
   };
 
   const heroObjectPosition = getHeroObjectPosition(service.id);
@@ -109,15 +109,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       <Navbar />
 
       {/* ═══════════════════════════════════════════════════════
-          HERO SECTION — Full bleed background with navbar padding
+          HERO SECTION — Full bleed background starting below fixed navbar
       ═══════════════════════════════════════════════════════ */}
       <section
-        className="relative w-full overflow-hidden bg-white min-h-[500px] md:min-h-[560px] flex items-center"
+        className="relative w-full overflow-hidden bg-white min-h-[540px] md:min-h-[620px] lg:min-h-[680px] flex items-center"
       >
-        {/* Background image positioned right — full bleed from top */}
+        {/* Background image positioned right — starting cleanly below fixed navbar (top-[80px]) */}
         {detailImg && (
           <div
-            className="absolute inset-0 z-0"
+            className="absolute inset-0 top-[80px] z-0"
           >
             <Image
               src={detailImg}
