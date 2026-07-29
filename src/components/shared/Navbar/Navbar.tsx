@@ -32,7 +32,7 @@ type MobileNavItem = {
 
 const dropdownLeftItems = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "Team", href: "/teams" },
   { label: "Services", href: "/#services" },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products" },
@@ -60,7 +60,7 @@ const shopItems: MobileSubItem[] = [
 ];
 
 const moreItemsMiddle: MobileSubItem[] = [
-  { label: "Our Team", href: "/teams" },
+  { label: "About", href: "/about" },
   { label: "SoZo on Social Media", href: "/social-media" },
   { label: "Ask the Expert", href: "/ask-expert" },
   { label: "View Our Ratings", href: "/view-our-ratings" },
@@ -77,7 +77,7 @@ const moreItemsRight: MobileSubItem[] = [
 // All mobile nav items combined
 const mobileNavItems: MobileNavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "Team", href: "/teams" },
   { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
@@ -119,6 +119,7 @@ export default function Navbar() {
   const isServicesActive = !activeMenu && (pathname.startsWith("/services") || currentHash === "#services");
   const isContactActive = !activeMenu && currentHash === "#contact";
   const isHomeActive = !activeMenu && pathname === "/" && currentHash !== "#services" && currentHash !== "#contact";
+  const isTeamActive = !activeMenu && pathname.startsWith("/teams");
   const isAboutActive = !activeMenu && pathname === "/about";
   const isWigsActive = !activeMenu && pathname === "/wigs";
   const isShopActive = !activeMenu && (pathname.startsWith("/premium-products") || pathname.startsWith("/special-products"));
@@ -127,7 +128,7 @@ export default function Navbar() {
   const isArticlesActive = !activeMenu && pathname.startsWith("/articles");
 
   const isMoreActive = !activeMenu && [
-    "/teams",
+    "/about",
     "/social-media",
     "/ask-expert",
     "/view-our-ratings",
@@ -305,13 +306,13 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/about"
+                href="/teams"
                 onClick={() => handleNavClick(null)}
                 onMouseEnter={() => handleMouseEnter(null)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isAboutActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isTeamActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
-                About
+                Team
               </Link>
 
               <a
@@ -633,13 +634,13 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* Mobile Sign In */}
+            {/* Mobile Sign Up */}
             <Link
               href="/register"
               onClick={closeMobile}
               className="mt-6 inline-flex items-center justify-center px-6 py-3 bg-[#D4A59A] text-white rounded-full text-[15px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a]"
             >
-              Sign in
+              Sign up
             </Link>
             <Link
               href="/profile"
