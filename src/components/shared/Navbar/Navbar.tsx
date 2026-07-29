@@ -32,12 +32,12 @@ type MobileNavItem = {
 
 const dropdownLeftItems = [
   { label: "Home", href: "/" },
+  { label: "Academy", href: "/academy" },
   { label: "Team", href: "/teams" },
   { label: "Services", href: "/#services" },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Academy", href: "/academy" },
   { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -79,12 +79,12 @@ const moreItemsRight: MobileSubItem[] = [
 // All mobile nav items combined
 const mobileNavItems: MobileNavItem[] = [
   { label: "Home", href: "/" },
+  { label: "Academy", href: "/academy" },
   { label: "Team", href: "/teams" },
   { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
   { label: "Gallery", href: "/gallery" },
-  { label: "Academy", href: "/academy" },
   { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/#contact" },
   { label: "More", href: "#", hasSubmenu: true, menuKey: "more" as const },
@@ -196,8 +196,18 @@ export default function Navbar() {
     if (!isSearchOpen) setSearchQuery("");
   }, [isSearchOpen]);
 
-  const handleMouseEnter = useCallback((menu: ActiveMenu) => {
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+
+  const isHighlighted = useCallback((itemKey: string, isRouteActive: boolean) => {
+    if (hoveredItem !== null) {
+      return hoveredItem === itemKey;
+    }
+    return isRouteActive;
+  }, [hoveredItem]);
+
+  const handleMouseEnter = useCallback((itemKey: string, menu: ActiveMenu = null) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setHoveredItem(itemKey);
     setActiveMenu(menu);
     if (menu === "services") {
       setActiveMoreSubmenu("services");
@@ -211,6 +221,7 @@ export default function Navbar() {
   const handleMouseLeave = useCallback(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
+      setHoveredItem(null);
       setActiveMenu(null);
     }, 150);
   }, []);
@@ -283,7 +294,7 @@ export default function Navbar() {
           </button>
 
           {/* Left Container with Logo & Nav Links */}
-          <div className="flex items-center gap-4 xl:gap-8">
+          <div className="flex items-center gap-4 xl:gap-8 h-full">
             <Link href="/" className="flex items-center justify-center no-underline mr-2" onClick={() => { setActiveMenu(null); closeMobile(); setCurrentHash(""); }}>
               <Image
                 src="/logo.png"
@@ -296,67 +307,104 @@ export default function Navbar() {
             </Link>
 
             {/* Left Nav Links — hidden below lg */}
-            <div className="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-6 mr-3 xl:mr-6">
+            <div className="hidden lg:flex items-center h-full gap-3 xl:gap-5 2xl:gap-6 mr-3 xl:mr-6">
               <Link
                 href="/"
                 onClick={() => { handleNavClick("home"); setCurrentHash(""); }}
-                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseEnter={() => handleMouseEnter("home", null)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHomeActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("home", isHomeActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
               >
                 Home
               </Link>
 
               <Link
+                href="/academy"
+                onClick={() => handleNavClick("academy")}
+                onMouseEnter={() => handleMouseEnter("academy", null)}
+                onMouseLeave={handleMouseLeave}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("academy", isAcademyActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
+              >
+                Academy
+              </Link>
+
+              <Link
                 href="/teams"
                 onClick={() => handleNavClick(null)}
-                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseEnter={() => handleMouseEnter("team", null)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isTeamActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("team", isTeamActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
               >
                 Team
               </Link>
 
-              <a
-                href="/#services"
-                onClick={(e) => {
-                  if (pathname === "/") {
-                    e.preventDefault();
-                    document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
-                    window.history.pushState(null, "", "#services");
-                    setCurrentHash("#services");
-                  }
-                  setActiveMenu(null);
-                }}
-                onMouseEnter={() => handleMouseEnter("services")}
+              {/* Services Dropdown */}
+              <div
+                className="relative flex items-center h-full"
+                onMouseEnter={() => handleMouseEnter("services", "services")}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 whitespace-nowrap flex items-center gap-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide transition-colors duration-300 bg-transparent border-none cursor-pointer p-0 no-underline after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${activeMenu === "services" || isServicesActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
-                Services
-                <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </a>
+                <a
+                  href="/#services"
+                  onClick={(e) => {
+                    if (pathname === "/") {
+                      e.preventDefault();
+                      document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+                      window.history.pushState(null, "", "#services");
+                      setCurrentHash("#services");
+                    }
+                    setActiveMenu(null);
+                  }}
+                  className={`relative py-1 whitespace-nowrap flex items-center gap-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide transition-colors duration-300 bg-transparent border-none cursor-pointer p-0 no-underline after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("services", activeMenu === "services" || isServicesActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
+                >
+                  Services
+                  <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </a>
+
+                {/* Floating Dropdown Panel */}
+                {activeMenu === "services" && (
+                  <div className="absolute top-full left-0 mt-0 w-[360px] sm:w-[380px] bg-white border border-t-0 border-[#EADCC9]/90 shadow-[0_16px_40px_rgba(0,0,0,0.12)] rounded-b-xl rounded-t-none py-3.5 px-3 z-[150] animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="text-[13px] font-extrabold tracking-[2px] uppercase text-[#D4A59A] px-3.5 py-2 mb-2 border-b border-[#F5ECE2]">
+                      Our Services
+                    </div>
+                    <div className="flex flex-col gap-1 max-h-[440px] overflow-y-auto custom-scrollbar pr-1">
+                      {serviceItems.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="px-3.5 py-2.5 text-[16px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
+                        >
+                          <span>{item.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <Link
                 href="/wigs"
                 onClick={() => handleNavClick(null)}
-                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseEnter={() => handleMouseEnter("wigs", null)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isWigsActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("wigs", isWigsActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
               >
                 Wigs
               </Link>
 
+              {/* Shop Dropdown */}
               <div
-                className="relative flex items-center"
-                onMouseEnter={() => handleMouseEnter("shop")}
+                className="relative flex items-center h-full"
+                onMouseEnter={() => handleMouseEnter("shop", "shop")}
                 onMouseLeave={handleMouseLeave}
               >
                 <Link
                   href="/premium-products"
                   onClick={() => setActiveMenu(null)}
-                  className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${activeMenu === "shop" || isShopActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                  className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("shop", activeMenu === "shop" || isShopActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
                 >
                   Shop
                 </Link>
@@ -372,34 +420,45 @@ export default function Navbar() {
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
+
+                {/* Floating Dropdown Panel */}
+                {activeMenu === "shop" && (
+                  <div className="absolute top-full left-0 mt-0 w-[360px] sm:w-[380px] bg-white border border-t-0 border-[#EADCC9]/90 shadow-[0_16px_40px_rgba(0,0,0,0.12)] rounded-b-xl rounded-t-none py-3.5 px-3 z-[150] animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="text-[13px] font-extrabold tracking-[2px] uppercase text-[#D4A59A] px-3.5 py-2 mb-2 border-b border-[#F5ECE2]">
+                      Shop Collections
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      {shopItems.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="px-3.5 py-2.5 text-[16px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
+                        >
+                          <span>{item.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <Link
                 href="/gallery"
                 onClick={() => handleNavClick("gallery")}
-                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseEnter={() => handleMouseEnter("gallery", null)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isGalleryActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("gallery", isGalleryActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
               >
                 Gallery
               </Link>
 
               <Link
-                href="/academy"
-                onClick={() => handleNavClick("academy")}
-                onMouseEnter={() => handleMouseEnter(null)}
-                onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isAcademyActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
-              >
-                Academy
-              </Link>
-
-              <Link
                 href="/articles"
                 onClick={() => handleNavClick(null)}
-                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseEnter={() => handleMouseEnter("articles", null)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isArticlesActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("articles", isArticlesActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
               >
                 Articles
               </Link>
@@ -415,24 +474,63 @@ export default function Navbar() {
                   }
                   setActiveMenu(null);
                 }}
-                onMouseEnter={() => handleMouseEnter(null)}
+                onMouseEnter={() => handleMouseEnter("contact", null)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isContactActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
+                className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("contact", isContactActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
               >
                 Contact
               </a>
 
-              <button
-                onClick={() => handleNavClick("more")}
-                onMouseEnter={() => handleMouseEnter("more")}
+              {/* More Dropdown */}
+              <div
+                className="relative flex items-center h-full"
+                onMouseEnter={() => handleMouseEnter("more", "more")}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 whitespace-nowrap flex items-center gap-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide transition-colors duration-300 bg-transparent border-none cursor-pointer p-0 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${activeMenu === "more" || isMoreActive ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] hover:text-[#D4A59A] after:scale-x-0 hover:after:scale-x-100"}`}
               >
-                More
-                <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "more" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
+                <button
+                  onClick={() => handleNavClick("more")}
+                  className={`relative py-1 whitespace-nowrap flex items-center gap-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide transition-colors duration-300 bg-transparent border-none cursor-pointer p-0 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("more", activeMenu === "more" || isMoreActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
+                >
+                  More
+                  <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "more" ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
+                {/* Floating Dropdown Panel */}
+                {activeMenu === "more" && (
+                  <div className="absolute top-full right-0 mt-0 w-[360px] sm:w-[380px] bg-white border border-t-0 border-[#EADCC9]/90 shadow-[0_16px_40px_rgba(0,0,0,0.12)] rounded-b-xl rounded-t-none py-3.5 px-3 z-[150] animate-in fade-in slide-in-from-top-2 duration-200 max-h-[480px] overflow-y-auto custom-scrollbar">
+                    <div className="text-[13px] font-extrabold tracking-[2px] uppercase text-[#D4A59A] px-3.5 py-2 mb-2 border-b border-[#F5ECE2]">
+                      About & Info
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      {moreItemsMiddle.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="px-3.5 py-2.5 text-[16px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
+                        >
+                          <span>{item.label}</span>
+                        </Link>
+                      ))}
+                      <div className="text-[13px] font-extrabold tracking-[2px] uppercase text-[#D4A59A] px-3.5 py-2 mt-3 mb-2 border-b border-[#F5ECE2]">
+                        Policies
+                      </div>
+                      {moreItemsRight.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="px-3.5 py-2.5 text-[16px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
+                        >
+                          <span>{item.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -654,199 +752,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ===== DESKTOP DROPDOWN PANEL ===== */}
-        <div
-          onMouseEnter={() => handleMouseEnter(activeMenu)}
-          onMouseLeave={handleMouseLeave}
-          className={`fixed top-[110px] md:top-[130px] inset-x-0 bottom-0 bg-[#FDF8F4]/98 backdrop-blur-lg border-t border-[#F5ECE2] overflow-y-auto transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-2xl hidden lg:block ${(activeMenu === "more" || activeMenu === "services" || activeMenu === "shop") ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
-            }`}
-        >
-          <div className="max-w-[var(--container-max-width)] mx-auto px-8 py-16 flex items-start gap-16 min-h-[450px]">
-            {/* Column 1 - Main Links */}
-            <div className="w-1/3 flex flex-col gap-6 border-r border-[#EADCC9] pr-16">
-              {dropdownLeftItems.map((item) => {
-                const isInteractive = item.label === "Services" || item.label === "Shop";
-                const isCurrentActive =
-                  (item.label === "Services" && activeMoreSubmenu === "services") ||
-                  (item.label === "Shop" && activeMoreSubmenu === "shop") ||
-                  (item.label === "Home" && activeMoreSubmenu === "home");
-
-                return (
-                  <div key={item.label} className="group flex items-center justify-between">
-                    {isInteractive ? (
-                      <button
-                        onMouseEnter={() => setActiveMoreSubmenu(item.label.toLowerCase() as "services" | "shop")}
-                        onClick={() => setActiveMoreSubmenu(item.label.toLowerCase() as "services" | "shop")}
-                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${isCurrentActive ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                          }`}
-                      >
-                        <span>{item.label}</span>
-                        <svg className={`w-5 h-5 transition-all duration-300 ${isCurrentActive ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                      </button>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        onClick={() => setActiveMenu(null)}
-                        onMouseEnter={() => {
-                          if (item.label === "Home" || item.label === "About" || item.label === "Wigs" || item.label === "Articles" || item.label === "Gallery" || item.label === "Academy" || item.label === "Contact") {
-                            setActiveMoreSubmenu("home");
-                          }
-                        }}
-                        className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] no-underline transition-all duration-300 block w-full ${(item.label === "Home" && activeMoreSubmenu === "home")
-                          ? "text-[#D4A59A] translate-x-2"
-                          : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                          }`}
-                      >
-                        {item.label}
-                      </Link>
-                    )}
-                  </div>
-                );
-              })}
-
-              {/* About & Info Trigger */}
-              <button
-                onMouseEnter={() => setActiveMoreSubmenu("about_careers")}
-                onClick={() => setActiveMoreSubmenu("about_careers")}
-                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${activeMoreSubmenu === "about_careers" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                  }`}
-              >
-                <span>About &amp; Info</span>
-                <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "about_careers" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-
-              {/* Policies Trigger */}
-              <button
-                onMouseEnter={() => setActiveMoreSubmenu("policies")}
-                onClick={() => setActiveMoreSubmenu("policies")}
-                className={`font-[family-name:var(--font-playfair)] text-[24px] uppercase tracking-[2px] text-left bg-transparent border-none cursor-pointer p-0 transition-all duration-300 flex items-center justify-between w-full ${activeMoreSubmenu === "policies" ? "text-[#D4A59A] translate-x-2" : "text-[#8B7B6B] hover:text-[#2D2D2D] hover:translate-x-2"
-                  }`}
-              >
-                <span>Policies</span>
-                <svg className={`w-5 h-5 transition-all duration-300 ${activeMoreSubmenu === "policies" ? "translate-x-1 opacity-100 stroke-[#D4A59A]" : "opacity-0 group-hover:opacity-100 translate-x-0 stroke-[#8B7B6B]"}`} viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
-
-            {/* Right Column - Dynamic Submenu Panel */}
-            <div className="w-2/3 pl-8 py-2 relative min-h-[350px]">
-              {/* Home Welcome Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "home" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-                }`}>
-                <div className="max-w-md">
-                  <span className="text-[11px] font-semibold tracking-[3px] uppercase text-[#D4A59A] block mb-2">Welcome to SoZo Hair</span>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-[36px] text-[#2D2D2D] leading-tight mb-4">
-                    Your Premium Hair, Spa &amp; Wigs Experience
-                  </h3>
-                  <p className="text-[15px] text-[#777] leading-relaxed mb-6 font-sans">
-                    Discover our high-end hair design, relaxing scalp facials, medical spa treatments, and professional custom-styled wigs. We believe in providing a personalized, premium experience for every guest.
-                  </p>
-                  <div className="flex gap-4">
-                    <Link
-                      href="/#booking"
-                      onClick={() => setActiveMenu(null)}
-                      className="inline-flex items-center justify-center px-6 py-2.5 bg-[#D4A59A] text-white rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#c4958a] hover:-translate-y-0.5 hover:shadow-md"
-                    >
-                      Book Appointment
-                    </Link>
-                    <Link
-                      href="/about"
-                      onClick={() => setActiveMenu(null)}
-                      className="inline-flex items-center justify-center px-6 py-2.5 border border-[#D4A59A] text-[#D4A59A] rounded-full text-[14px] font-medium no-underline transition-all duration-300 hover:bg-[#D4A59A] hover:text-white hover:-translate-y-0.5"
-                    >
-                      Our Story
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Services Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "services" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-                }`}>
-                <div>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Our Premium Services</h3>
-                  <div className="grid grid-cols-2 gap-x-12 gap-y-6">
-                    {serviceItems.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setActiveMenu(null)}
-                        className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Shop Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "shop" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-                }`}>
-                <div>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Shop Collection</h3>
-                  <div className="grid grid-cols-1 gap-y-6">
-                    {shopItems.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setActiveMenu(null)}
-                        className="font-[family-name:var(--font-playfair)] text-[17px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* About & Info Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "about_careers" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-                }`}>
-                <div>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">About &amp; Information</h3>
-                  <div className="grid grid-cols-2 gap-x-12 gap-y-6">
-                    {moreItemsMiddle.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setActiveMenu(null)}
-                        className="font-[family-name:var(--font-playfair)] text-[16px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Policies Panel */}
-              <div className={`transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform absolute inset-y-0 left-8 right-0 flex flex-col justify-center ${activeMoreSubmenu === "policies" ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 -translate-y-2 scale-98 pointer-events-none"
-                }`}>
-                <div>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-[13px] uppercase tracking-[3px] text-[#D4A59A] font-semibold mb-8">Policies</h3>
-                  <div className="grid grid-cols-1 gap-y-6">
-                    {moreItemsRight.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setActiveMenu(null)}
-                        className="font-[family-name:var(--font-playfair)] text-[16px] uppercase tracking-[1.5px] text-[#555] no-underline transition-all duration-200 hover:text-[#D4A59A] hover:translate-x-1.5 transform block"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Cart Sidebar */}
