@@ -533,6 +533,116 @@ export const services: Service[] = [
       "* Gratuity IS NOT included in any of our prices or packages.",
     ],
   },
+
+  // ── 9. Skin Services ──────────────────────────────────────
+  {
+    id: "skin-services",
+    title: "Skin Services",
+    badge: "SKIN CARE & FACIALS",
+    heroTitle: "Sozo Skin Services",
+    heroSubtitle:
+      "With the finest skin and facial treatments in the Cincinnati area, experience deep relaxation and glowing skin.",
+    heroImage: "/landing/services/sozo-Skin-Services.jpg",
+    heroDetailImage: "/landing/services/sozo-Skin-Services.jpg",
+    intro:
+      "With the finest skin and facial treatments in the Cincinnati area, you'll relax knowing you're in the hands of experienced professionals catering to your every need and pampering you with loving care. A complimentary consultation, a detailed skin analysis and a soothing massage are performed with each facial. Additionally, a home maintenance regimen is always recommended! We proudly use Circadia Skin Care Products to ensure quality, consistency and the very highest level of your satisfaction.",
+    type: "pricing-simple",
+    simpleTable: {
+      columns: ["Skin Service", "Price"],
+      rows: [
+        ["FaSSage - Facial & Massage Combo", "$156"],
+        ["MicrodermAbrasion Spot Treatment", "$40"],
+        ["MicrodermAbrasion Treatment", "$108"],
+        ["Signature Facial", "$125"],
+        ["Signature Facial w/MicrodermAbrasion", "$185"],
+        ["Signature Facial w/Dermaplaning", "$165"],
+        ["Circadia Facial", "$125"],
+        ["Circadia Facial w/ Dermaplaning", "$165"],
+        ["Chemical / Enzyme Peel - Add On", "$106"],
+      ],
+    },
+    highlights: [
+      {
+        icon: "💆‍♀️",
+        title: "FASSAGE (90 MINUTES) - $156",
+        desc: "A European Facial combined with a full body relaxation massage. Designed to put you in a full state of relaxation. The first 30 minutes you'll experience a custom blended deep pore cleansing, exfoliation and massage of the face, neck and shoulders followed by a therapeutic Circadia mask and serum. The last hour is a massage combining firm gliding strokes with muscle-kneading techniques for welcome tension relief.",
+      },
+      {
+        icon: "✨",
+        title: "SIGNATURE FACIAL - $125",
+        desc: "Treat your skin to a personalized facial designed specifically for your unique skincare needs & goals. Includes thorough skin analysis, deep cleanse, gentle exfoliation, & customized treatment mask for dryness, congestion, sensitivity, or aging. Targeted serums and SPF leave your skin balanced and glowing.",
+      },
+      {
+        icon: "🌸",
+        title: "SIGNATURE FACIAL W/ DERMAPLANING - $165",
+        desc: "Luxurious treatment beginning with personalized skin analysis, deep cleanse & gentle dermaplaning to remove dead skin cells and fine vellus hair (peach fuzz), revealing smoother, brighter skin. Completed with serums, moisturizer, and SPF.",
+      },
+      {
+        icon: "💎",
+        title: "SIGNATURE FACIAL W/ MICRODERMABRASION - $185",
+        desc: "Rejuvenating treatment starting with personalized skin analysis, deep cleanse and gentle microdermabrasion to exfoliate dull dead skin cells and refine skin texture, followed by nourishing serums, moisturizers, and SPF.",
+      },
+      {
+        icon: "🌿",
+        title: "MICRODERMABRASION - $108",
+        desc: "Gently removes outer dead skin cells to improve texture, soften fine lines, minimize clogged pores, and promote a healthy glow. Ultra-fine crystals peel away dull cells and include a customized Circadia mask to infuse nutrients into your newly polished complexion.",
+      },
+    ],
+    notes: [
+      "* Prices may vary according to the Esthetician's level and experience.",
+      "* Please arrive 5-10 minutes early for your first visit so that we may take care of administrative details.",
+      "* We also ask that if you need to cancel an appointment that you do so 24-hours in advance.",
+      "* Prices are subject to change without notice.",
+      "* Gratuity IS NOT included in any of our prices or packages.",
+    ],
+  },
+
+  // ── 10. HeadSpa ───────────────────────────────────────────
+  {
+    id: "headspa",
+    title: "HeadSpa",
+    badge: "HOLISTIC WELLNESS",
+    heroTitle: "Relaxing HeadSpa Treatment",
+    heroSubtitle:
+      "Deep scalp cleansing, improved circulation, and total relaxation for healthy hair and stress relief.",
+    heroImage: "/landing/services/headSpa-What-Youve-been-Waiting.jpg",
+    heroDetailImage: "/landing/services/headSpa-What-Youve-been-Waiting.jpg",
+    intro:
+      "Head spa treatments offer deep scalp cleansing, improved circulation, and relaxation, promoting overall hair health and reducing stress. They can also help with issues like dandruff, dryness, and tension headaches, making it a holistic wellness experience. Ultimate Relaxation Treatment by Expertly Trained Mandy!",
+    type: "pricing-simple",
+    simpleTable: {
+      columns: ["HeadSpa Treatment", "Duration", "Price"],
+      rows: [
+        ["'No-Water' Sensory Scalp Experience", "60 minutes", "$150"],
+        ["The Serenity Head Spa Experience (Blow Dry included)", "80 minutes", "$175"],
+        ["The Ultimate Escape: Head Spa & Facial", "105 minutes", "$250"],
+      ],
+    },
+    highlights: [
+      {
+        icon: "💆‍♂️",
+        title: "'NO-WATER' SENSORY SCALP EXPERIENCE (60-MINS) - $150",
+        desc: "Designed for deep relaxation and sensory stimulation, this unique dry scalp treatment is an ASMR-inspired experience that awakens the senses and melts away stress using specialized tools and techniques. No water is used, making it the perfect sensory escape. (Safe for Fashion Color & Extensions)",
+      },
+      {
+        icon: "🌊",
+        title: "THE SERENITY HEAD SPA EXPERIENCE (80-MINS) - $175",
+        desc: "Escape into a deeply relaxing head spa experience where scalp wellness meets total-body relaxation. Includes personalized scalp assessment, aromatic sensory experience, nourishing cleanse, exfoliation, therapeutic scalp massage, and warm cascading water. (Blow Dry included / No Extensions)",
+      },
+      {
+        icon: "✨",
+        title: "THE ULTIMATE ESCAPE: HEAD SPA & FACIAL (105-MINS) - $250",
+        desc: "Luxurious combination of a customized head spa with a relaxing facial for a complete self-care journey. Includes deep scalp cleanse, therapeutic scalp massage, customized facial with cleansing, exfoliation, hydrating skincare, and warm towels. (No Extensions)",
+      },
+    ],
+    notes: [
+      "* Please arrive 5-10 minutes early for your first visit so that we may take care of administrative details.",
+      "* Parties greater than 3 people and gift packages require a 50% deposit at time of booking and must be cancelled 7 days in advance to receive your refund.",
+      "* We also ask that if you need to cancel an appointment that you do so 24-hours in advance.",
+      "* Prices are subject to change without notice.",
+      "* Gratuity IS NOT included in any of our prices or packages.",
+    ],
+  },
 ];
 
 // Helper: find by slug/id

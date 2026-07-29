@@ -51,6 +51,8 @@ const serviceItems: MobileSubItem[] = [
   { label: "CryoSkin Fat Loss Treatment", href: "/services/cryoskin" },
   { label: "Pure Plasma", href: "/services/pure-plasma" },
   { label: "The Relaxing Scalp Facial", href: "/services/scalp-facial" },
+  { label: "Skin Services", href: "/services/skin-services" },
+  { label: "HeadSpa", href: "/services/headspa" },
   { label: "Medical Spa Services", href: "/services/medical-spa-services" },
 ];
 

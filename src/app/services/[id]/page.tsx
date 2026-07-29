@@ -2,6 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  Sparkles,
+  Flower2,
+  Gem,
+  Feather,
+  Waves,
+  Zap,
+  ShieldCheck,
+  Sun,
+  Heart,
+  Droplets,
+  CheckCircle2,
+} from "lucide-react";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
 import { services, getServiceById, getAllServiceIds } from "@/data/services";
@@ -9,6 +22,36 @@ import ScalpVideoPlayer from "@/components/services/ScalpVideoPlayer";
 import PlasmaVideoPlayer from "@/components/services/PlasmaVideoPlayer";
 import PlasmaFaqAccordion from "@/components/services/PlasmaFaqAccordion";
 import BookOnlineButton from "@/components/common/BookOnlineButton";
+
+function renderLucideIcon(iconStr: string) {
+  if (!iconStr) return <Sparkles className="w-6 h-6 text-[#C4956A]" />;
+  if (iconStr === "💆‍♀️" || iconStr === "💆‍♂️" || iconStr.includes("FASSAGE") || iconStr.includes("SENSORY")) {
+    return <Sparkles className="w-6 h-6 text-[#C4956A]" />;
+  }
+  if (iconStr === "✨" || iconStr.includes("SIGNATURE") || iconStr.includes("ESCAPE")) {
+    return <Sun className="w-6 h-6 text-[#C4956A]" />;
+  }
+  if (iconStr === "🌸" || iconStr.includes("DERMAPLANING")) {
+    return <Flower2 className="w-6 h-6 text-[#C4956A]" />;
+  }
+  if (iconStr === "💎" || iconStr.includes("MICRODERMABRASION")) {
+    return <Gem className="w-6 h-6 text-[#C4956A]" />;
+  }
+  if (iconStr === "🌿" || iconStr.includes("MICRO")) {
+    return <Feather className="w-6 h-6 text-[#C4956A]" />;
+  }
+  if (iconStr === "🌊" || iconStr.includes("SERENITY")) {
+    return <Waves className="w-6 h-6 text-[#C4956A]" />;
+  }
+  if (iconStr === "🔬" || iconStr === "⚡") {
+    return <Zap className="w-6 h-6 text-[#C4956A]" />;
+  }
+  if (iconStr === "🏥") {
+    return <ShieldCheck className="w-6 h-6 text-[#C4956A]" />;
+  }
+
+  return <Sparkles className="w-6 h-6 text-[#C4956A]" />;
+}
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -100,39 +143,19 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           className="relative z-[2] w-full max-w-[var(--container-max-width,1319px)] mx-auto px-5 sm:px-8 md:px-10 pt-[140px] md:pt-[165px] pb-16 md:pb-20 flex flex-col gap-4"
         >
           <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: 3,
-              textTransform: "uppercase",
-              color: "#C4956A",
-            }}
+            className="text-[12px] sm:text-[13px] font-bold tracking-[3px] uppercase text-[#C4956A]"
           >
             {service.badge}
           </span>
 
           <h1
-            style={{
-              fontFamily: "var(--font-playfair), serif",
-              fontSize: 42,
-              fontWeight: 600,
-              color: "#2D2D2D",
-              lineHeight: 1.2,
-              maxWidth: 550,
-              margin: 0,
-            }}
+            className="text-3xl sm:text-4xl md:text-[44px] font-bold text-[#2D2D2D] leading-[1.25] max-w-[600px] m-0 font-[family-name:var(--font-playfair)]"
           >
             {service.heroTitle}
           </h1>
 
           <p
-            style={{
-              fontSize: 15,
-              color: "#666",
-              lineHeight: 1.6,
-              maxWidth: 480,
-              margin: 0,
-            }}
+            className="text-base sm:text-[17px] text-[#4A4A4A] leading-[1.7] max-w-[520px] m-0 font-normal"
           >
             {service.heroSubtitle}
           </p>
@@ -429,7 +452,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </section>
         ) : (
           <>
-            {/* ── INTRO ── */}
+            {/* ── INTRO & FEATURED RIGHT SIDE IMAGE (50% - 50% CENTERED SPLIT) ── */}
             <section
               style={{
                 maxWidth: "var(--container-max-width, 1319px)",
@@ -437,48 +460,196 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 padding: "60px 40px 40px",
               }}
             >
-              <div style={{ maxWidth: 900 }}>
-                {/* Extensions page heading */}
-                {service.id === "extensions-texturizing" && (
-                  <h2
-                    style={{
-                      fontFamily: "var(--font-playfair), serif",
-                      fontSize: 32,
-                      fontWeight: 600,
-                      color: "#2D2D2D",
-                      marginBottom: 24,
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    Be a Celebrity and go from short-to-long, fine-to-full, blonde to brunette in ONE visit!
-                  </h2>
-                )}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                {/* Left Column (50% Width): Intro + Simple Table */}
+                <div className="w-full">
+                  <div className="mb-8">
+                    {/* Extensions page heading */}
+                    {service.id === "extensions-texturizing" && (
+                      <h2
+                        style={{
+                          fontFamily: "var(--font-playfair), serif",
+                          fontSize: 32,
+                          fontWeight: 600,
+                          color: "#2D2D2D",
+                          marginBottom: 24,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        Be a Celebrity and go from short-to-long, fine-to-full, blonde to brunette in ONE visit!
+                      </h2>
+                    )}
 
-                <p
-                  style={{
-                    fontSize: 15,
-                    lineHeight: 1.85,
-                    color: "#555",
-                  }}
-                >
-                  {service.intro}
-                </p>
+                    <p
+                      className="text-[16px] sm:text-[17px] leading-[1.85] text-[#2C2C2C] font-normal"
+                    >
+                      {service.intro}
+                    </p>
 
-                {/* Hair Cuts extra paragraph */}
-                {service.id === "hair-cuts-color" && (
-                  <p
-                    style={{
-                      fontSize: 15,
-                      lineHeight: 1.85,
-                      color: "#555",
-                      marginTop: 20,
-                    }}
-                  >
-                    Be sure to check into the anti-aging benefits of microdermabrasion to get smoother, younger looking skin! SoZo Hair – your home for hair coloring and hair cuts in West Chester, Ohio.
-                  </p>
+                    {/* Hair Cuts extra paragraph */}
+                    {service.id === "hair-cuts-color" && (
+                      <p
+                        className="text-[16px] sm:text-[17px] leading-[1.85] text-[#2C2C2C] font-normal mt-5"
+                      >
+                        Be sure to check into the anti-aging benefits of microdermabrasion to get smoother, younger looking skin! SoZo Hair – your home for hair coloring and hair cuts in West Chester, Ohio.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* ── PRICING SIMPLE TABLE (Left Column) ── */}
+                  {isPricingSimple && service.simpleTable && (
+                    <div className="mb-8 overflow-x-auto rounded-xl border border-[#EDE7E0] shadow-sm bg-white">
+                      <table
+                        style={{
+                          width: "100%",
+                          borderCollapse: "collapse",
+                          fontSize: 15,
+                        }}
+                      >
+                        <thead>
+                          <tr>
+                            {service.simpleTable.columns.map((col, cIdx) => (
+                              <th
+                                key={cIdx}
+                                style={{
+                                  background: cIdx === 0 ? "#C4956A" : "#D4A57A",
+                                  color: "#fff",
+                                  padding: "16px 20px",
+                                  textAlign: "left",
+                                  fontSize: 13,
+                                  fontWeight: 700,
+                                  letterSpacing: 0.5,
+                                  textTransform: "uppercase",
+                                  borderRight: cIdx < service.simpleTable!.columns.length - 1 ? "1px solid rgba(255,255,255,0.2)" : "none",
+                                }}
+                              >
+                                {col}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {service.simpleTable.rows.map((row, rIdx) => (
+                            <tr
+                              key={rIdx}
+                              style={{
+                                background: rIdx % 2 === 0 ? "#fff" : "#FDFAF7",
+                                borderBottom: "1px solid #F0EBE5",
+                              }}
+                              className="hover:bg-[#FDF6F0] transition-colors"
+                            >
+                              {row.map((cell, cellIdx) => (
+                                <td
+                                  key={cellIdx}
+                                  style={{
+                                    padding: "14px 20px",
+                                    fontSize: 15,
+                                    color: cellIdx === 0 ? "#222222" : "#C4956A",
+                                    fontWeight: cellIdx === 0 ? 500 : 700,
+                                  }}
+                                >
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {service.tableNote && (
+                        <p style={{ fontSize: 13, color: "#777", fontStyle: "italic", padding: "12px 20px 14px", margin: 0 }}>
+                          * {service.tableNote}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Right Column (50% Width): Plain Featured Image Card (Vertically Centered) */}
+                {(service.heroImage || service.heroDetailImage) && (
+                  <div className="w-full rounded-3xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-[#E8DDD7] bg-white group">
+                    <div className="relative w-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] overflow-hidden">
+                      <Image
+                        src={service.heroImage || service.heroDetailImage || ""}
+                        alt={service.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        priority
+                      />
+                    </div>
+                  </div>
                 )}
               </div>
             </section>
+
+            {/* ── HIGHLIGHTS & DETAILED SERVICES BREAKDOWN ── */}
+            {service.highlights && service.highlights.length > 0 && (
+              <section
+                style={{
+                  maxWidth: "var(--container-max-width, 1319px)",
+                  margin: "0 auto",
+                  padding: "0 40px 60px",
+                }}
+              >
+                <div className="border-t border-[#E8DDD7] pt-12">
+                  <h3
+                    className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl font-semibold text-[#2D2D2D] mb-6"
+                  >
+                    Featured Treatments & Benefits
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {service.highlights.map((h, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-white p-6 rounded-2xl border border-[#EDE7E0] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(196,149,106,0.12)] transition-all duration-300 flex flex-col justify-between"
+                      >
+                        <div>
+                          <div className="w-12 h-12 rounded-xl bg-[#FAF6F2] border border-[#E8DDD7] flex items-center justify-center mb-4">
+                            {renderLucideIcon(h.icon || h.title)}
+                          </div>
+                          <h4 className="text-[16px] font-bold tracking-wide text-[#2D2D2D] uppercase mb-2">
+                            {h.title}
+                          </h4>
+                          <p className="text-[15px] leading-[1.75] text-[#444444] font-normal">
+                            {h.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* ── ADDITIONAL INFORMATION / NOTES ── */}
+            {service.notes && service.notes.length > 0 && service.id !== "scalp-facial" && (
+              <section
+                style={{
+                  maxWidth: "var(--container-max-width, 1319px)",
+                  margin: "0 auto",
+                  padding: "0 40px 60px",
+                }}
+              >
+                <div className="bg-[#FAF6F2] p-8 rounded-2xl border border-[#E8DDD7]">
+                  <h3
+                    className="font-[family-name:var(--font-playfair)] text-xl sm:text-2xl font-semibold text-[#2D2D2D] mb-4"
+                  >
+                    Additional Information
+                  </h3>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3.5 list-none p-0 m-0">
+                    {service.notes.map((note, nIdx) => (
+                      <li
+                        key={nIdx}
+                        className="text-[15px] leading-relaxed text-[#2C2C2C] flex items-start gap-2.5 font-normal"
+                      >
+                        <span className="text-[#C4956A] font-bold text-lg leading-none mt-0.5">•</span>
+                        <span>{note.replace(/^\*\s*/, "")}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+            )}
 
             {/* ═══════════════════════════════════════════════════════
                 PRICING TABLES — pricing-multi type
@@ -598,82 +769,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             )}
 
             {/* ═══════════════════════════════════════════════════════
-                PRICING SIMPLE — pricing-simple type
-            ═══════════════════════════════════════════════════════ */}
-            {isPricingSimple && service.simpleTable && (
-              <section
-                style={{
-                  maxWidth: "var(--container-max-width, 1319px)",
-                  margin: "0 auto",
-                  padding: "20px 40px 60px",
-                }}
-              >
-                <div style={{ maxWidth: 700, overflowX: "auto" }}>
-                  <table
-                    style={{
-                      width: "100%",
-                      borderCollapse: "collapse",
-                      fontSize: 14,
-                    }}
-                  >
-                    <thead>
-                      <tr>
-                        {service.simpleTable.columns.map((col, cIdx) => (
-                          <th
-                            key={cIdx}
-                            style={{
-                              background: cIdx === 0 ? "#C4956A" : "#D4A57A",
-                              color: "#fff",
-                              padding: "14px 16px",
-                              textAlign: "left",
-                              fontSize: 12,
-                              fontWeight: 700,
-                              letterSpacing: 0.5,
-                              textTransform: "uppercase",
-                              borderRight: cIdx < service.simpleTable!.columns.length - 1 ? "1px solid rgba(255,255,255,0.2)" : "none",
-                            }}
-                          >
-                            {col}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {service.simpleTable.rows.map((row, rIdx) => (
-                        <tr
-                          key={rIdx}
-                          style={{
-                            background: rIdx % 2 === 0 ? "#fff" : "#FDFAF7",
-                            borderBottom: "1px solid #F0EBE5",
-                          }}
-                        >
-                          {row.map((cell, cellIdx) => (
-                            <td
-                              key={cellIdx}
-                              style={{
-                                padding: "12px 16px",
-                                fontSize: 14,
-                                color: cellIdx === 0 ? "#2D2D2D" : "#555",
-                                fontWeight: cellIdx === 0 ? 500 : 400,
-                              }}
-                            >
-                              {cell}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                {service.tableNote && (
-                  <p style={{ fontSize: 12, color: "#999", fontStyle: "italic", marginTop: 12 }}>
-                    * {service.tableNote}
-                  </p>
-                )}
-              </section>
-            )}
-
-            {/* ═══════════════════════════════════════════════════════
                 INFO BENEFITS — info-benefits type (Extensions, Scalp Facial)
             ═══════════════════════════════════════════════════════ */}
             {isInfoBenefits && (
@@ -782,7 +877,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                             border: "1px solid #EDE7E0",
                           }}
                         >
-                          <div style={{ fontSize: 24, marginBottom: 10 }}>{h.icon}</div>
+                          <div className="w-12 h-12 rounded-xl bg-[#FAF6F2] border border-[#E8DDD7] flex items-center justify-center mb-4">
+                            {renderLucideIcon(h.icon || h.title)}
+                          </div>
                           <h4 style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: "#2D2D2D", marginBottom: 8 }}>
                             {h.title}
                           </h4>

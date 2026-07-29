@@ -329,7 +329,12 @@ export default function SocialMediaPage() {
                   <Link href="/register" className="inline-flex items-center rounded-full bg-[#B8836E] px-5 py-3 text-[13px] font-medium text-white transition-colors hover:bg-[#2C2420]">
                     Book Appointment
                   </Link>
-                  <a href="#contact-form" className="inline-flex items-center rounded-full border border-[#E8DDD7] px-5 py-3 text-[13px] font-medium text-[#2C2420] transition-colors hover:border-[#B8836E] hover:text-[#B8836E]">
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=9069+Cincinnati+Dayton+Rd,+West+Chester,+OH+45069"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-full border border-[#E8DDD7] px-5 py-3 text-[13px] font-medium text-[#2C2420] transition-colors hover:border-[#B8836E] hover:text-[#B8836E] no-underline"
+                  >
                     Get Directions
                   </a>
                 </div>
@@ -355,8 +360,19 @@ export default function SocialMediaPage() {
               </div>
 
               <div className="space-y-5" id="contact-form">
-                <div className="overflow-hidden rounded-2xl border border-[#E8DDD7] bg-[#F8F3EE]">
-                  <Image src="/landing/map/map.png" alt="Map placeholder" width={400} height={200} className="h-full w-full object-cover" />
+                {/* Google Maps Container */}
+                <div className="relative w-full h-[380px] sm:h-[420px] lg:h-[450px] overflow-hidden rounded-2xl border border-[#E8DDD7] shadow-sm">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3086.3361802537734!2d-84.4133532235326!3d39.325968221302425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8840503c40489de9%3A0x7f3ad5308be19b80!2sSoZo%20Hair%2C%20Spa%20%26%20Wigs!5e0!3m2!1sen!2sbd!4v1785322002891!5m2!1sen!2sbd"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    className="w-full h-full"
+                    title="SoZo Hair Salon Google Location Map"
+                  />
                 </div>
 
                 <div className="rounded-2xl bg-[#F8F3EE] p-6 shadow-[0_12px_32px_rgba(44,36,32,0.08)]">

@@ -11,6 +11,8 @@ const services = [
   { title: "CryoSkin Fat Loss", image: "/landing/services/cryosking.png", id: "cryoskin" },
   { title: "Pure Plasma", image: "/landing/services/pure-plasma.png", id: "pure-plasma" },
   { title: "The Relaxing Scalp Facial", image: "/landing/services/the-relaxing-Scalp-facial.png", id: "scalp-facial" },
+  { title: "Skin Services", image: "/landing/services/sozo-Skin-Services.jpg", id: "skin-services" },
+  { title: "HeadSpa", image: "/landing/services/headSpa-What-Youve-been-Waiting.jpg", id: "headspa" },
 ];
 
 export default function OurServices() {
