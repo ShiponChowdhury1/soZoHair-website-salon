@@ -1,48 +1,85 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 
 interface PlasmaVideoPlayerProps {
   poster: string;
-  videoUrl: string;
+  videoSrc?: string;
+  videoUrl?: string;
   duration?: string;
 }
 
-export default function PlasmaVideoPlayer({ poster, videoUrl, duration = "1:00" }: PlasmaVideoPlayerProps) {
+export default function PlasmaVideoPlayer({
+  poster,
+  videoSrc,
+  videoUrl,
+  duration = "1:00",
+}: PlasmaVideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   if (isPlaying) {
-    return (
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "100%",
-          aspectRatio: "16/9",
-          borderRadius: 12,
-          overflow: "hidden",
-          backgroundColor: "#000",
-          boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
-          margin: "0 auto",
-        }}
-      >
-        <iframe
-          src={`${videoUrl}?autoplay=1&rel=0`}
-          title="Pure Plasma Treatment Video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
+    if (videoSrc) {
+      return (
+        <div
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
+            position: "relative",
             width: "100%",
-            height: "100%",
-            border: "none",
+            maxWidth: "100%",
+            aspectRatio: "16/9",
+            borderRadius: 16,
+            overflow: "hidden",
+            backgroundColor: "#000",
+            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
+            margin: "0 auto",
           }}
-        />
-      </div>
-    );
+        >
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            poster={poster}
+            controls
+            autoPlay
+            playsInline
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </div>
+      );
+    }
+
+    if (videoUrl) {
+      return (
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "100%",
+            aspectRatio: "16/9",
+            borderRadius: 16,
+            overflow: "hidden",
+            backgroundColor: "#000",
+            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
+            margin: "0 auto",
+          }}
+        >
+          <iframe
+            src={`${videoUrl}?autoplay=1&rel=0`}
+            title="Pure Plasma Treatment Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+            }}
+          />
+        </div>
+      );
+    }
   }
 
   return (
@@ -53,7 +90,7 @@ export default function PlasmaVideoPlayer({ poster, videoUrl, duration = "1:00" 
         width: "100%",
         maxWidth: "100%",
         aspectRatio: "16/9",
-        borderRadius: 12,
+        borderRadius: 16,
         overflow: "hidden",
         cursor: "pointer",
         boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
@@ -86,12 +123,6 @@ export default function PlasmaVideoPlayer({ poster, videoUrl, duration = "1:00" 
           backgroundColor: "rgba(0, 0, 0, 0.25)",
           transition: "backgroundColor 0.3s ease",
         }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.15)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
-        }}
       />
 
       {/* Play button overlay */}
@@ -123,10 +154,7 @@ export default function PlasmaVideoPlayer({ poster, videoUrl, duration = "1:00" 
             color: "#C4956A",
           }}
         >
-          <path
-            d="M8 5V19L19 12L8 5Z"
-            fill="currentColor"
-          />
+          <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
         </svg>
       </div>
 

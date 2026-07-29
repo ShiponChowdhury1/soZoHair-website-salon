@@ -334,10 +334,34 @@ export const services: Service[] = [
     type: "pricing-simple",
     tableNote: "",
     simpleTable: {
-      columns: ["Treatment", "Rate"],
+      columns: ["Eyelash/Brow Service", "Price", "Description"],
       rows: [
-        ["Brow Wax", "$24"],
-        ["Brow/Lash Tint", "$31"],
+        ["Eyebrow Wax", "$32", ""],
+        [
+          "Eyebrow Tint",
+          "$38",
+          "Enhance your natural brows with a custom brow tint designed to add depth, definition and the appearance of fuller looking brows.",
+        ],
+        [
+          "Eyebrow Lamination",
+          "$92",
+          "Gently restructures the brow hairs, allowing them to be shaped into the ideal look while creating the appearance of added fulness and symmetry.",
+        ],
+        [
+          "Eyelash Application",
+          "$35",
+          "Complete your look with a professional lash application for instant length, volume and glamour.",
+        ],
+        [
+          "Eyelash Tint",
+          "$38",
+          "Enhance your natural lashes with a custom eyelash tint that adds rich, long lasting color. This service creates the appearance of darker, fuller-looking lashes.",
+        ],
+        [
+          "Eyelash Lift",
+          "$103",
+          "This treatment gently lifts & curls your lashes to create the appearance of longer, fuller, more defines lashes.",
+        ],
       ],
     },
     notes: [

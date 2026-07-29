@@ -94,6 +94,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const isInfoBenefits = service.type === "info-benefits";
   const isInfoFaq = service.type === "info-faq";
   const isFaqStats = service.type === "faq-stats";
+  const hasRightSideFeaturedCard = service.id === "headspa" || service.id === "skin-services";
   const getHeroObjectPosition = (serviceId: string) => {
     if (serviceId === "cryoskin") return "right 35%";
     if (serviceId === "lash-brow") return "right 25%";
@@ -452,7 +453,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </section>
         ) : (
           <>
-            {/* ── INTRO & FEATURED RIGHT SIDE IMAGE (50% - 50% CENTERED SPLIT) ── */}
+            {/* ── INTRO & PRICING SIMPLE SECTION ── */}
             <section
               style={{
                 maxWidth: "var(--container-max-width, 1319px)",
@@ -460,11 +461,106 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 padding: "60px 40px 40px",
               }}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-                {/* Left Column (50% Width): Intro + Simple Table */}
+              {hasRightSideFeaturedCard ? (
+                /* 50% - 50% Centered Split ONLY for HeadSpa & Skin Services */
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                  {/* Left Column (50% Width): Intro + Simple Table */}
+                  <div className="w-full">
+                    <div className="mb-8">
+                      <p className="text-[16px] sm:text-[17px] leading-[1.85] text-[#2C2C2C] font-normal">
+                        {service.intro}
+                      </p>
+                    </div>
+
+                    {/* PRICING SIMPLE TABLE */}
+                    {isPricingSimple && service.simpleTable && (
+                      <div className="mb-8 overflow-x-auto rounded-xl border border-[#EDE7E0] shadow-sm bg-white">
+                        <table
+                          style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                            fontSize: 15,
+                          }}
+                        >
+                          <thead>
+                            <tr>
+                              {service.simpleTable.columns.map((col, cIdx) => (
+                                <th
+                                  key={cIdx}
+                                  style={{
+                                    background: cIdx === 0 ? "#C4956A" : "#D4A57A",
+                                    color: "#fff",
+                                    padding: "16px 20px",
+                                    textAlign: "left",
+                                    fontSize: 13,
+                                    fontWeight: 700,
+                                    letterSpacing: 0.5,
+                                    textTransform: "uppercase",
+                                    borderRight: cIdx < service.simpleTable!.columns.length - 1 ? "1px solid rgba(255,255,255,0.2)" : "none",
+                                  }}
+                                >
+                                  {col}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {service.simpleTable.rows.map((row, rIdx) => (
+                              <tr
+                                key={rIdx}
+                                style={{
+                                  background: rIdx % 2 === 0 ? "#fff" : "#FDFAF7",
+                                  borderBottom: "1px solid #F0EBE5",
+                                }}
+                                className="hover:bg-[#FDF6F0] transition-colors"
+                              >
+                                {row.map((cell, cellIdx) => (
+                                  <td
+                                    key={cellIdx}
+                                    style={{
+                                      padding: "14px 20px",
+                                      fontSize: 15,
+                                      color: cellIdx === 0 ? "#222222" : cellIdx === 1 ? "#C4956A" : "#555555",
+                                      fontWeight: cellIdx === 0 ? 600 : cellIdx === 1 ? 700 : 400,
+                                      lineHeight: cellIdx === 2 ? 1.6 : 1.4,
+                                    }}
+                                  >
+                                    {cell}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                        {service.tableNote && (
+                          <p style={{ fontSize: 13, color: "#777", fontStyle: "italic", padding: "12px 20px 14px", margin: 0 }}>
+                            * {service.tableNote}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column (50% Width): Featured Image Card */}
+                  {(service.heroImage || service.heroDetailImage) && (
+                    <div className="w-full h-full flex flex-col rounded-3xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-[#E8DDD7] bg-white group">
+                      <div className="relative w-full h-full flex-1 min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] overflow-hidden">
+                        <Image
+                          src={service.heroImage || service.heroDetailImage || ""}
+                          alt={service.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          priority
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Full Width 1-Column Layout for ALL other services */
                 <div className="w-full">
                   <div className="mb-8">
-                    {/* Extensions page heading */}
                     {service.id === "extensions-texturizing" && (
                       <h2
                         style={{
@@ -486,7 +582,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                       {service.intro}
                     </p>
 
-                    {/* Hair Cuts extra paragraph */}
                     {service.id === "hair-cuts-color" && (
                       <p
                         className="text-[16px] sm:text-[17px] leading-[1.85] text-[#2C2C2C] font-normal mt-5"
@@ -496,7 +591,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     )}
                   </div>
 
-                  {/* ── PRICING SIMPLE TABLE (Left Column) ── */}
+                  {/* PRICING SIMPLE TABLE (Full Width) */}
                   {isPricingSimple && service.simpleTable && (
                     <div className="mb-8 overflow-x-auto rounded-xl border border-[#EDE7E0] shadow-sm bg-white">
                       <table
@@ -544,8 +639,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                                   style={{
                                     padding: "14px 20px",
                                     fontSize: 15,
-                                    color: cellIdx === 0 ? "#222222" : "#C4956A",
-                                    fontWeight: cellIdx === 0 ? 500 : 700,
+                                    color: cellIdx === 0 ? "#222222" : cellIdx === 1 ? "#C4956A" : "#555555",
+                                    fontWeight: cellIdx === 0 ? 600 : cellIdx === 1 ? 700 : 400,
+                                    lineHeight: cellIdx === 2 ? 1.6 : 1.4,
                                   }}
                                 >
                                   {cell}
@@ -563,23 +659,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     </div>
                   )}
                 </div>
-
-                {/* Right Column (50% Width): Plain Featured Image Card (Full Height Section Fit) */}
-                {(service.heroImage || service.heroDetailImage) && (
-                  <div className="w-full h-full flex flex-col rounded-3xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-[#E8DDD7] bg-white group">
-                    <div className="relative w-full h-full flex-1 min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] overflow-hidden">
-                      <Image
-                        src={service.heroImage || service.heroDetailImage || ""}
-                        alt={service.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        priority
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
+              )}
             </section>
 
             {/* ── HIGHLIGHTS & DETAILED SERVICES BREAKDOWN ── */}
@@ -944,8 +1024,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div style={{ width: "100%", maxWidth: 1100, margin: "0 0 60px" }}>
                   <PlasmaVideoPlayer
                     poster="/landing/services/pure-plasma-skin-treatments.-details.png"
-                    videoUrl="https://www.youtube.com/embed/LrMMztkFEMk"
-                    duration="2:15"
+                    videoSrc="/pure_Plasma_Skin_Treatment-detials.mp4"
+                    duration="0:45"
                   />
                 </div>
 
@@ -981,8 +1061,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div style={{ width: "100%", maxWidth: 1100, margin: "0 0 60px" }}>
                   <PlasmaVideoPlayer
                     poster="/landing/services/pure-plasma.png"
-                    videoUrl="https://www.youtube.com/embed/LrMMztkFEMk"
-                    duration="3:42"
+                    videoSrc="/pure_plasma_skin_treatments.mp4"
+                    duration="1:15"
                   />
                 </div>
 
@@ -1033,8 +1113,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div style={{ width: "100%", maxWidth: 1100, margin: "40px 0 60px" }}>
                   <PlasmaVideoPlayer
                     poster="/landing/services/pure-plasma-skin-treatments.-details.png"
-                    videoUrl="https://www.youtube.com/embed/LrMMztkFEMk"
-                    duration="4:10"
+                    videoSrc="/pure_plasma_skin_treatments.mp4"
+                    duration="1:15"
                   />
                 </div>
 
