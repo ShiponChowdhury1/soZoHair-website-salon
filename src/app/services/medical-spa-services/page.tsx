@@ -92,7 +92,7 @@ export default function MedicalSpaServicesPage() {
           </div>
 
           {/* Hero Banner Grid — Matched to Navbar Container, No Shadows, Clean Images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white rounded-3xl p-6 sm:p-10 border border-[#EADCC9]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center rounded-3xl p-6 sm:p-10 border border-[#EADCC9] bg-[#FDF8F4]">
             <div className="relative h-[320px] sm:h-[400px] rounded-2xl overflow-hidden group">
               <Image
                 src="/medical-spa/medical-Spa-Services.jpg"
@@ -101,13 +101,6 @@ export default function MedicalSpaServicesPage() {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="bg-[#D4A59A] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-1">
-                  FDA Approved SkinPen
-                </span>
-                <p className="text-sm font-medium opacity-90">Advanced Microneedling & Medical Aesthetics</p>
-              </div>
             </div>
 
             <div className="space-y-6">
@@ -175,10 +168,10 @@ export default function MedicalSpaServicesPage() {
             ].map((service, idx) => (
               <div
                 key={idx}
-                className="bg-white p-6 rounded-2xl border border-[#EADCC9] transition-colors hover:border-[#D4A59A] group"
+                className="bg-[#FDF8F4] p-6 rounded-2xl border border-[#EADCC9] transition-colors hover:border-[#D4A59A] group"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4A59A] bg-[#FDF8F4] px-3 py-1 rounded-full border border-[#EADCC9]">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4A59A] bg-[#F5ECE2] px-3 py-1 rounded-full border border-[#EADCC9]">
                     {service.badge}
                   </span>
                   <CheckCircle2 className="w-5 h-5 text-[#D4A59A] opacity-70 group-hover:opacity-100 transition-opacity" />
@@ -196,9 +189,9 @@ export default function MedicalSpaServicesPage() {
 
         {/* ── SECOND IMAGE & NURSE CREDENTIALS BANNER ── */}
         <section className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 mb-16">
-          <div className="bg-gradient-to-br from-[#FDF8F4] to-[#F5ECE2] rounded-3xl p-6 sm:p-10 border border-[#EADCC9] grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 text-[#D4A59A] font-bold text-xs tracking-widest uppercase bg-[#FDF8F4] px-3 py-1 rounded-full border border-[#EADCC9]">
+          <div className="bg-[#FDF8F4] rounded-3xl p-6 sm:p-10 border border-[#EADCC9] grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 text-[#D4A59A] font-bold text-xs tracking-widest uppercase bg-[#F5ECE2] px-3 py-1 rounded-full border border-[#EADCC9]">
                 <Award className="w-4 h-4" /> Medical Director & Certified Practitioner
               </div>
               <h3 className="text-2xl sm:text-4xl font-serif font-bold text-[#111111] leading-tight">
@@ -223,12 +216,12 @@ export default function MedicalSpaServicesPage() {
               </ul>
             </div>
             
-            <div className="md:col-span-5 relative h-[260px] sm:h-[320px] rounded-2xl overflow-hidden">
+            <div className="relative h-[340px] sm:h-[420px] rounded-2xl overflow-hidden group">
               <Image
                 src="/medical-spa/medical-Spa.jpg"
                 alt="Kara Day Medical Aesthetics Partner"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
           </div>
@@ -236,7 +229,7 @@ export default function MedicalSpaServicesPage() {
 
         {/* ── SURVEY FORM SECTION ── */}
         <section id="survey" className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8">
-          <div className="bg-white rounded-3xl p-6 sm:p-12 border border-[#EADCC9]">
+          <div className="bg-[#FDF8F4] rounded-3xl p-6 sm:p-12 border border-[#EADCC9]">
             <div className="text-center max-w-xl mx-auto mb-10">
               <div className="w-16 h-16 bg-[#FDF8F4] text-[#D4A59A] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#EADCC9]">
                 <Calendar className="w-8 h-8" />

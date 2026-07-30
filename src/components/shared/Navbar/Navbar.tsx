@@ -64,13 +64,14 @@ const shopItems: MobileSubItem[] = [
 
 const moreItemsMiddle: MobileSubItem[] = [
   { label: "About", href: "/about" },
+  { label: "Virtual Tour", href: "/virtual-tour" },
+  { label: "American Beauty Show in Chicago", href: "/american-beauty-show-chicago" },
   { label: "Medical Spa Services", href: "/services/medical-spa-services" },
   { label: "Speak Your Voice!", href: "/speak-your-voice" },
   { label: "SoZo on Social Media", href: "/social-media" },
   { label: "Ask the Expert", href: "/ask-expert" },
   { label: "View Our 5 Star Ratings", href: "https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l=", isExternal: true },
   { label: "Careers at SoZo Hair, Spa & Wigs", href: "/careers" },
-  { label: "Virtual Tour", href: "/virtual-tour" },
 ];
 
 const moreItemsRight: MobileSubItem[] = [
@@ -136,6 +137,7 @@ export default function Navbar() {
   const isMoreActive = !activeMenu && [
     "/about",
     "/virtual-tour",
+    "/american-beauty-show-chicago",
     "/speak-your-voice",
     "/social-media",
     "/ask-expert",
