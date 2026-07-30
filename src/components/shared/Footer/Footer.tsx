@@ -53,7 +53,7 @@ export default function Footer() {
               <li><Link href="/#services" className={styles.columnLink}>Services</Link></li>
               <li><Link href="/gallery" className={styles.columnLink}>Gallery</Link></li>
               <li><Link href="/premium-products" className={styles.columnLink}>Products</Link></li>
-              <li><Link href="/view-our-ratings" className={styles.columnLink}>View Our Ratings</Link></li>
+              <li><a href="https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l=" target="_blank" rel="noopener noreferrer" className={styles.columnLink}>View Our 5 Star Ratings</a></li>
             </ul>
           </div>
 

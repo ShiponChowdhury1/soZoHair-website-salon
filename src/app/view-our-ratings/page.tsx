@@ -54,13 +54,22 @@ export default function RatingsPage() {
               <p className="text-[14px] text-[#5A4A42] mb-6">
                 We appreciate every client who chooses SZO. Here&apos;s what they have to say about their experience with our expert stylists and personalized care.
               </p>
-              <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex flex-wrap gap-4 items-center mb-4">
+                <a
+                  href="https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#D4A59A] px-6 py-3 text-white font-bold text-sm shadow-md hover:bg-[#c29388] transition-all no-underline"
+                >
+                  ★ View / Leave 5 Star Ratings on Meevo
+                </a>
                 <Link
                   href="/register"
-                  className="inline-flex items-center rounded-full bg-[#B8836E] px-5 py-3 text-white text-sm"
+                  className="inline-flex items-center rounded-full bg-[#B8836E] px-5 py-3 text-white text-sm no-underline"
                 >
                   Book an appointment online!
                 </Link>
+              </div>
                 <div className="flex gap-3">
                   {/* Facebook */}
                   <Link href="#" className="w-9 h-9 rounded-full border border-[#E8DDD7] bg-white/70 flex items-center justify-center text-[#5A4A42]">
@@ -81,8 +90,7 @@ export default function RatingsPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
         {/* ── LEAVE A REVIEW + REVIEWS LIST ── */}
         <section

@@ -21,6 +21,7 @@ type MobileSubItem = {
   label: string;
   href: string;
   isHeading?: boolean;
+  isExternal?: boolean;
 };
 
 type MobileNavItem = {
@@ -63,10 +64,13 @@ const shopItems: MobileSubItem[] = [
 
 const moreItemsMiddle: MobileSubItem[] = [
   { label: "About", href: "/about" },
+  { label: "Medical Spa Services", href: "/services/medical-spa-services" },
+  { label: "Speak Your Voice!", href: "/speak-your-voice" },
   { label: "SoZo on Social Media", href: "/social-media" },
   { label: "Ask the Expert", href: "/ask-expert" },
-  { label: "View Our Ratings", href: "/view-our-ratings" },
+  { label: "View Our 5 Star Ratings", href: "https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l=", isExternal: true },
   { label: "Careers at SoZo Hair, Spa & Wigs", href: "/careers" },
+  { label: "Virtual Tour", href: "/virtual-tour" },
 ];
 
 const moreItemsRight: MobileSubItem[] = [
@@ -131,6 +135,8 @@ export default function Navbar() {
 
   const isMoreActive = !activeMenu && [
     "/about",
+    "/virtual-tour",
+    "/speak-your-voice",
     "/social-media",
     "/ask-expert",
     "/view-our-ratings",
@@ -505,14 +511,30 @@ export default function Navbar() {
                     </div>
                     <div className="flex flex-col gap-1">
                       {moreItemsMiddle.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          onClick={() => setActiveMenu(null)}
-                          className="px-3.5 py-2.5 text-[16px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
-                        >
-                          <span>{item.label}</span>
-                        </Link>
+                        item.isExternal || item.href.startsWith("http") ? (
+                          <a
+                            key={item.label}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setActiveMenu(null)}
+                            className="px-3.5 py-2.5 text-[16px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
+                          >
+                            <span>{item.label}</span>
+                            <svg className="w-4 h-4 text-[#D4A59A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        ) : (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={() => setActiveMenu(null)}
+                            className="px-3.5 py-2.5 text-[16px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
+                          >
+                            <span>{item.label}</span>
+                          </Link>
+                        )
                       ))}
                       <div className="text-[13px] font-extrabold tracking-[2px] uppercase text-[#D4A59A] px-3.5 py-2 mt-3 mb-2 border-b border-[#F5ECE2]">
                         Policies
