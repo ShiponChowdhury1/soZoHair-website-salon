@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import CartSidebar from "@/components/shared/CartSidebar/CartSidebar";
 import WishlistSidebar from "@/components/shared/WishlistSidebar/WishlistSidebar";
 import { productSections } from "@/data/products";
+import { services } from "@/data/services";
+import { SOZO_ARTICLES } from "@/data/articles";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -49,12 +51,17 @@ const serviceItems: MobileSubItem[] = [
   { label: "Hair Extensions", href: "/services/extensions-texturizing" },
   { label: "Waxing Services", href: "/services/waxing" },
   { label: "Lash & Brow Services", href: "/services/lash-brow" },
-  { label: "CryoSkin Fat Loss Treatment", href: "/services/cryoskin" },
   { label: "Pure Plasma", href: "/services/pure-plasma" },
   { label: "The Relaxing Scalp Facial", href: "/services/scalp-facial" },
   { label: "Skin Services", href: "/services/skin-services" },
   { label: "HeadSpa", href: "/services/headspa" },
-  { label: "Medical Spa Services", href: "/services/medical-spa-services" },
+  { label: "CryoSkin Fat Loss Treatment", href: "/services/cryoskin" },
+  { label: "Medical Spa Services", href: "/services/medical-spa-services", isHeading: true },
+  { label: "  • Wrinkle Relaxers & Fillers", href: "/services/medical-spa-services" },
+  { label: "  • Microneedling (SkinPen)", href: "/services/medical-spa-services" },
+  { label: "  • VI-Peel Chemical Peel", href: "/services/medical-spa-services" },
+  { label: "  • Lipo B12 Injections", href: "/services/medical-spa-services" },
+  { label: "  • Body Sculpting", href: "/services/medical-spa-services" },
 ];
 
 const shopItems: MobileSubItem[] = [
@@ -65,12 +72,11 @@ const shopItems: MobileSubItem[] = [
 const moreItemsMiddle: MobileSubItem[] = [
   { label: "About", href: "/about" },
   { label: "Virtual Tour", href: "/virtual-tour" },
-  { label: "American Beauty Show in Chicago", href: "/american-beauty-show-chicago" },
   { label: "Medical Spa Services", href: "/services/medical-spa-services" },
   { label: "Speak Your Voice!", href: "/speak-your-voice" },
   { label: "SoZo on Social Media", href: "/social-media" },
   { label: "Ask the Expert", href: "/ask-expert" },
-  { label: "View Our 5 Star Ratings", href: "https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l=", isExternal: true },
+  { label: "View Our 5 Star Ratings", href: "https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l=107183", isExternal: true },
   { label: "Careers at SoZo Hair, Spa & Wigs", href: "/careers" },
 ];
 
@@ -137,7 +143,6 @@ export default function Navbar() {
   const isMoreActive = !activeMenu && [
     "/about",
     "/virtual-tour",
-    "/american-beauty-show-chicago",
     "/speak-your-voice",
     "/social-media",
     "/ask-expert",
@@ -189,15 +194,56 @@ export default function Navbar() {
 
   const searchResults = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) return [] as any;
-    const all = productSections.flatMap((s) => s.products || []);
-    return all.filter((p) => {
-      return (
-        p.name?.toLowerCase().includes(q) ||
-        p.category?.toLowerCase().includes(q) ||
-        p.description?.toLowerCase().includes(q)
-      );
-    }).slice(0, 12);
+    if (!q) return { products: [], servicesList: [], articlesList: [], pageLinks: [] };
+
+    // 1. Products
+    const allProducts = productSections.flatMap((s) => s.products || []);
+    const matchingProducts = allProducts.filter((p) =>
+      p.name?.toLowerCase().includes(q) ||
+      p.category?.toLowerCase().includes(q) ||
+      p.description?.toLowerCase().includes(q)
+    ).slice(0, 4);
+
+    // 2. Services
+    const matchingServices = services.filter((s) =>
+      s.title.toLowerCase().includes(q) ||
+      s.intro.toLowerCase().includes(q) ||
+      s.badge.toLowerCase().includes(q)
+    ).slice(0, 4);
+
+    // 3. Articles
+    const matchingArticles = (SOZO_ARTICLES || []).filter((a) =>
+      a.title.toLowerCase().includes(q) ||
+      a.excerpt.toLowerCase().includes(q) ||
+      a.category.toLowerCase().includes(q) ||
+      a.tags.some((t) => t.toLowerCase().includes(q))
+    ).slice(0, 4);
+
+    // 4. Key Pages
+    const sitePages = [
+      { name: "Home", href: "/", desc: "Main landing page" },
+      { name: "Services", href: "/#services", desc: "All hair, spa, & medical spa services" },
+      { name: "Wigs", href: "/wigs", desc: "Human hair & synthetic wigs, hats, & accessories" },
+      { name: "Academy", href: "/academy", desc: "Education & salon training" },
+      { name: "Team", href: "/teams", desc: "Meet master stylists & experts" },
+      { name: "Gallery", href: "/gallery", desc: "Photos of our work" },
+      { name: "Articles & Blog", href: "/articles", desc: "Hair tips, trends, and care advice" },
+      { name: "Virtual Tour", href: "/virtual-tour", desc: "360 degree virtual tour of landmark salon" },
+      { name: "Ask The Expert", href: "/ask-expert", desc: "Beauty & hair advice Q&A" },
+      { name: "Careers", href: "/careers", desc: "Job opportunities at SoZo" },
+      { name: "View Our 5 Star Ratings", href: "/view-our-ratings", desc: "Client ratings & reviews" },
+      { name: "Medical Spa Services", href: "/services/medical-spa-services", desc: "Wrinkle relaxers, fillers, skinpen, VI peel" },
+    ];
+    const matchingPages = sitePages.filter((p) =>
+      p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+    ).slice(0, 4);
+
+    return {
+      products: matchingProducts,
+      servicesList: matchingServices,
+      articlesList: matchingArticles,
+      pageLinks: matchingPages,
+    };
   }, [searchQuery]);
 
   useEffect(() => {
@@ -654,13 +700,94 @@ export default function Navbar() {
             {searchQuery && (
               <div className="border-t border-gray-100 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.1)]">
                 <div className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 py-6 max-h-[60vh] overflow-y-auto">
-                  {searchResults.length === 0 ? (
-                    <p className="text-center text-[#666] py-8 text-[14px]">No results found.</p>
+                  {searchResults.servicesList.length === 0 &&
+                  searchResults.articlesList.length === 0 &&
+                  searchResults.products.length === 0 &&
+                  searchResults.pageLinks.length === 0 ? (
+                    <p className="text-center text-[#666] py-8 text-[14px]">No results found for &quot;{searchQuery}&quot;.</p>
                   ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                      {searchResults.map((p: any) => (
-                        <ProductCard key={`${p.id}-${p.slug}`} product={p} />
-                      ))}
+                    <div className="space-y-6">
+                      {/* Services */}
+                      {searchResults.servicesList.length > 0 && (
+                        <div>
+                          <div className="text-[12px] font-bold uppercase tracking-widest text-[#D4A59A] mb-3">
+                            Services
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            {searchResults.servicesList.map((s) => (
+                              <Link
+                                key={s.id}
+                                href={`/services/${s.id}`}
+                                onClick={() => setIsSearchOpen(false)}
+                                className="p-3 bg-[#FDF8F4] hover:bg-[#F5ECE2] rounded-xl border border-[#EADCC9] transition-all no-underline block"
+                              >
+                                <div className="text-[10px] font-bold uppercase tracking-wider text-[#D4A59A] mb-1">{s.badge}</div>
+                                <div className="text-sm font-bold text-[#111]">{s.title}</div>
+                                <div className="text-xs text-[#666] line-clamp-2 mt-1">{s.intro}</div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Articles */}
+                      {searchResults.articlesList.length > 0 && (
+                        <div>
+                          <div className="text-[12px] font-bold uppercase tracking-widest text-[#D4A59A] mb-3">
+                            Articles & Tips
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            {searchResults.articlesList.map((a) => (
+                              <Link
+                                key={a.id}
+                                href={`/articles/${a.id}`}
+                                onClick={() => setIsSearchOpen(false)}
+                                className="p-3 bg-[#FDF8F4] hover:bg-[#F5ECE2] rounded-xl border border-[#EADCC9] transition-all no-underline block"
+                              >
+                                <div className="text-[10px] font-bold uppercase tracking-wider text-[#D4A59A] mb-1">{a.category}</div>
+                                <div className="text-sm font-bold text-[#111] line-clamp-1">{a.title}</div>
+                                <div className="text-xs text-[#666] line-clamp-2 mt-1">{a.excerpt}</div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Site Pages */}
+                      {searchResults.pageLinks.length > 0 && (
+                        <div>
+                          <div className="text-[12px] font-bold uppercase tracking-widest text-[#D4A59A] mb-3">
+                            Pages & Information
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            {searchResults.pageLinks.map((p) => (
+                              <Link
+                                key={p.name}
+                                href={p.href}
+                                onClick={() => setIsSearchOpen(false)}
+                                className="p-3 bg-[#FDF8F4] hover:bg-[#F5ECE2] rounded-xl border border-[#EADCC9] transition-all no-underline block"
+                              >
+                                <div className="text-sm font-bold text-[#111]">{p.name}</div>
+                                <div className="text-xs text-[#666] mt-0.5">{p.desc}</div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Products */}
+                      {searchResults.products.length > 0 && (
+                        <div>
+                          <div className="text-[12px] font-bold uppercase tracking-widest text-[#D4A59A] mb-3">
+                            Products
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            {searchResults.products.map((p: any) => (
+                              <ProductCard key={`${p.id}-${p.slug}`} product={p} />
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

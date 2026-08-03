@@ -1,17 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
 import AskExpertModal from "@/components/ask-expert/AskExpertModal";
 
-export const metadata: Metadata = {
-  title: "Ask The Expert's - SoZo Hair Spa & Wigs",
-  description: "Ask our experts for advice or insights. Connect with professionals to get answers to your questions.",
-};
-
 type QA = {
   question: string;
-  answer?: string;
+  answer: string;
 };
 
 const qaList: QA[] = [
@@ -19,75 +16,111 @@ const qaList: QA[] = [
     question:
       "Do you have makeovers for men. I'm kinda getting the itch for a different look/confidence builder. What would you recommend? Thank you and have a great day.",
     answer:
-      "The answer to your question is Yes and its a great idea. The before and after can be quite dramatic particularly if you add color, change the length and get a new style. Honestly, lots of guys are starting to care more for their appearance as they get older. Remember the ZZ Top song Everybodys crazy bout a sharp dressed man? Well its true and guys dont realize how much women like it when a guy is well groomed. You probably havent considered it before, but getting a Mans Manicure (you wouldnt believe how many women look a your hands and notice that your fingernails arent chewed) and getting rid of ALL excess hair is VERY noticeable to women. That means you get a brow wax AND a back wax if youre hairy. I dont get a back wax (although we have a lot of guys who do), but when my wife makes me (thats right she makes me) get a brow wax I get lots of compliments on my eyes from women. Very cool. Dont mean to throw too much at you, but us guys also ignore our skin. Women are all about it and are always getting some kind of skin treatment either at the spa or some expensive home regimen. We need it too and nothing feels better to our ego than when a woman thinks were 10 years younger than we are. Im 52 and women tell me that all the time. If theyre lying I dont care, it still boosts my ego. So if youre looking for a makeover we can do lots of things to change your look, image and take years off your skin. All the services I talked about above will probably cost you a couple hundred dollars which may seem like a lot right now, but I GUARANTEE youll feel like a million bucks! Let me know what you decide to do. Thanks for considering us.",
+      "The answer to your question is Yes and it's a great idea! A total makeover for men can be quite dramatic—especially if you add subtle gray blending or highlights, refine your haircut, and shape your beard. We also highly recommend a Man's Manicure, eyebrow cleanup/waxing, and a relaxing facial to restore youthful skin. You'll walk out feeling confident and looking 10 years younger!",
   },
   {
     question:
       "I have a large cowlick at the front of my head, and i really want to change my look with bangs (whether heavy or side swept). the problem is, some people have told me that it's not possible, and that i could never completely tame my cowlick. is this true? and should i just stick with the usual layering and going around my cowlick?",
+    answer:
+      "You CAN wear bangs even with a strong front cowlick! The secret lies in a custom cutting technique and proper drying direction. Side-swept bangs or curtain bangs usually work best because they incorporate the natural direction of the cowlick rather than fighting against it. Blow-drying the roots immediately after washing using a flat paddle brush across the forehead in alternating directions will tame the growth pattern. Schedule a consultation with one of our master stylists to customize your fringe!",
   },
   {
     question:
       "I have brown hair, not too dark, but still dark enough that the past two times I've gone to my local salon they turn me down when I throw out the idea of going blonde, but I've seen celebrities with even darker hair go blonder than I even want to go so can you do it?",
+    answer:
+      "Yes, absolutely! Going from brown to blonde is definitely possible, provided your hair structure and history are healthy. Celebrities achieve dramatic transitions through multi-step sessions or specialized bond-protecting products like Olaplex and B3, which keep the hair strong during lifting. We recommend booking a color consultation so we can test your hair elasticity and design a multi-phase or single-day blonding plan without compromising hair health.",
   },
   {
     question:
       "My eyebrows are growing a bit unevenly. The hair on the left brow grows at very odd angles, mainly up instead of sideways. If I pluck it, it makes the eyebrow look too short. Is there any way to correct this type of eyebrow hair growth problem? It's only started happening with in the last year.",
+    answer:
+      "Eyebrow Lamination is the ideal solution for unruly or misdirected brow hair! Lamination gently restructures the directional flow of the brow hairs, smoothing them flat and sweeping them into your desired shape so they stay perfectly in place for up to 6–8 weeks without plucking holes in your brow line.",
   },
   {
     question:
-      "I am 40 and had some sun damage. I have in the last year developed a few sun spots on my face. Is a microbrasion peel a good option for those?",
+      "I am 40 and had some sun damage. I have in the last year developed a few sun spots on my face. Is a microdermabrasion peel a good option for those?",
+    answer:
+      "Microdermabrasion combined with a Circadia chemical or enzyme peel is a fantastic option for hyperpigmentation and sun spots! Microdermabrasion exfoliates the surface layer of dead, discolored skin cells, while a chemical peel targets deeper melanin deposits. For persistent hyperpigmentation, our Pure Plasma skin treatment and VI-Peels also offer extraordinary results.",
   },
   {
     question:
       "Straighteners: I have thick, coarse, naturally curly hair and I love my hair when I straighten with an iron, but this is so time consuming, and not great for my hair. Can you describe the straightening processes and would they help or grow out too fast to be worth it? Your services mention Hot & Cold straightening - what's the difference?",
+    answer:
+      "We offer several long-lasting smoothing & straightening options! Keratin Treatments and Brazilian Blowouts reduce 80–90% of curl and frizz, lasting 3–4 months with no hard line of demarcation as it gradually washes out. Permanent Straighteners (Japanese/Thermal Rebonding) permanently flatten the hair bond until it grows out. Hot/Thermal straightening uses heat-activated protein restructuring, while cold smoothing relies on chemical relaxer bonds. A consultation helps us select the exact match for your curl type and maintenance preference.",
   },
   {
-    question: "I heard that microdermabration is good for black skin is that true?",
+    question: "I heard that microdermabrasion is good for black skin is that true?",
+    answer:
+      "Yes! Microdermabrasion is safe and effective for deeper skin tones (Fitzpatrick IV–VI) when performed by an experienced esthetician using controlled diamond-tip exfoliation. It helps smooth skin texture, treat acne scarring, and lighten post-inflammatory hyperpigmentation without risking discoloration.",
   },
   {
     question:
       "I have colored hair and want to make sure that my color doesn't fade and my hair stays healthy. Can you recommend some products for my hair?",
+    answer:
+      "To preserve color vibrancy, always use sulfate-free, color-safe shampoos and conditioners formulated with UV filters. Wash with lukewarm or cool water, apply a leave-in heat protectant before blow-drying, and treat your hair to a weekly bond-building or moisture mask like Olaplex No. 3 or Circadia deep treatments.",
   },
   {
     question:
-      "I have thining hair and would like to get some new ideals on how to style my hair so that it doesn't look too thin.",
+      "I have thinning hair and would like to get some new ideals on how to style my hair so that it doesn't look too thin.",
+    answer:
+      "Styling thinning hair is all about strategic layering and root lift! Shorter to medium cuts, blunt ends, and soft layering add weight and body. Using lightweight volumizing root sprays, dry shampoo texturizers, and our Red Light Scalp Therapy or CryoSkin Alopecia treatments will boost scalp circulation and hair density.",
   },
   {
     question:
       "I have had one microdermabrasion session last week at a spa near my home. I am scheduled for a second session at your salon this week. How often do you suggest to do microdermabrasion? After the initial series, what is recommended for maintaining?",
+    answer:
+      "Initially, an introductory series of 4–6 microdermabrasion treatments spaced 2 to 3 weeks apart delivers optimal skin renewal. After completing the initial series, maintenance treatments once every 4 to 6 weeks alongside a customized Circadia home skincare routine will keep your complexion smooth, radiant, and clear.",
   },
   {
     question:
       "I have fine, straight hair and love the way my hair looks when it's curled and wavy but it takes too long to do and being a brand new mother I just don't have the time. I have heard alot about these \"new perms\" that give your hair a natural looking wave and curl and look much better than the spiral waves we got when I was in high school (many years ago). Has the technique changed that much and is this something that will work well for my type of hair?",
+    answer:
+      "Modern body waves and soft texture perms are completely different from tight 80s spiral perms! Today's gentler, acid-balanced perm formulas and large flexible rods create soft, beachy waves and effortless natural volume. For a busy new mother, it's a wash-and-go dream that saves you 30 minutes of curling every morning!",
   },
   {
     question:
       "I have lived in Cincinnati for three years and have had a hard time finding a good salon. I would like to try your salon, but am unsure who I should make an appointment with for a cut/style? Any suggestions?",
+    answer:
+      "Welcome to West Chester! We would love to have you visit. Call our front desk at (513) 874-9999 or view our Team page on the website. Our receptionist will ask a few quick questions about your hair type, desired style, and schedule to match you with the perfect Master or Sr. Master Artist who specializes in your exact look!",
   },
   {
     question:
       "I used one of those at home boxes of color, like you get at Walgreens, and did my hair my self. It looks aweful! What would be the first step I should take in getting it fixed? Am I going to have to make alot of visits to Bajon? Is this going to cost an arm and a leg?",
+    answer:
+      "Don't panic! Box color corrections are very common. The first step is to refrain from applying any more box dye or bleach at home. Book a Corrective Color Consultation with us. Our master colorists will evaluate your hair health, neutralize brassy or uneven tones, and restore your desired color—often accomplished in just 1 or 2 targeted salon visits.",
   },
   {
     question: "Are body wraps for weight loss on a long term basis, or just to appear thinner for a couple days?",
+    answer:
+      "Traditional body wraps primarily shed excess water weight and detoxify the skin for short-term slimming (great for special events!). However, for permanent fat cell elimination and long-term inch loss, we recommend our CryoSkin CryoSlimming treatments, which permanently destroy subcutaneous fat cells.",
   },
   {
     question:
       "My old hairstylist put lots of blond highlights in my naturally red hair, but I only wanted a few around my face. He is the type of hairstylist who doesn't really listen. So now I am trying to grow this blond out because I love my red hair and I don't want to dye it. What should I do.",
+    answer:
+      "Instead of waiting years to grow out the unwanted blonde, we can apply a semi-permanent lowlight or toner that matches your natural red shade exactly! This fills in the over-highlighted strands to blend seamlessly back into your natural red without lifting your natural base or causing damage.",
   },
   {
     question: "I've been having dry skin problems on my face. Can you recommend a procedure that might help?",
+    answer:
+      "For deep facial hydration, our Circadia Signature Facial or FaSSage (Facial & Body Massage combo) is ideal. It includes gentle enzymatic exfoliation followed by deep hyaluronic acid infusion masks that restore your skin's natural moisture barrier.",
   },
   {
     question:
       "I've seen a lot of sponges, brushes, loufas, etc. that are being sold promising better skin. Is there any truth to what they say?",
+    answer:
+      "Physical tools like loofahs and stiff facial brushes can actually cause micro-tears and harbor bacteria if not cleaned daily. Gentle chemical exfoliation (like Circadia enzyme exfoliants or professional microdermabrasion) is far more effective and safer for maintaining healthy skin barrier function.",
   },
   {
     question:
       "My daughter has just started wearing makeup and I'm unable to convince her that too much, particularly around the eyes, makes her look like a raccoon. Any suggestions?",
+    answer:
+      "Bring her in for a fun, professional Teen Makeup Lesson or lash/brow shaping session! Hearing makeup advice and subtle enhancement techniques directly from a licensed aesthetician makes a huge impact, empowering young girls to embrace fresh, natural beauty.",
   },
   {
     question: "There are so many shampoos available today, how do I know which one is right for my hair?",
+    answer:
+      "Your shampoo choice depends on your scalp condition (oily vs dry) and hair texture/color treatment status. Color-treated hair requires sulfate-free formulas, fine hair benefits from lightweight volumizing cleansers, and thick/curly hair needs rich moisture. Visit us for a quick scalp check and personalized recommendation!",
   },
 ];
 
@@ -132,25 +165,40 @@ const quickLinks = [
 const containerClass = "mx-auto max-w-[var(--container-max-width)] px-4 sm:px-5 md:px-8";
 
 function QAItem({ question, answer }: QA) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="border-b border-[#E8DDD7] py-6 last:border-0">
-      <div className="flex items-start justify-between gap-4">
-        <p className="text-[15px] leading-7 text-[#2C2420]">{question}</p>
-        <button
-          className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#E8DDD7] text-[#B8836E] transition-colors hover:bg-[#F8F3EE]"
-          aria-label="Expand answer"
-        >
+    <div className="border-b border-[#E8DDD7] py-5 transition-all">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-start justify-between gap-4 text-left bg-transparent border-none cursor-pointer group py-1"
+        aria-expanded={isOpen}
+      >
+        <span className="text-[15px] font-semibold leading-7 text-[#2C2420] group-hover:text-[#B8836E] transition-colors">
+          {question}
+        </span>
+        <div className={`mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#E8DDD7] text-[#B8836E] transition-all duration-200 ${isOpen ? "rotate-180 bg-[#B8836E] text-white border-[#B8836E]" : "group-hover:bg-[#F8F3EE]"}`}>
           <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
-        </button>
-      </div>
-      {answer && <p className="mt-4 text-[14px] leading-7 text-[#5A4A42]">{answer}</p>}
+        </div>
+      </button>
+      {isOpen && (
+        <div className="mt-3 pl-1 pr-4 text-[14.5px] leading-7 text-[#5A4A42] bg-[#FDF8F4] p-4 rounded-xl border border-[#E8DDD7] animate-in fade-in duration-200">
+          {answer}
+        </div>
+      )}
     </div>
   );
 }
 
 export default function AskExpertPage() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredQA = qaList.filter((item) =>
+    item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.answer.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <>
       <Navbar />
@@ -219,7 +267,9 @@ export default function AskExpertPage() {
               </svg>
               <input
                 type="search"
-                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search questions or keywords (e.g., cowlick, blonde, facial, perms)..."
                 className="w-full rounded-full border border-[#E8DDD7] bg-white py-3 pl-11 pr-5 text-[14px] outline-none transition-colors focus:border-[#C4907A]"
               />
             </div>
@@ -228,9 +278,13 @@ export default function AskExpertPage() {
 
         <section id="qa" className="bg-white px-5 py-12 sm:px-8 lg:px-10">
           <div className={containerClass}>
-            {qaList.map((item, i) => (
-              <QAItem key={i} {...item} />
-            ))}
+            {filteredQA.length === 0 ? (
+              <p className="text-center text-[#888] py-8 text-sm">No matching questions found.</p>
+            ) : (
+              filteredQA.map((item, i) => (
+                <QAItem key={i} {...item} />
+              ))
+            )}
           </div>
         </section>
 

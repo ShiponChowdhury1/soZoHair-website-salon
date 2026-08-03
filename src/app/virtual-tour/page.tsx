@@ -179,6 +179,41 @@ export default function VirtualTourPage() {
             </p>
           </div>
 
+          {/* ── FACEBOOK VIDEO VIRTUAL TOUR EMBED ── */}
+          <div className="rounded-3xl p-6 sm:p-10 mb-16 bg-[#FDF8F4] border border-[#EADCC9]">
+            <div className="flex items-center justify-between px-2 pb-4 border-b border-[#EADCC9]/50 mb-6 flex-wrap gap-3">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#D4A59A] bg-[#F5ECE2] px-3 py-1 rounded-full border border-[#EADCC9]">
+                  Featured Video Tour
+                </span>
+                <h2 className="text-xl sm:text-3xl font-serif font-bold text-[#111111] mt-2">
+                  Watch Our Salon Video Walkthrough
+                </h2>
+              </div>
+              <a
+                href="https://www.facebook.com/share/v/1EZJ55G21c/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-bold text-white bg-[#1877F2] hover:bg-[#166fe5] uppercase tracking-wider no-underline px-5 py-2.5 rounded-full transition-all"
+              >
+                Watch on Facebook <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            <div className="relative w-full aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-black border border-[#EADCC9]">
+              <iframe
+                title="SoZo Hair Salon Facebook Video Tour"
+                src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fv%2F1EZJ55G21c%2F&show_text=false"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                className="w-full h-full"
+              />
+            </div>
+          </div>
+
           {/* ── INTERACTIVE 360 TOUR / GOOGLE MAPS EMBED ── */}
           <div className="rounded-3xl p-4 sm:p-6 mb-16 bg-[#FDF8F4]">
             <div className="flex items-center justify-between px-2 pb-4 border-b border-[#EADCC9]/50 mb-4 flex-wrap gap-3">

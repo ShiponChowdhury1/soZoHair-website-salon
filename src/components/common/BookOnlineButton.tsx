@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
-import { BOOKING_ENABLED } from "@/config/bookingConfig";
+import { MEEVO_BOOKING_URL } from "@/config/bookingConfig";
 
 interface BookOnlineButtonProps {
   href?: string;
@@ -13,13 +11,15 @@ interface BookOnlineButtonProps {
 }
 
 export default function BookOnlineButton({
-  href = "/booking",
+  href,
   className = "",
   size = "md",
   variant = "primary",
   fullWidth = false,
 }: BookOnlineButtonProps) {
-  const targetHref = BOOKING_ENABLED ? href : (href === "/booking" ? "tel:5138749999" : href);
+  const targetHref = href || MEEVO_BOOKING_URL;
+  const isExternal = targetHref.startsWith("http");
+
   const sizeClasses = {
     sm: "px-4 py-2 text-xs",
     md: "px-6 py-3 text-sm",
@@ -35,13 +35,8 @@ export default function BookOnlineButton({
       "bg-transparent border-[1.5px] border-[#C4956A] text-[#C4956A] hover:bg-[#C4956A] hover:text-white",
   };
 
-  return (
-    <Link
-      href={targetHref}
-      className={`group inline-flex items-center justify-center gap-2.5 rounded-md font-medium no-underline transition-all duration-300 transform hover:-translate-y-0.5 ${
-        sizeClasses[size]
-      } ${variantClasses[variant]} ${fullWidth ? "w-full" : "w-auto"} ${className}`}
-    >
+  const content = (
+    <>
       <span>Book Online</span>
       <svg
         className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -55,6 +50,30 @@ export default function BookOnlineButton({
         <path d="M5 12h14" />
         <path d="M12 5l7 7-7 7" />
       </svg>
+    </>
+  );
+
+  const combinedClasses = `group inline-flex items-center justify-center gap-2.5 rounded-md font-medium no-underline transition-all duration-300 transform hover:-translate-y-0.5 ${
+    sizeClasses[size]
+  } ${variantClasses[variant]} ${fullWidth ? "w-full" : "w-auto"} ${className}`;
+
+  if (isExternal) {
+    return (
+      <a
+        href={targetHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={combinedClasses}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={targetHref} className={combinedClasses}>
+      {content}
     </Link>
   );
 }
+

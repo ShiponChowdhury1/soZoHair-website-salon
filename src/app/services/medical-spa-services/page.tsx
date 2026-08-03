@@ -105,125 +105,100 @@ export default function MedicalSpaServicesPage() {
 
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 text-[#D4A59A] font-bold text-sm tracking-wider uppercase">
-                <ShieldCheck className="w-5 h-5" /> Coming Early August
+                <ShieldCheck className="w-5 h-5" /> Advanced Aesthetics
               </div>
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#111111] leading-snug">
-                Exciting New Medical Aesthetics Partnering with Kara Day
+                Medically Supervised Beauty & Rejuvenation
               </h2>
               <p className="text-sm sm:text-base text-[#555555] leading-relaxed font-normal">
-                In early August, we plan on adding brand-new medical aesthetics services to the salon! We’re partnering with Kara Day, who is a certified advanced practice registered nurse (APRN), family nurse practitioner (FNP-c), MSN-Health Care Law certified, AAFE certified injector for botulinum toxin & filler, and Allergan certified.
+                Our Medical Spa services combine cutting-edge clinical aesthetic procedures with the relaxing comfort of our boutique salon and spa. All treatments are performed by certified medical professionals adhering to the highest standards of care.
               </p>
               
               <div className="bg-[#FDF8F4] p-5 rounded-2xl border border-[#EADCC9] flex items-start gap-3">
                 <Award className="w-6 h-6 text-[#D4A59A] shrink-0 mt-0.5" />
                 <p className="text-xs sm:text-sm text-[#444444] font-medium leading-relaxed">
-                  Starting with a couple days a week and expanding as needed to deliver exceptional quality and safety in every treatment.
+                  We are continually expanding our service menu to bring you the latest in non-invasive skin tightening, body contouring, and aesthetic rejuvenation.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── UPCOMING SERVICES OVERVIEW ── */}
+        {/* ── OUR MEDICAL SPA SERVICES LIST ── */}
         <section className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 mb-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#111111]">
-              The Medical Services We’ll Offer
+              Our Medical Spa Offerings
             </h2>
-            <p className="text-sm text-[#666666] mt-2">Medically supervised procedures tailored to your unique beauty goals</p>
+            <p className="text-sm text-[#666666] mt-2">Explore our list of med spa treatments designed to renew and rejuvenate</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: "Wrinkle Relaxers & Fillers",
-                desc: "Botulinum toxins and premium fillers for lips, cheeks, marionette lines, jaw, and chin.",
-                badge: "Certified Injector"
+                desc: "Botulinum toxins (Botox/Dysport) and premium dermal fillers for lips, cheeks, marionette lines, jaw, and chin contouring.",
+                badge: "Injectables",
+                link: "#survey"
               },
               {
-                title: "FDA Approved SkinPen",
-                desc: "Precision microneedling to stimulate collagen, improve texture, and restore youthful elasticity.",
-                badge: "FDA Approved"
+                title: "FDA Cleared SkinPen Microneedling",
+                desc: "Precision microneedling using the FDA-cleared SkinPen to stimulate natural collagen, refine texture, and diminish scars.",
+                badge: "Collagen Induction",
+                link: "#survey"
               },
               {
-                title: "VI-Peel Chemical Peel",
-                desc: "Medical-grade chemical peel targeting hyperpigmentation, fine lines, and sun damage.",
-                badge: "Medical Grade"
+                title: "VI-Peel Medical Grade Chemical Peel",
+                desc: "Pharmaceutical-grade chemical peel targeting hyperpigmentation, sun damage, acne scarring, and fine lines.",
+                badge: "Chemical Peel",
+                link: "#survey"
               },
               {
-                title: "Lipo B12 Injections",
-                desc: "Boost energy, enhance metabolism, and support wellness with essential vitamin therapy.",
-                badge: "Wellness Boost"
+                title: "Pure Plasma Skin Tightening",
+                desc: "FDA-cleared nitrogen plasma technology delivering non-surgical skin tightening and cellular renewal.",
+                badge: "Plasma Therapy",
+                link: "/services/pure-plasma"
               },
               {
-                title: "Body Sculpting",
-                desc: "Advanced body contouring treatments scheduled on specified appointment dates.",
-                badge: "Targeted Dates"
+                title: "CryoSkin Fat Loss & Body Contouring",
+                desc: "European cold-temperature cryoslimming technology to permanently target fat cells and tone skin non-invasively.",
+                badge: "Body Sculpting",
+                link: "/services/cryoskin"
               },
               {
-                title: "Physician Partnered Care",
-                desc: "Medically supervised care under licensed APRN / FNP-c certified nurse practitioner Kara Day.",
-                badge: "Licensed APRN"
+                title: "Lipo B12 Wellness Injections",
+                desc: "Enhance metabolism, boost energy levels, and support overall wellness with targeted lipotropic vitamin therapy.",
+                badge: "Vitamin Therapy",
+                link: "#survey"
               }
             ].map((service, idx) => (
               <div
                 key={idx}
-                className="bg-[#FDF8F4] p-6 rounded-2xl border border-[#EADCC9] transition-colors hover:border-[#D4A59A] group"
+                className="bg-[#FDF8F4] p-6 rounded-2xl border border-[#EADCC9] transition-all hover:border-[#D4A59A] hover:shadow-md flex flex-col justify-between group"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4A59A] bg-[#F5ECE2] px-3 py-1 rounded-full border border-[#EADCC9]">
-                    {service.badge}
-                  </span>
-                  <CheckCircle2 className="w-5 h-5 text-[#D4A59A] opacity-70 group-hover:opacity-100 transition-opacity" />
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4A59A] bg-[#F5ECE2] px-3 py-1 rounded-full border border-[#EADCC9]">
+                      {service.badge}
+                    </span>
+                    <CheckCircle2 className="w-5 h-5 text-[#D4A59A] opacity-70 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#111111] mb-2 font-serif">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#666666] leading-relaxed mb-4">
+                    {service.desc}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-[#111111] mb-2 font-serif">
-                  {service.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                  {service.desc}
-                </p>
+                <Link
+                  href={service.link}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#D4A59A] hover:text-[#c29388] transition-colors no-underline pt-2 border-t border-[#F5ECE2]"
+                >
+                  <span>Learn More &amp; Inquire</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* ── SECOND IMAGE & NURSE CREDENTIALS BANNER ── */}
-        <section className="max-w-[var(--container-max-width)] mx-auto px-4 sm:px-5 md:px-8 mb-16">
-          <div className="bg-[#FDF8F4] rounded-3xl p-6 sm:p-10 border border-[#EADCC9] grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 text-[#D4A59A] font-bold text-xs tracking-widest uppercase bg-[#F5ECE2] px-3 py-1 rounded-full border border-[#EADCC9]">
-                <Award className="w-4 h-4" /> Medical Director & Certified Practitioner
-              </div>
-              <h3 className="text-2xl sm:text-4xl font-serif font-bold text-[#111111] leading-tight">
-                Meet Kara Day, APRN, FNP-c
-              </h3>
-              <p className="text-sm sm:text-base text-[#555555] leading-relaxed">
-                We are thrilled to bring Kara Day’s extensive medical qualifications to SoZo Hair, Spa & Wigs. Certified in Botulinum toxin & fillers by the AAFE, Allergan certified, and MSN-Health Care Law certified.
-              </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm font-semibold text-[#333333] pt-2">
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#D4A59A]" /> Certified APRN & FNP-c
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#D4A59A]" /> AAFE Certified Injector
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#D4A59A]" /> Allergan Aesthetics Certified
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#D4A59A]" /> MSN-Health Care Law Certified
-                </li>
-              </ul>
-            </div>
-            
-            <div className="relative h-[340px] sm:h-[420px] rounded-2xl overflow-hidden group">
-              <Image
-                src="/medical-spa/medical-Spa.jpg"
-                alt="Kara Day Medical Aesthetics Partner"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
           </div>
         </section>
 

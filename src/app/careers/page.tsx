@@ -64,6 +64,7 @@ const positionOptions = [
   { value: "esthetician", label: "Esthetician" },
   { value: "nail-technician", label: "Nail Technician" },
   { value: "front-desk", label: "Front Desk Coordinator" },
+  { value: "social-digital-media-manager", label: "Social Digital Media Marketing Manager" },
 ] as const;
 
 export default function SoZoCareersPage() {
@@ -384,6 +385,35 @@ export default function SoZoCareersPage() {
               <img
                 src="/landing/service-specialis.png"
                 alt="Client service specialist"
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr className="mx-5 border-t border-[#D4A59A]/25 sm:mx-8 lg:mx-[80px]" />
+
+      <section className="py-16 text-left sm:py-[64px]">
+        <div className={sectionClass}>
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-[52px]">
+            <div>
+              <h2 className="mb-5 font-[family-name:var(--font-playfair)] text-[34px] font-medium leading-[1.15] text-[#2C2118]">
+                Social Digital Media Marketing Manager
+              </h2>
+              <p className="mb-4 text-[14px] font-light leading-[1.8] text-[#4A3728]">
+                SoZo Hair, Spa &amp; Wigs is seeking an energetic, creative Social Digital Media Marketing Manager to drive our online presence and client engagement!
+              </p>
+              <p className="mb-4 text-[14px] font-light leading-[1.8] text-[#4A3728]">
+                The ideal candidate will be responsible for creating captivating visual and video content, managing digital marketing campaigns across Instagram, Facebook, TikTok, and YouTube, overseeing online brand promotion, and interacting with our growing online community.
+              </p>
+              <p className="text-[14px] font-light leading-[1.8] text-[#4A3728]">
+                Applicants please submit your portfolio and work history using the online application form above or call (513) 874-9999 for more details. Full-Time &amp; Part-Time options available!
+              </p>
+            </div>
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/landing/creativeBackground.png"
+                alt="Social digital media marketing manager"
                 className="h-[280px] w-full rounded-[3px] object-cover"
               />
             </div>

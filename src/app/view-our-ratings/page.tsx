@@ -56,7 +56,7 @@ export default function RatingsPage() {
               </p>
               <div className="flex flex-wrap gap-4 items-center mb-4">
                 <a
-                  href="https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l="
+                  href="https://na0.meevo.com/FiveStarRatingApp/five-star-rating?t=104044&l=107183"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-[#D4A59A] px-6 py-3 text-white font-bold text-sm shadow-md hover:bg-[#c29388] transition-all no-underline"

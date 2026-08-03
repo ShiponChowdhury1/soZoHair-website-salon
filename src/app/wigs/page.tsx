@@ -38,13 +38,18 @@ export default function WigsPage() {
               natural looking, more and more women are choosing this option for
               both fun and medical reasons!
             </p>
-            <button className="inline-flex items-center gap-2 rounded-full bg-[#c49a8a] px-6 py-3 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#b58878]">
+            <a
+              href="https://login.meevo.com/sozohairohio/ob?locationId=107183"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#c49a8a] px-6 py-3 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#b58878] no-underline"
+            >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <rect x="3" y="4" width="18" height="18" rx="2" strokeWidth="2" />
                 <path strokeLinecap="round" strokeWidth="2" d="M16 2v4M8 2v4M3 10h18" />
               </svg>
               Book Your Appointment
-            </button>
+            </a>
           </div>
         </div>
       </section>
