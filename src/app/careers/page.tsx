@@ -385,6 +385,8 @@ export default function SoZoCareersPage() {
               <img
                 src="/landing/service-specialis.png"
                 alt="Client service specialist"
+                className="h-[280px] w-full rounded-[3px] object-cover"
+              />
             </div>
           </div>
         </div>

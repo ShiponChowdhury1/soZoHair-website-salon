@@ -17,7 +17,7 @@ import UserProfileDropdown from "./UserProfileDropdown";
 import { useAuth } from "@/context/AuthContext";
 import TopHeader from "@/components/layout/TopHeader";
 
-type ActiveMenu = "services" | "shop" | "more" | null;
+type ActiveMenu = "services" | "shop" | "gallery" | "more" | null;
 
 type MobileSubItem = {
   label: string;
@@ -40,7 +40,7 @@ const dropdownLeftItems = [
   { label: "Services", href: "/#services" },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products" },
-  { label: "Gallery", href: "/gallery" },
+  { label: "Galleries", href: "/gallery" },
   { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -69,6 +69,12 @@ const shopItems: MobileSubItem[] = [
   { label: "Premium Products", href: "/premium-products" },
 ];
 
+const galleryItems: MobileSubItem[] = [
+  { label: "Before and After Happy Clients", href: "/gallery" },
+  { label: "St Baldrick’s 2009 Fundraiser at Bajon Salon (SoZo HAIR)", href: "/st-baldricks-2009" },
+  { label: "Virtual Tour", href: "/virtual-tour" },
+];
+
 const moreItemsMiddle: MobileSubItem[] = [
   { label: "About", href: "/about" },
   { label: "Virtual Tour", href: "/virtual-tour" },
@@ -95,7 +101,7 @@ const mobileNavItems: MobileNavItem[] = [
   { label: "Services", href: "/#services", hasSubmenu: true, menuKey: "services" as const },
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
-  { label: "Gallery", href: "/gallery" },
+  { label: "Galleries", href: "/gallery", hasSubmenu: true, menuKey: "gallery" as const },
   { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/#contact" },
   { label: "More", href: "#", hasSubmenu: true, menuKey: "more" as const },
@@ -267,6 +273,8 @@ export default function Navbar() {
       setActiveMoreSubmenu("services");
     } else if (menu === "shop") {
       setActiveMoreSubmenu("shop");
+    } else if (menu === "gallery") {
+      setActiveMoreSubmenu(null);
     } else if (menu === "more") {
       setActiveMoreSubmenu("about_careers");
     }
@@ -288,7 +296,7 @@ export default function Navbar() {
 
   const handleNavClick = useCallback((id: ActiveMenu | "home" | "wigs" | "gallery" | "academy") => {
     setIsSearchOpen(false);
-    if (id === "services" || id === "shop" || id === "more") {
+    if (id === "services" || id === "shop" || id === "gallery" || id === "more") {
       setActiveMenu((prev) => {
         const next = prev === id ? null : id;
         if (next === "services") {
@@ -313,6 +321,7 @@ export default function Navbar() {
   const getMobileSubItems = (key: string): MobileSubItem[] => {
     if (key === "services") return serviceItems;
     if (key === "shop") return shopItems;
+    if (key === "gallery") return galleryItems;
     if (key === "more") return [...moreItemsMiddle, ...moreItemsRight];
     return [];
   };
@@ -497,15 +506,53 @@ export default function Navbar() {
                 )}
               </div>
 
-              <Link
-                href="/gallery"
-                onClick={() => handleNavClick("gallery")}
-                onMouseEnter={() => handleMouseEnter("gallery", null)}
+              {/* Galleries Dropdown */}
+              <div
+                className="relative flex items-center h-full"
+                onMouseEnter={() => handleMouseEnter("gallery", "gallery")}
                 onMouseLeave={handleMouseLeave}
-                className={`relative py-1 text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("gallery", isGalleryActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
               >
-                Gallery
-              </Link>
+                <Link
+                  href="/gallery"
+                  onClick={() => setActiveMenu(null)}
+                  className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("gallery", activeMenu === "gallery" || isGalleryActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
+                >
+                  Galleries
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNavClick("gallery");
+                  }}
+                  className="p-1 bg-transparent border-none cursor-pointer transition-colors ml-0.5"
+                  aria-label="Toggle Galleries menu"
+                >
+                  <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${activeMenu === "gallery" ? "rotate-180 text-[#D4A59A]" : "text-[#111111]"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
+                {/* Floating Dropdown Panel */}
+                {activeMenu === "gallery" && (
+                  <div className="absolute top-full left-0 mt-0 w-[360px] sm:w-[400px] bg-white border border-t-0 border-[#EADCC9]/90 shadow-[0_16px_40px_rgba(0,0,0,0.12)] rounded-b-xl rounded-t-none py-3.5 px-3 z-[150] animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="text-[13px] font-extrabold tracking-[2px] uppercase text-[#D4A59A] px-3.5 py-2 mb-2 border-b border-[#F5ECE2]">
+                      Galleries
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      {galleryItems.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="px-3.5 py-2.5 text-[15px] font-semibold text-[#111111] hover:text-[#D4A59A] hover:bg-[#FDF8F4] rounded-lg transition-all duration-150 flex items-center justify-between no-underline"
+                        >
+                          <span>{item.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <Link
                 href="/articles"
