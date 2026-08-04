@@ -2,16 +2,41 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Article } from "@/data/articles";
 
 interface ArticlesGridProps {
   articles: Article[];
+  activeCategory?: string;
 }
 
 const PER_PAGE = 11;
 
-export default function ArticlesGrid({ articles }: ArticlesGridProps) {
+// Maps URL category slug → keywords to match in article tags/category
+const CATEGORY_MAP: Record<string, { label: string; keywords: string[] }> = {
+  "sozo-hair-salon-tips": { label: "Sozo Hair Salon Tips", keywords: ["tips", "hair care", "salon", "article"] },
+  "hair-cuts": { label: "Hair Cuts", keywords: ["hair cut", "shag", "bob", "lob", "cut", "bangs", "fringe"] },
+  "hair-extensions": { label: "Hair Extensions", keywords: ["extension", "hair extension"] },
+  "foiling-and-highlights": { label: "Foiling and Highlights", keywords: ["foiling", "highlight", "foil", "balayage"] },
+  "professional-hair-color": { label: "Professional Hair Color", keywords: ["color", "colour", "brazilian blowout", "blowout", "professional"] },
+  "trendy-hair-styles": { label: "Trendy Hair Styles", keywords: ["trendy", "trend", "style", "styling", "braids"] },
+};
+
+function articleMatchesCategory(article: Article, slug: string): boolean {
+  const mapping = CATEGORY_MAP[slug];
+  if (!mapping) return true;
+  const haystack = [
+    article.title,
+    article.category,
+    article.excerpt,
+    ...article.tags,
+    ...(article.sections?.map((s) => s.title) ?? []),
+  ].join(" ").toLowerCase();
+  return mapping.keywords.some((kw) => haystack.includes(kw));
+}
+
+export default function ArticlesGrid({ articles, activeCategory }: ArticlesGridProps) {
   const [sortBy, setSortBy] = useState<"latest" | "oldest" | "az">("latest");
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
@@ -22,7 +47,11 @@ export default function ArticlesGrid({ articles }: ArticlesGridProps) {
   }, [sortBy]);
 
   const getSortedArticles = () => {
-    const arr = [...articles];
+    let arr = [...articles];
+    // Filter by category if active
+    if (activeCategory && CATEGORY_MAP[activeCategory]) {
+      arr = arr.filter((a) => articleMatchesCategory(a, activeCategory));
+    }
     if (sortBy === "az") {
       return arr.sort((a, b) => a.title.localeCompare(b.title));
     }
@@ -109,6 +138,20 @@ export default function ArticlesGrid({ articles }: ArticlesGridProps) {
   return (
     <section className="articles-section">
       <div className="slider-container">
+        {/* Active Category Banner */}
+        {activeCategory && CATEGORY_MAP[activeCategory] && (
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px", padding: "10px 16px", background: "#FDF8F4", borderRadius: "10px", border: "1px solid #EADCC9" }}>
+            <span style={{ fontSize: "13px", fontWeight: 700, color: "#D4A59A", textTransform: "uppercase", letterSpacing: "1.5px" }}>
+              Category:
+            </span>
+            <span style={{ fontSize: "14px", fontWeight: 600, color: "#111" }}>
+              {CATEGORY_MAP[activeCategory].label}
+            </span>
+            <Link href="/articles" style={{ marginLeft: "auto", fontSize: "12px", color: "#D4A59A", fontWeight: 600, textDecoration: "none" }}>
+              ✕ Clear filter
+            </Link>
+          </div>
+        )}
         <div className="articles-header">
           <h2>Sozo&apos;s Top Articles</h2>
           <div className="sort-wrap">

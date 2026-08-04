@@ -14,14 +14,19 @@ export const metadata: Metadata = {
     "Discover the latest hair trends, professional styling advice, and expert care tips directly from our master stylists at SoZo Hair.",
 };
 
-export default function ArticlesPage() {
+interface ArticlesPageProps {
+  searchParams: Promise<{ category?: string }>;
+}
+
+export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
+  const { category } = await searchParams;
   return (
     <main>
       <Navbar />
       <div className="articles-container pt-[70px] md:pt-[90px]">
         <ArticlesHero />
         <ArticlesSlider articles={SOZO_ARTICLES} />
-        <ArticlesGrid articles={SOZO_ARTICLES} />
+        <ArticlesGrid articles={SOZO_ARTICLES} activeCategory={category} />
       </div>
       <Footer />
     </main>
