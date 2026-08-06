@@ -41,7 +41,7 @@ const dropdownLeftItems = [
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products" },
   { label: "Galleries", href: "/gallery" },
-  { label: "Articles", href: "/articles" },
+  { label: "Articles", href: "/blog" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -71,18 +71,18 @@ const shopItems: MobileSubItem[] = [
 
 const galleryItems: MobileSubItem[] = [
   { label: "Before and After Happy Clients", href: "/gallery" },
-  { label: "St Baldrick’s 2009 Fundraiser at Bajon Salon (SoZo HAIR)", href: "/st-baldricks-2009" },
+  { label: "St Baldrick’s Fundraiser", href: "/st-baldricks-2009" },
   { label: "Virtual Tour", href: "/virtual-tour" },
 ];
 
 const articleItems: MobileSubItem[] = [
-  { label: "All Articles", href: "/articles" },
-  { label: "Sozo Hair Salon Tips", href: "/articles?category=sozo-hair-salon-tips" },
-  { label: "Hair Cuts", href: "/articles?category=hair-cuts" },
-  { label: "Hair Extensions", href: "/articles?category=hair-extensions" },
-  { label: "Foiling and Highlights", href: "/articles?category=foiling-and-highlights" },
-  { label: "Professional Hair Color", href: "/articles?category=professional-hair-color" },
-  { label: "Trendy Hair Styles", href: "/articles?category=trendy-hair-styles" },
+  { label: "All Articles", href: "/blog" },
+  { label: "Sozo Hair Salon Tips", href: "/blog?category=sozo-hair-salon-tips" },
+  { label: "Hair Cuts", href: "/blog?category=hair-cuts" },
+  { label: "Hair Extensions", href: "/blog?category=hair-extensions" },
+  { label: "Foiling and Highlights", href: "/blog?category=foiling-and-highlights" },
+  { label: "Professional Hair Color", href: "/blog?category=professional-hair-color" },
+  { label: "Trendy Hair Styles", href: "/blog?category=trendy-hair-styles" },
 ];
 
 const moreItemsMiddle: MobileSubItem[] = [
@@ -112,7 +112,7 @@ const mobileNavItems: MobileNavItem[] = [
   { label: "Wigs", href: "/wigs" },
   { label: "Shop", href: "/premium-products", hasSubmenu: true, menuKey: "shop" as const },
   { label: "Galleries", href: "/gallery", hasSubmenu: true, menuKey: "gallery" as const },
-  { label: "Articles", href: "/articles", hasSubmenu: true, menuKey: "articles" as const },
+  { label: "Articles", href: "/blog", hasSubmenu: true, menuKey: "articles" as const },
   { label: "Contact", href: "/#contact" },
   { label: "More", href: "#", hasSubmenu: true, menuKey: "more" as const },
 ];
@@ -154,7 +154,7 @@ export default function Navbar() {
   const isShopActive = !activeMenu && (pathname.startsWith("/premium-products") || pathname.startsWith("/special-products"));
   const isGalleryActive = !activeMenu && pathname === "/gallery";
   const isAcademyActive = !activeMenu && pathname === "/academy";
-  const isArticlesActive = !activeMenu && pathname.startsWith("/articles");
+  const isArticlesActive = !activeMenu && (pathname.startsWith("/articles") || pathname.startsWith("/blog"));
 
   const isMoreActive = !activeMenu && [
     "/about",
@@ -243,7 +243,7 @@ export default function Navbar() {
       { name: "Academy", href: "/academy", desc: "Education & salon training" },
       { name: "Team", href: "/teams", desc: "Meet master stylists & experts" },
       { name: "Gallery", href: "/gallery", desc: "Photos of our work" },
-      { name: "Articles & Blog", href: "/articles", desc: "Hair tips, trends, and care advice" },
+      { name: "Articles & Blog", href: "/blog", desc: "Hair tips, trends, and care advice" },
       { name: "Virtual Tour", href: "/virtual-tour", desc: "360 degree virtual tour of landmark salon" },
       { name: "Ask The Expert", href: "/ask-expert", desc: "Beauty & hair advice Q&A" },
       { name: "Careers", href: "/careers", desc: "Job opportunities at SoZo" },
@@ -572,7 +572,7 @@ export default function Navbar() {
                 onMouseLeave={handleMouseLeave}
               >
                 <Link
-                  href="/articles"
+                  href="/blog"
                   onClick={() => setActiveMenu(null)}
                   className={`relative py-1 whitespace-nowrap text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-wide no-underline transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#D4A59A] after:rounded-full after:transition-transform after:duration-300 after:ease-out after:origin-left ${isHighlighted("articles", activeMenu === "articles" || isArticlesActive) ? "text-[#D4A59A] after:scale-x-100" : "text-[#111111] after:scale-x-0"}`}
                 >
