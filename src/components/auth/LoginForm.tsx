@@ -13,6 +13,8 @@ import { loginSchema, type LoginFormValues } from "@/lib/validators/loginSchema"
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setCredentials, setError, setLoading } from "@/store/slices/authSlice";
 import type { ApiErrorResponse, AuthResponse } from "@/types/auth.types";
+import { useAuth } from "@/context/AuthContext";
+
 
 function EyeIcon() {
   return (
@@ -43,6 +45,7 @@ export function LoginForm() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { isLoading, error } = useAppSelector((state) => state.auth);
+  const { login: contextLogin } = useAuth();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -78,14 +81,25 @@ export function LoginForm() {
 
       dispatch(setCredentials(response.data));
       router.push("/dashboard");
-    } catch (err) {
-      const axiosError = err as AxiosError<ApiErrorResponse>;
-      const message = axiosError.response?.data?.message ?? "Unable to sign in. Please try again.";
-      dispatch(setError(message));
+    } catch {
+      // Fallback: try mock admin login via AuthContext
+      const mockSuccess = contextLogin(values.email, values.password);
+      if (mockSuccess) {
+        dispatch(setLoading(false));
+        // Check if admin credentials — redirect to admin dashboard
+        if (values.email === "admin@gmail.com") {
+          router.push("/admin");
+        } else {
+          router.push("/dashboard");
+        }
+        return;
+      }
+      dispatch(setError("Invalid email or password. Please try again."));
     } finally {
       dispatch(setLoading(false));
     }
   };
+
 
   const onGoogleSignIn = async () => {
     dispatch(setError(null));
